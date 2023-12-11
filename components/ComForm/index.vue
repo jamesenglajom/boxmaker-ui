@@ -235,8 +235,8 @@ export default {
             // alert(v);
         },
         boxData(v) {
-            console.log("BOXDATA");
-            console.log(v);
+            // console.log("BOXDATA");
+            // console.log(v);
             this.extractFormElements();
             this.generatePreviewImage();
         }
@@ -345,7 +345,7 @@ export default {
                 }));
             }))
             
-            console.log(this.form);
+            // console.log(this.form);
         },
         resetFormValues() {
             this.initializeFormData();

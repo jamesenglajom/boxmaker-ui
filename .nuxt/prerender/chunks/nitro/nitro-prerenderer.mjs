@@ -1,4 +1,4 @@
-globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseStatus, setResponseHeader, send, getRequestHeaders, removeResponseHeader, createError, getResponseHeader, createApp, createRouter as createRouter$1, toNodeListener, fetchWithEvent, lazyEventHandler } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/h3/dist/index.mjs';
+globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, setResponseStatus, setResponseHeader, send, getRequestHeaders, removeResponseHeader, createError, getResponseHeader, lazyEventHandler, useBase, createApp, createRouter as createRouter$1, toNodeListener, fetchWithEvent } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/h3/dist/index.mjs';
 import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/ofetch/dist/node.mjs';
 import destr from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/destr/dist/index.mjs';
 import { createCall, createFetch } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/unenv/runtime/fetch/index.mjs';
@@ -16,11 +16,12 @@ import unstorage_47drivers_47fs_45lite from 'file://C:/xampp/htdocs/projects/box
 import { toRouteMatcher, createRouter } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/radix3/dist/index.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, resolve } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/pathe/dist/index.mjs';
+import { dirname, resolve, isAbsolute } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/pathe/dist/index.mjs';
+import { ipxFSStorage, ipxHttpStorage, createIPX, createIPXH3Handler } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/ipx/dist/index.mjs';
 
 const inlineAppConfig = {
   "nuxt": {
-    "buildId": "07c0df8f-5f4d-45e4-b5c7-fb63f8a49b5e"
+    "buildId": "09a81121-fad6-4929-b635-ceb4810e0863"
   },
   "ui": {
     "primary": "green",
@@ -82,7 +83,17 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {},
+  "ipx": {
+    "baseURL": "/_ipx",
+    "alias": {},
+    "fs": {
+      "dir": "C:/xampp/htdocs/projects/boxmaker/public"
+    },
+    "http": {
+      "domains": []
+    }
+  }
 };
 const ENV_PREFIX = "NITRO_";
 const ENV_PREFIX_ALT = _inlineRuntimeConfig.nitro.envPrefix ?? process.env.NITRO_ENV_PREFIX ?? "_";
@@ -740,10 +751,29 @@ const _f4b49z = eventHandler((event) => {
   return readAsset(id);
 });
 
+const _l3ZnUN = lazyEventHandler(() => {
+  const opts = useRuntimeConfig().ipx || {};
+  const fsDir = opts.fs?.dir ? isAbsolute(opts.fs.dir) ? opts.fs.dir : fileURLToPath(new URL(opts.fs.dir, globalThis._importMeta_.url)) : void 0;
+  const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : void 0;
+  const httpStorage = opts.http?.domains ? ipxHttpStorage({ ...opts.http }) : void 0;
+  if (!fsStorage && !httpStorage) {
+    throw new Error("IPX storage is not configured!");
+  }
+  const ipxOptions = {
+    ...opts,
+    storage: fsStorage || httpStorage,
+    httpStorage
+  };
+  const ipx = createIPX(ipxOptions);
+  const ipxHandler = createIPXH3Handler(ipx);
+  return useBase(opts.baseURL, ipxHandler);
+});
+
 const _lazy_xZAJaf = () => import('../renderer.mjs').then(function (n) { return n.r; });
 
 const handlers = [
   { route: '', handler: _f4b49z, lazy: false, middleware: true, method: undefined },
+  { route: '/_ipx/**', handler: _l3ZnUN, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_xZAJaf, lazy: true, middleware: false, method: undefined }
 ];
 

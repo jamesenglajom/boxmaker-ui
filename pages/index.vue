@@ -39,8 +39,8 @@
                                 <div style="display:flex;justify-content:center;height:130px;">
                                     <div style="margin-top:15px;justify-content:center;text-align:center;">
                                         <center>
-                                            <img style="width:60px;color:rgb(0,78,97);" class="ui image"
-                                                :src="`_nuxt/assets/images/box_icons/${resolveImageName(datum)}`" />
+                                            <NuxtPicture style="width:60px;color:rgb(0,78,97);" class="ui image"
+                                                :src="`/assets/images/box_icons/${resolveImageName(datum)}`" />
                                         </center>
                                         <div class="label"
                                             style="color:rgb(0,78,97);padding:3px;margin-top:7px;font-size:.85em;text-align:center;">
@@ -68,8 +68,8 @@
 
                                 <div style="margin-top:15px;justify-content:center;text-align:center;">
                                     <center>
-                                        <img style="width:60px;color:rgb(0,78,97);" class="ui image"
-                                            :src="`_nuxt/assets/images/box_icons/${resolveImageName(datum)}`" />
+                                        <NuxtPicture style="width:60px;color:rgb(0,78,97);" class="ui image"
+                                            :src="`/assets/images/box_icons/${resolveImageName(datum)}`" />
                                     </center>
                                     <div class="label"
                                         style="color:rgb(0,78,97);padding:3px;margin-top:7px;font-size:.85em;text-align:center;">
@@ -15458,7 +15458,7 @@ export default {
             this.filterBoxByTags();
         },
         handleSelectedItems(v){
-            console.log("handlesSelectedItems: "+ v + ", filter_tags: " + this.filter_tags);
+            // console.log("handlesSelectedItems: "+ v + ", filter_tags: " + this.filter_tags);
             let filtered_boxes = [],
             selected_tags = v;
             // alert(v);

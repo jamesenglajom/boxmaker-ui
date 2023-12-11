@@ -8,7 +8,7 @@
                         <i class="arrow left icon" ></i>
                     </div>
                     <div style="align-self:center;width:25px;margin-left:15px;">
-                        <img :src="`_nuxt/assets/images/box_icons/${boxImg}`" class="ui image"/>
+                        <NuxtPicture :src="`/assets/images/box_icons/${boxImg}`" class="ui image"/>
                     </div>
                     <div class="content" style="align-self:center;margin-left:10px">
                         <!-- Arced Top Box -->

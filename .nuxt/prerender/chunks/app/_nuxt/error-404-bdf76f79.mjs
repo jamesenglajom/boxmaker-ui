@@ -26,6 +26,7 @@ import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/radix3/dist/index.
 import 'node:fs';
 import 'node:url';
 import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/pathe/dist/index.mjs';
+import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/ipx/dist/index.mjs';
 
 const firstNonUndefined = (...args) => args.find((arg) => arg !== void 0);
 const DEFAULT_EXTERNAL_REL_ATTRIBUTE = "noopener noreferrer";

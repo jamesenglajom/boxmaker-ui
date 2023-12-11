@@ -2,11 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr:true,
-  modules: [
-    '@nuxt/ui',
-    '@nuxt/devtools',
-    // 'vue-fomantic-ui'
-
-  ],
+  modules: ['@nuxt/ui', // 'vue-fomantic-ui'
+  '@nuxt/devtools', "@nuxt/image"],
   // css:['fomantic-ui-css/semantic.min.css']
 })

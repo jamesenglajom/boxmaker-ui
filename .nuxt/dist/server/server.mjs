@@ -504,7 +504,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import("./_nuxt/index-013cd17d.js").then((m) => m.default || m)
+    component: () => import("./_nuxt/index-6a1d5bf4.js").then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -608,7 +608,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "07c0df8f-5f4d-45e4-b5c7-fb63f8a49b5e"
+    "buildId": "09a81121-fad6-4929-b635-ceb4810e0863"
   },
   "ui": {
     "primary": "green",
@@ -1243,6 +1243,7 @@ export {
   createError as c,
   useHead as d,
   entry$1 as default,
+  useNuxtApp as e,
   nuxtLinkDefaults as n,
   useRouter as u
 };

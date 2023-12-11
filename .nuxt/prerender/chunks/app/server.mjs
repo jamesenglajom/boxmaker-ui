@@ -1,4 +1,4 @@
-import { version, ref, watchEffect, watch, getCurrentInstance, defineComponent, provide, shallowReactive, h, inject, Suspense, nextTick, Transition, hasInjectionContext, unref, useSSRContext, createApp, effectScope, reactive, defineAsyncComponent, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, toRef, shallowRef, isReadonly, computed, isRef, isShallow, isReactive, toRaw, mergeProps } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/vue/index.mjs';
+import { hasInjectionContext, getCurrentInstance, version, ref, watchEffect, watch, defineComponent, provide, shallowReactive, h, inject, Suspense, nextTick, Transition, unref, useSSRContext, createApp, effectScope, reactive, defineAsyncComponent, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, toRef, shallowRef, isReadonly, computed, isRef, isShallow, isReactive, toRaw, mergeProps } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/vue/index.mjs';
 import { $fetch } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/ofetch/dist/node.mjs';
 import { createHooks } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/hookable/dist/index.mjs';
 import { getContext } from 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/unctx/dist/index.mjs';
@@ -25,6 +25,7 @@ import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/radix3/dist/index.
 import 'node:fs';
 import 'node:url';
 import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/pathe/dist/index.mjs';
+import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/ipx/dist/index.mjs';
 
 const appConfig = useRuntimeConfig$1().app;
 const baseURL = () => appConfig.baseURL;
@@ -516,7 +517,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-013cd17d.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-6a1d5bf4.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -620,7 +621,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "07c0df8f-5f4d-45e4-b5c7-fb63f8a49b5e"
+    "buildId": "09a81121-fad6-4929-b635-ceb4810e0863"
   },
   "ui": {
     "primary": "green",
@@ -1248,5 +1249,5 @@ let entry;
 }
 const entry$1 = (ctx) => entry(ctx);
 
-export { _export_sfc as _, useRuntimeConfig as a, navigateTo as b, createError as c, useHead as d, entry$1 as default, nuxtLinkDefaults as n, useRouter as u };
+export { _export_sfc as _, useRuntimeConfig as a, navigateTo as b, createError as c, useHead as d, entry$1 as default, useNuxtApp as e, nuxtLinkDefaults as n, useRouter as u };
 //# sourceMappingURL=server.mjs.map

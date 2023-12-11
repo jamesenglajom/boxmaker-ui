@@ -3,7 +3,7 @@
         <!-- image and preview display -->
         <div class="preview-display"
             style="border-right:1px solid lightgray;width:50%;position:fixed;background-color:white;">
-            <div style="display:flex">
+            <div style="display:flex"> 
                 <template v-for="datum in box_preview_options" :key="datum">
                     <div class="box-preview-button" @click="box_preview = datum"
                         :style="(box_preview == datum ? 'background-color:rgb(18,121,198) !important;color:white' : '')">
@@ -204,7 +204,7 @@
                     </template>
                 </div>
             </div>
-        </div>
+        </div>node 
     </div>
 </template>
 <script>

@@ -26,6 +26,7 @@ import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/radix3/dist/index.
 import 'node:fs';
 import 'node:url';
 import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/pathe/dist/index.mjs';
+import 'file://C:/xampp/htdocs/projects/boxmaker/node_modules/ipx/dist/index.mjs';
 
 const components_islands = {};
 const islandComponents = /* @__PURE__ */ Object.freeze({

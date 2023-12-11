@@ -198,7 +198,7 @@ input.focused {
     max-height: 200px;
     background-color: white;
     border-radius: 0px 0px 4px 4px;
-    z-index: 999;
+    z-index: 99;
     border: .7px solid rgba(59 130 246 / 0.5);
     overflow: auto;
 }

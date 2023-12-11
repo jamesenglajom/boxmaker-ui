@@ -4,57 +4,57 @@
     {
       "name": "vite:load-fallback",
       "result": "\r\nimport type { MultiSelect } from '#ui-colors/components';\r\n\r\nimport type { select } from '@nuxt/ui/dist/runtime/ui.config';\r\n\r\nimport type { _left } from '#tailwind-config/theme/backgroundPosition';\r\n\r\nimport type { _ringOffsetWidth } from '#tailwind-config/theme';\r\n\r\nimport type { _inherit } from '#tailwind-config/theme/accentColor';\r\n\r\nimport type { _green } from '#tailwind-config/theme/typography';\r\n\r\nimport type { resolveDirective } from 'vue';\r\n\r\nimport type { resolveDirective } from 'vue';\r\n\r\n<template>\r\n    <div id=\"MultiSelec\" ref=\"mainWrap\">\r\n        <div class=\"wrap\">\r\n            <!-- placeholder -->\r\n            <!-- <div>{{ placeholder }}</div> -->\r\n            <!-- selected options -->\r\n            <!-- :class=\"selected_items.length > 0? 'invisible':''\" -->\r\n            <div class=\"ui icon input\">\r\n                <input :class=\"count % 2 == 0 ? '' : 'focused'\" type=\"button\" ref=\"multiSelect\" @click=\"clickED\"\r\n                    :style=\"`caret-color:transparent;cursor:pointer;width:${input_el_width}px !important;height:${input_el_height}px !important;`\" :value=\"selected_items.length == 0 ? 'Please select...' : ''\" />                    <!-- icons -->\r\n                <div style=\"position:absolute;right:8px;top:9px;color:darkgray;pointer-events:none;\">\r\n                    <span :style=\"selected_items.length==0?'display:none':'display:auto'\">\r\n                        <i class=\"close icon\" @click=\"clearSelection\" style=\"pointer-events:auto\"></i>\r\n                    </span>\r\n                    <span>\r\n                        <i class=\"filter icon\"></i>\r\n                    </span>\r\n                </div>\r\n                <!-- selected tray -->\r\n                <div style=\"position:absolute;top:4px;left:3px;pointer-events: none;\">\r\n                    <div style=\"display:flex;\"\r\n                        :style=\"FwrapOn ? 'flex-wrap:wrap;width:' + max_wrap_width + 'px !important;min-width:' + max_wrap_width + 'px !important;' : 'flex-wrap:nowrap;' + (selected_items.length == 0 ? 'width:0px;' : '')\"\r\n                        ref=\"selectTray\">\r\n                        <template v-for=\"datum in selected_items\" :key=\"datum\">\r\n                            <div :ref=\"`dynamicEl${datum}`\"\r\n                                style=\"pointer-events:auto;white-space:nowrap;display:inline-block;width:auto;position:relative;margin:2px;height:26px;padding:1px 30px 1px 7px;background:lightgray;border:1px solid darkgray;border-radius:3px;\">\r\n                                <p><b><small>{{ options.filter(i => i.id == datum)[0].name }}\r\n                                        </small></b></p><i class=\"close icon\" @click=\"unselect(datum)\"\r\n                                    style=\"cursor:pointer;position:absolute;right:4px;top:6px;\"></i>\r\n                            </div>\r\n                        </template>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div :class=\"count % 2 == 0 ? 'invisible' : 'visible'\" class=\"option-tray\"\r\n                :style=\"`width:${option_tray_width}px;top:${option_tray_top}px !important;`\">\r\n                <template v-for=\"datum in options.filter(i => !selected_items.includes(i.id))\" :key=\"datum.name\">\r\n                    <div class=\"options\" :data-value=\"datum.id\" @click=\"optionClicked(datum.id)\">{{ datum.name }}</div>\r\n                </template>\r\n                <div class=\"options disabled\" :style=\"`${selected_items.length != options.length ? 'display:none' : ''}`\">\r\n                    <i>No items left...</i></div>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- <div class=\"ui\">\r\n            <select class=\"dropdown selection ui\" placeholder=\"Please Select...\">\r\n                <option value=\"\">Please select...</option>\r\n            </select>\r\n        </div> -->\r\n    </div>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n    name: \"MultiSelect\",\r\n    props: {placeholder:String,options:Array},\r\n    data() {\r\n        return {\r\n            // options: [\r\n            //     { id: 1, name: \"Remember Me\" },\r\n            //     { id: 2, name: \"Joni\" },\r\n            //     { id: 3, name: \"Don't let me down\" },\r\n            //     { id: 4, name: \"Dont't cry\" },\r\n            //     { id: 5, name: \"Joni\" },\r\n            //     { id: 6, name: \"Joni\" },\r\n            // ],\r\n            // dynamicElement:[]\r\n            FwrapOn: false,\r\n            show_options: false,\r\n            option_tray_width: 220,\r\n            input_el_width: 220,\r\n            input_el_height: 38,\r\n            option_tray_top: 35,\r\n            max_wrap_width: 220,\r\n            count: 0,\r\n            selected_items: []\r\n        }\r\n    },\r\n    mounted() {\r\n        // consloe(this.options);   \r\n        this.$nextTick(() => {\r\n            this.option_tray_width = 220;\r\n            this.input_el_width = 220;\r\n            this.input_el_height = 38;\r\n            this.option_tray_top = 35;\r\n            this.max_wrap_width = 220;\r\n        });\r\n    },\r\n    methods: {\r\n        clearSelection(){\r\n            this.selected_items = [];\r\n            this.$emit(\"selected_items\",this.selected_items);\r\n            this.adjustELWidth(false,'')\r\n        },\r\n        clickED() {\r\n            this.option_tray_width = this.$refs.multiSelect.offsetWidth;\r\n            this.count++;\r\n        },\r\n        optionClicked(value) {\r\n            // check if value exist\r\n            this.selected_items = [...this.selected_items, value];\r\n            this.$emit(\"selected_items\",this.selected_items);\r\n            this.adjustELWidth(true, value);\r\n        },\r\n        unselect(v) {\r\n            this.selected_items = this.selected_items.filter(i => i != v);\r\n            this.$emit(\"selected_items\",this.selected_items);\r\n            this.adjustELWidth(false, v);\r\n        },\r\n        adjustELWidth(increase, val) {\r\n            let w = this.$refs.selectTray.offsetWidth,\r\n                mw = this.$refs.mainWrap.offsetWidth;\r\n            this.$nextTick(() => {\r\n                // width\r\n                let tmp = increase ? this.$refs[`dynamicEl${val}`][0].offsetWidth : 0;\r\n                let h = this.$refs.selectTray.offsetHeight,\r\n                    DW_DElW = w + tmp, max_stretch = w;\r\n                let check = `DW_DElW = ${DW_DElW}, mw = ${mw}, w = ${w};  DW_DElW > mw : ${DW_DElW > mw}`;\r\n                let select_tray_max_stretch = mw - 60, element_stretch = DW_DElW + 64;\r\n                if (DW_DElW > mw - 60) {\r\n                    this.max_wrap_width = select_tray_max_stretch;\r\n                    this.option_tray_width = mw;\r\n                    this.input_el_width = mw;\r\n                    this.input_el_height = this.FwrapOn ? h + 8 : h + 38;\r\n                    this.option_tray_top = this.input_el_height - 2;\r\n                    this.FwrapOn = true;\r\n                    // height\r\n                } else {\r\n                    if (increase) {\r\n                        this.option_tray_width = (DW_DElW + 4) < 220 - 60 ? 220 : (element_stretch);\r\n                        this.input_el_width = (DW_DElW + 4) < 220 - 60 ? 220 : (element_stretch);\r\n                        // console.log(`input_el = ${this.input_el_width}, option_tray = ${this.option_tray_width}, element_stretch = ${element_stretch}`)\r\n                    } else {\r\n                        if (this.selected_items.length == 0) {\r\n                            this.FwrapOn = false;\r\n                            this.option_tray_width = 220;\r\n                            this.input_el_width = 220;\r\n                            this.input_el_height = 38;\r\n                            this.option_tray_top = 35;\r\n                            this.max_wrap_width = 220;\r\n                        }else{\r\n                            this.input_el_height = this.selected_items.length == 0 ? 38 : h + 8;\r\n                            this.option_tray_top = this.input_el_height - 2;\r\n                        }\r\n                    }\r\n                }\r\n            })\r\n        }\r\n    }\r\n}\r\n</script>\r\n\r\n<style>\r\n#MultiSelec {\r\n    /* margin-left: 100px; */\r\n    max-width: 100%;\r\n}\r\nspan > i.icon{\r\n    pointer-events: none;\r\n}\r\n\r\n.wrap {\r\n    position: relative;\r\n    max-width: inherit;\r\n}\r\n\r\n.wrap>input {\r\n    cursor: pointer;\r\n    max-width: inherit;\r\n}\r\n\r\ninput.focused {\r\n    border: .7px solid rgba(59 130 246 / 0.5) !important;\r\n}\r\n\r\n.option-tray {\r\n    position: absolute;\r\n    left: 0px;\r\n    width: 100%;\r\n    min-height: 25px;\r\n    max-height: 200px;\r\n    background-color: white;\r\n    border-radius: 0px 0px 4px 4px;\r\n    z-index: 999;\r\n    border: .7px solid rgba(59 130 246 / 0.5);\r\n    overflow: auto;\r\n}\r\n\r\n.options {\r\n    padding: 10px 15px;\r\n    color: rgb(69, 69, 69);\r\n}\r\n\r\n.options:hover {\r\n    background-color: lightgray;\r\n}\r\n\r\ni.icon.close{\r\n    cursor:pointer;\r\n}\r\ni.icon.caret{\r\n    color:rgb(73, 73, 73)\r\n}\r\ni.icon:hover{\r\n    color:rgb(73, 73, 73);\r\n}\r\n</style>",
-      "start": 1702269820824,
-      "end": 1702269825058,
+      "start": 1702270255089,
+      "end": 1702270259183,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702269825058,
-      "end": 1702269825058,
+      "start": 1702270259183,
+      "end": 1702270259183,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702269825058,
-      "end": 1702269825058,
+      "start": 1702270259183,
+      "end": 1702270259183,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702269825058,
-      "end": 1702269825058,
+      "start": 1702270259183,
+      "end": 1702270259183,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702269825058,
-      "end": 1702269825058,
+      "start": 1702270259183,
+      "end": 1702270259183,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702269825058,
-      "end": 1702269825058,
+      "start": 1702270259183,
+      "end": 1702270259183,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702269825058,
-      "end": 1702269825058,
+      "start": 1702270259183,
+      "end": 1702270259183,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702269825059,
-      "end": 1702269825059,
+      "start": 1702270259183,
+      "end": 1702270259183,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "\r\nconst _sfc_main = {\r\n    name: \"MultiSelect\",\r\n    props: {placeholder:String,options:Array},\r\n    data() {\r\n        return {\r\n            // options: [\r\n            //     { id: 1, name: \"Remember Me\" },\r\n            //     { id: 2, name: \"Joni\" },\r\n            //     { id: 3, name: \"Don't let me down\" },\r\n            //     { id: 4, name: \"Dont't cry\" },\r\n            //     { id: 5, name: \"Joni\" },\r\n            //     { id: 6, name: \"Joni\" },\r\n            // ],\r\n            // dynamicElement:[]\r\n            FwrapOn: false,\r\n            show_options: false,\r\n            option_tray_width: 220,\r\n            input_el_width: 220,\r\n            input_el_height: 38,\r\n            option_tray_top: 35,\r\n            max_wrap_width: 220,\r\n            count: 0,\r\n            selected_items: []\r\n        }\r\n    },\r\n    mounted() {\r\n        // consloe(this.options);   \r\n        this.$nextTick(() => {\r\n            this.option_tray_width = 220;\r\n            this.input_el_width = 220;\r\n            this.input_el_height = 38;\r\n            this.option_tray_top = 35;\r\n            this.max_wrap_width = 220;\r\n        });\r\n    },\r\n    methods: {\r\n        clearSelection(){\r\n            this.selected_items = [];\r\n            this.$emit(\"selected_items\",this.selected_items);\r\n            this.adjustELWidth(false,'')\r\n        },\r\n        clickED() {\r\n            this.option_tray_width = this.$refs.multiSelect.offsetWidth;\r\n            this.count++;\r\n        },\r\n        optionClicked(value) {\r\n            // check if value exist\r\n            this.selected_items = [...this.selected_items, value];\r\n            this.$emit(\"selected_items\",this.selected_items);\r\n            this.adjustELWidth(true, value);\r\n        },\r\n        unselect(v) {\r\n            this.selected_items = this.selected_items.filter(i => i != v);\r\n            this.$emit(\"selected_items\",this.selected_items);\r\n            this.adjustELWidth(false, v);\r\n        },\r\n        adjustELWidth(increase, val) {\r\n            let w = this.$refs.selectTray.offsetWidth,\r\n                mw = this.$refs.mainWrap.offsetWidth;\r\n            this.$nextTick(() => {\r\n                // width\r\n                let tmp = increase ? this.$refs[`dynamicEl${val}`][0].offsetWidth : 0;\r\n                let h = this.$refs.selectTray.offsetHeight,\r\n                    DW_DElW = w + tmp, max_stretch = w;\r\n                let check = `DW_DElW = ${DW_DElW}, mw = ${mw}, w = ${w};  DW_DElW > mw : ${DW_DElW > mw}`;\r\n                let select_tray_max_stretch = mw - 60, element_stretch = DW_DElW + 64;\r\n                if (DW_DElW > mw - 60) {\r\n                    this.max_wrap_width = select_tray_max_stretch;\r\n                    this.option_tray_width = mw;\r\n                    this.input_el_width = mw;\r\n                    this.input_el_height = this.FwrapOn ? h + 8 : h + 38;\r\n                    this.option_tray_top = this.input_el_height - 2;\r\n                    this.FwrapOn = true;\r\n                    // height\r\n                } else {\r\n                    if (increase) {\r\n                        this.option_tray_width = (DW_DElW + 4) < 220 - 60 ? 220 : (element_stretch);\r\n                        this.input_el_width = (DW_DElW + 4) < 220 - 60 ? 220 : (element_stretch);\r\n                        // console.log(`input_el = ${this.input_el_width}, option_tray = ${this.option_tray_width}, element_stretch = ${element_stretch}`)\r\n                    } else {\r\n                        if (this.selected_items.length == 0) {\r\n                            this.FwrapOn = false;\r\n                            this.option_tray_width = 220;\r\n                            this.input_el_width = 220;\r\n                            this.input_el_height = 38;\r\n                            this.option_tray_top = 35;\r\n                            this.max_wrap_width = 220;\r\n                        }else{\r\n                            this.input_el_height = this.selected_items.length == 0 ? 38 : h + 8;\r\n                            this.option_tray_top = this.input_el_height - 2;\r\n                        }\r\n                    }\r\n                }\r\n            })\r\n        }\r\n    }\r\n}\r\n\nimport { normalizeClass as _normalizeClass, normalizeStyle as _normalizeStyle, createElementVNode as _createElementVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, toDisplayString as _toDisplayString } from \"vue\"\n\nconst _hoisted_1 = {\n  id: \"MultiSelec\",\n  ref: \"mainWrap\"\n}\nconst _hoisted_2 = { class: \"wrap\" }\nconst _hoisted_3 = { class: \"ui icon input\" }\nconst _hoisted_4 = [\"value\"]\nconst _hoisted_5 = { style: {\"position\":\"absolute\",\"right\":\"8px\",\"top\":\"9px\",\"color\":\"darkgray\",\"pointer-events\":\"none\"} }\nconst _hoisted_6 = /*#__PURE__*/_createElementVNode(\"span\", null, [\n  /*#__PURE__*/_createElementVNode(\"i\", { class: \"filter icon\" })\n], -1)\nconst _hoisted_7 = { style: {\"position\":\"absolute\",\"top\":\"4px\",\"left\":\"3px\",\"pointer-events\":\"none\"} }\nconst _hoisted_8 = [\"onClick\"]\nconst _hoisted_9 = [\"data-value\", \"onClick\"]\nconst _hoisted_10 = /*#__PURE__*/_createElementVNode(\"i\", null, \"No items left...\", -1)\nconst _hoisted_11 = [\n  _hoisted_10\n]\n\nfunction _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createElementVNode(\"div\", _hoisted_3, [\n        _createElementVNode(\"input\", {\n          class: _normalizeClass($data.count % 2 == 0 ? '' : 'focused'),\n          type: \"button\",\n          ref: \"multiSelect\",\n          onClick: _cache[0] || (_cache[0] = (...args) => ($options.clickED && $options.clickED(...args))),\n          style: _normalizeStyle(`caret-color:transparent;cursor:pointer;width:${$data.input_el_width}px !important;height:${$data.input_el_height}px !important;`),\n          value: $data.selected_items.length == 0 ? 'Please select...' : ''\n        }, null, 14, _hoisted_4),\n        _createElementVNode(\"div\", _hoisted_5, [\n          _createElementVNode(\"span\", {\n            style: _normalizeStyle($data.selected_items.length==0?'display:none':'display:auto')\n          }, [\n            _createElementVNode(\"i\", {\n              class: \"close icon\",\n              onClick: _cache[1] || (_cache[1] = (...args) => ($options.clearSelection && $options.clearSelection(...args))),\n              style: {\"pointer-events\":\"auto\"}\n            })\n          ], 4),\n          _hoisted_6\n        ]),\n        _createElementVNode(\"div\", _hoisted_7, [\n          _createElementVNode(\"div\", {\n            style: _normalizeStyle([{\"display\":\"flex\"}, $data.FwrapOn ? 'flex-wrap:wrap;width:' + $data.max_wrap_width + 'px !important;min-width:' + $data.max_wrap_width + 'px !important;' : 'flex-wrap:nowrap;' + ($data.selected_items.length == 0 ? 'width:0px;' : '')]),\n            ref: \"selectTray\"\n          }, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($data.selected_items, (datum) => {\n              return (_openBlock(), _createElementBlock(\"div\", {\n                key: datum,\n                ref_for: true,\n                ref: `dynamicEl${datum}`,\n                style: {\"pointer-events\":\"auto\",\"white-space\":\"nowrap\",\"display\":\"inline-block\",\"width\":\"auto\",\"position\":\"relative\",\"margin\":\"2px\",\"height\":\"26px\",\"padding\":\"1px 30px 1px 7px\",\"background\":\"lightgray\",\"border\":\"1px solid darkgray\",\"border-radius\":\"3px\"}\n              }, [\n                _createElementVNode(\"p\", null, [\n                  _createElementVNode(\"b\", null, [\n                    _createElementVNode(\"small\", null, _toDisplayString($props.options.filter(i => i.id == datum)[0].name), 1)\n                  ])\n                ]),\n                _createElementVNode(\"i\", {\n                  class: \"close icon\",\n                  onClick: $event => ($options.unselect(datum)),\n                  style: {\"cursor\":\"pointer\",\"position\":\"absolute\",\"right\":\"4px\",\"top\":\"6px\"}\n                }, null, 8, _hoisted_8)\n              ], 512))\n            }), 128))\n          ], 4)\n        ])\n      ]),\n      _createElementVNode(\"div\", {\n        class: _normalizeClass([$data.count % 2 == 0 ? 'invisible' : 'visible', \"option-tray\"]),\n        style: _normalizeStyle(`width:${$data.option_tray_width}px;top:${$data.option_tray_top}px !important;`)\n      }, [\n        (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($props.options.filter(i => !$data.selected_items.includes(i.id)), (datum) => {\n          return (_openBlock(), _createElementBlock(\"div\", {\n            key: datum.name,\n            class: \"options\",\n            \"data-value\": datum.id,\n            onClick: $event => ($options.optionClicked(datum.id))\n          }, _toDisplayString(datum.name), 9, _hoisted_9))\n        }), 128)),\n        _createElementVNode(\"div\", {\n          class: \"options disabled\",\n          style: _normalizeStyle(`${$data.selected_items.length != $props.options.length ? 'display:none' : ''}`)\n        }, _hoisted_11, 4)\n      ], 6)\n    ])\n  ], 512))\n}\n\nimport \"C:/xampp/htdocs/projects/boxmaker/components/MultiSelect/index.vue?vue&type=style&index=0&lang.css\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render]])",
-      "start": 1702269825059,
-      "end": 1702269825077,
+      "start": 1702270259183,
+      "end": 1702270259197,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -62,152 +62,152 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702269825077,
-      "end": 1702269825077,
+      "start": 1702270259197,
+      "end": 1702270259197,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702269825077,
-      "end": 1702269825078,
+      "start": 1702270259197,
+      "end": 1702270259197,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259197,
+      "end": 1702270259197,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259197,
+      "end": 1702270259197,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259197,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702269825078,
-      "end": 1702269825078,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702269825078,
-      "end": 1702269825079,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702269825079,
-      "end": 1702269825079,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702269825079,
-      "end": 1702269825079,
+      "start": 1702270259198,
+      "end": 1702270259198,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702269825079,
-      "end": 1702269825083,
+      "start": 1702270259198,
+      "end": 1702270259200,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702269825083,
-      "end": 1702269825083,
+      "start": 1702270259200,
+      "end": 1702270259200,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702269825083,
-      "end": 1702269825083,
+      "start": 1702270259200,
+      "end": 1702270259200,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1702269825083,
-      "end": 1702269825083,
+      "start": 1702270259200,
+      "end": 1702270259200,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1702269825083,
-      "end": 1702269825083,
+      "start": 1702270259200,
+      "end": 1702270259200,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702269825083,
-      "end": 1702269825083,
+      "start": 1702270259200,
+      "end": 1702270259200,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702269825083,
-      "end": 1702269825083,
+      "start": 1702270259201,
+      "end": 1702270259201,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702269825083,
-      "end": 1702269825084,
+      "start": 1702270259201,
+      "end": 1702270259201,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702269825084,
-      "end": 1702269825084,
+      "start": 1702270259201,
+      "end": 1702270259201,
       "order": "normal"
     }
   ]

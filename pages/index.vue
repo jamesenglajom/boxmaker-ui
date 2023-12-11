@@ -1,22 +1,30 @@
 <template>
-    <div class="container ui" >
-        <ElFlyout :isOpen="flyout" @isClosed="closeFlyout" :boxData="(isLoaded ? new_data.filter(i=> i.name.toLowerCase() == selected_box)[0]:null)" :boxImg="isLoaded? `${resolveImageName(selected_box)}`:'bag.svg'"></ElFlyout>
+    <div class="container ui">
+        <ElFlyout :isOpen="flyout" @isClosed="closeFlyout"
+            :boxData="(isLoaded ? new_data.filter(i => i.name.toLowerCase() == selected_box.toLowerCase())[0] : null)"
+            :boxImg="isLoaded ? `${resolveImageName(selected_box)}` : 'bag.svg'"></ElFlyout>
         <div class="ui segment">
-            <div style="margin-top:50px;">
-
-                <p><span class="ui large text">Tags ({{ filter_tags.length }})</span></p>
+            <div style="margin-top:20px;">
+                <!-- <p><span class="ui large text">Tags ({{ filter_tags.length }})</span></p>
                 <div class="ui divider"></div>
                 <div>
                     <template v-for="(datum) in tags" :key="datum">
-                        <!-- <UBadge  :color='filterTagIncludes(datum) ?"green":"white"' style="margin-left:4px;cursor:pointer;" variant="subtle" @click="clickTag(datum)">{{ datum }}</UBadge> -->
                         <div class="ui large label" :class='filterTagIncludes(datum) ? "green" : "white"'
                             style="margin:2px;cursor:pointer;" :style="(datum == 'all' ? 'border:1px solid green' : '')"
                             variant="subtle" @click="clickTag(datum)">
                             {{ datum }}
-                        </div>  
+                        </div>
                     </template>
-                </div>
+                </div> -->
+                
+                <p><span class="ui large text">Tags
+                     <!-- ({{ filter_tags.length }}) -->
+                    </span></p>
+                <div class="ui divider"></div>
+                <MultiSelect :placeholder="'Filter by tags...'" :options="tags" @selected_items="handleSelectedItems"></MultiSelect>
+
             </div>
+            
             <!-- <img src="https://templatemaker-dev.signcut.com/?MODEL=arced&CUSTOMER=whisqu&REQUEST=EXPLANATION" style="width:300px;height:500px;"/>     -->
             <div style="margin-top:60px;">
                 <p><span class="ui large text">Free</span></p>
@@ -24,7 +32,7 @@
 
                 <div class="ui segment secondary">
                     <div class="ui" style="display:flex;flex-wrap:wrap;">
-                        <template v-for="(datum, index) in (filter_tags.includes('all') ? all_boxes : filtered_tags)"
+                        <template v-for="(datum, index) in (filtered_tags.length==0 ? all_boxes : filtered_tags)"
                             :key="datum">
                             <div v-if="index < 5" class="image-item-container" @click="openFlyout(datum)">
                                 <!-- <div class="tag" :class="index%2==0?'free':'pro'">{{index%2==0?'FREE':'PRO'}}</div> -->
@@ -50,10 +58,10 @@
                     </span></p>
                 <div class="ui divider"></div>
                 <div class="ui" style="display:flex;flex-wrap:wrap;">
-                    <template v-for="(datum, index) in (filter_tags.includes('all') ? all_boxes : filtered_tags)"
+                    <template v-for="(datum, index) in (filtered_tags.length==0 ? all_boxes : filtered_tags)"
                         :key="datum">
 
-                        <div class="image-item-container"  @click="openFlyout(datum)">
+                        <div class="image-item-container" @click="openFlyout(datum)">
                             <!-- <div class="tag" :class="index%2==0?'free':'pro'">{{index%2==0?'FREE':'PRO'}}</div> -->
 
                             <div style="display:flex;justify-content:center;height:130px;">
@@ -76,7 +84,7 @@
                 <h2>{{ filtered_tags.length }} boxes</h2>
             </div> -->
         </div>
-        <div class="ui dimmer fluid" :class="flyout?'active':''"></div>
+        <div class="ui dimmer fluid" :class="flyout ? 'active' : ''"></div>
     </div>
 </template>
 
@@ -87,8 +95,8 @@ export default {
     // components:{SuiButton},
     data() {
         return {
-            isLoaded:false,
-            selected_box:"bag",
+            isLoaded: false,
+            selected_box: "bag",
             flyout: false,
             box_types: [],
             new_data: [],
@@ -15401,17 +15409,17 @@ export default {
     },
     mounted() {
         this.reconstructData();
-
+        // console.log([...new Set(this.new_data)]);
     },
     methods: {
         openFlyout(box) {
             this.flyout = true;
             this.selected_box = box;
-            console.log(this.new_data.filter(i=> i.name.toLowerCase() == this.selected_box)[0])
+            // console.log(this.new_data.filter(i => i.name.toLowerCase() == this.selected_box)[0])
             // add class .overlay, .visible on refName flyout 
             // add class .active on refName flyout 
         },
-        closeFlyout(v){
+        closeFlyout(v) {
             this.flyout = false;
         },
         filterTagIncludes(tag) {
@@ -15429,7 +15437,7 @@ export default {
             tags = [...new Set(tags)].sort();
             this.all_boxes = this.new_data.map((e) => { return e.name.toLowerCase() });
             this.selected_box = this.new_data[0].name;
-            this.tags = ['all', ...tags];
+            this.tags = [...tags].map(i=> {return {id:this.slug(i),name:i}});
             this.isLoaded = true;
             // this.tags = [...tags.map(e=>{ return {slug:e.toLowerCase(),name:e.charAt(0).toUpperCase() + e.slice(1),selected: false}})];
         },
@@ -15448,6 +15456,25 @@ export default {
                 }
             }
             this.filterBoxByTags();
+        },
+        handleSelectedItems(v){
+            console.log("handlesSelectedItems: "+ v + ", filter_tags: " + this.filter_tags);
+            let filtered_boxes = [],
+            selected_tags = v;
+            // alert(v);
+            // console.log(v);
+            if(selected_tags.length != 0){
+                selected_tags.forEach((v) => {
+                    this.new_data.forEach((v1) => {
+                        let temp = v1["tags"].map(e => this.slug(e.toLowerCase()));
+                        if (temp.includes(v)) {
+                            filtered_boxes.push(v1.name)
+                        }
+                    })
+                });
+            }
+            this.filtered_tags = [...new Set(filtered_boxes)];
+            
         },
         filterBoxByTags() {
             let filtered_boxes = [];
@@ -15470,20 +15497,22 @@ export default {
         resolveImageName(name) {
             return name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "-").toLowerCase() + ".svg";
         },
+        slug(name) {
+            return name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "").toLowerCase();
+        },
 
     }
 }
 </script>
 
 <style>
-
-
-.ui.dimmer.active{
-    position:fixed;
-    min-height:100vh;
-    height:100vh;
-    z-index:5;
+.ui.dimmer.active {
+    position: fixed;
+    min-height: 100vh;
+    height: 100vh;
+    z-index: 5;
 }
+
 .image-item-container:hover {
     background-color: rgb(255, 212, 59);
 }
@@ -15493,7 +15522,7 @@ export default {
     width: 130px;
     height: 130px;
     border-radius: 7px;
-    background-color: white;
+    background-color: transparent;
     position: relative;
     cursor: pointer;
 }
@@ -15517,4 +15546,5 @@ export default {
     font-weight: 900;
     font-size: .7em;
     padding: 3px 10px;
-}</style>
+}
+</style>

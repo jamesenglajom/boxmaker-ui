@@ -2,34 +2,40 @@
     <div id="CommonFormComponent" style="display:flex;">
         <!-- image and preview display -->
         <div class="preview-display"
-            style="border-right:1px solid lightgray;width:35%;position:fixed;background-color:white;">
+            style="border-right:1px solid lightgray;width:50%;position:fixed;background-color:white;">
             <div style="display:flex">
                 <template v-for="datum in box_preview_options" :key="datum">
-                    <div 
-                        class="box-preview-button"
-                    @click="box_preview = datum"
-                        :style="( box_preview == datum ? 'background-color:rgb(18,121,198) !important;color:white' : '')">
+                    <div class="box-preview-button" @click="box_preview = datum"
+                        :style="(box_preview == datum ? 'background-color:rgb(18,121,198) !important;color:white' : '')">
                         {{ datum }}</div>
                 </template>
             </div>
             <div style="height:calc(100vh - 113px);position:relative">
                 <div v-show="box_preview == 'Sample'">
-                    <img src="https://templatemaker-dev.signcut.com/?MODEL=arced&CUSTOMER=whisqu&REQUEST=EXPLANATION"
+                    <img :src="boxData ? `https://templatemaker-dev.signcut.com/?MODEL=${boxData.id}&CUSTOMER=whisqu&REQUEST=EXPLANATION` : ''"
                         width="500px" height="500px" />
                 </div>
                 <div v-show="box_preview == 'Box outline'">
-                    <img src="https://templatemaker-dev.signcut.com?REGISTRATION=model&REQUEST=DIELINESPREVIEW&MODEL=arced&CUSTOMER=whisqu" alt="" width="500px" height="500px"/>
+                    <img :src="boxData ? box_outline_preview : ''" alt="" width="500px" height="500px" />
                 </div>
-                
-                <div class="box-description ui text" style="position:absolute;bottom:0; background-color:lightgray;padding:10px 20px;width:100%;border-top:1px solid darkgray" >
-                    {{ boxData ? boxData.description:'' }}
+
+                <div class="box-description ui text" style="position:absolute;bottom:0;padding:10px 20px;">
+                    <div style="position:relative">
+                        <div class="ui icon button circular grey" @click="info_toggle = !info_toggle">
+                            <i class="question icon"></i>
+                        </div>
+                    </div>
+                    <div class="ui custom popup top left inverted" :class="info_toggle ? 'transition visible' : 'invisible'"
+                        style="inset: auto auto 60px 20px; display: block !important; width:400px !important;">
+                        {{ boxData ? boxData.description : '' }}
+                    </div>
                 </div>
             </div>
         </div>
         <!-- Form -->
-        <div class="form-display" style="width:65%; margin-left:35%;padding:35px 50px;">
+        <div class="form-display" style="width:50%; margin-left:50%;padding:20px;">
             <div class="ui form">
-                <div class="header" style="margin-bottom:20px;">
+                <div class="header" style="margin-bottom:10px;">
                     <h5 class="ui header text darkgray"><b>DIMENSIONS</b></h5>
                 </div>
                 <div class="content">
@@ -39,243 +45,163 @@
                                 <small>UNIT</small>
                             </label>
                             <div class="ui buttons blue fluid">
-                                <template v-for="datum in units" :key="datum.name">
+                                <template v-for=" datum  in  units " :key="datum.name">
                                     <button class="ui button" :class="selected_unit == datum.name ? 'active' : ''"
                                         @click="selected_unit = datum.name">{{ datum.name }}</button>
                                 </template>
                             </div>
                         </div>
-                        <div class="three fields">
-                            <div class="field">
-                                <label for="length">
-                                    <small>Length</small>
-                                </label>
-                                <div class="ui right labeled input">
-                                    <input step="1" type="number" min="0" v-model="form.length" />
-                                    <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
+                        <template v-if="boxData">
+                            <template v-for=" datum  in  form_elements.parameters ">
+                                <div class="field">
+                                    <label :for="slug(datum.name)">
+                                        <small>{{ datum.name }}</small>
+                                    </label>
+                                    <div class="ui right labeled input">
+                                        <input @change="generatePreviewImage(datum.symbol)" :id="slug(datum.name)" step="1"
+                                            type="number" :min="datum.minval" :max="datum.maxval"
+                                            v-model="form[`${datum.symbol}`]" />
+                                        <div class="ui basic label blue input-unit">{{ datum.type == "measure" ?
+                                            selected_unit : (datum.type == 'number' ? '' : '°') }}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <label for="width">
-                                    <small>Width</small>
-                                </label>
-                                <div class="ui right labeled input">
-                                    <input step="1" type="number" min="0" v-model="form.width" />
-                                    <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label for="height">
-                                    <small>Height</small>
-                                </label>
-                                <div class="ui right labeled input">
-                                    <input step="1" type="number" min="0" v-model="form.height" />
-                                    <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                                </div>
-                            </div>
-                        </div>
+                            </template>
+                        </template>
                     </div>
                     <div class="ui horizontal divider">
                         <small>Other Specifications</small>
                     </div>
                     <div class="custom-form-card">
-                        <div class="field">
-                            <label for="material_thickness">
-                                <small>Material thickness</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="segments_per_arc">
-                                <small>Segments per arc</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">Seg</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="slot_width">
-                                <small>Slot width</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="closing_flap_size">
-                                <small>Closing flap size</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="glue_flap_angle">
-                                <small>Glue flap angle</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">°</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="glue_flap_size">
-                                <small>Glue flap size</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="crash_lock_corner_radius">
-                                <small>Crash lock corner radius</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="crash_lock_flap_size">
-                                <small>Crash lock flap size</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
+                        <template v-if="boxData">
+                            <template v-for=" datum  in  form_elements.options ">
+                                <div class="field">
+                                    <label :for="slug(datum.name)">
+                                        <small>{{ datum.name }}</small>
+                                    </label>
+                                    <div class="ui right labeled input">
+                                        <input @change="generatePreviewImage(datum.symbol)" :id="slug(datum.name)"
+                                            type="number" :min="datum.minval" :max="datum.maxval"
+                                            v-model="form[`${datum.symbol}`]" />
+                                        <div class="ui basic label blue input-unit">{{ datum.type == "measure" ?
+                                            selected_unit : (datum.type == 'number' ? '' : '°') }}</div>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
                     </div>
                 </div>
 
 
                 <!-- pro -->
 
-
-                <div class="header" style="margin:20px 0px;">
+                <!-- page settings -->
+                <div class="header" style="margin:30px 0px 10px 0px ;">
                     <h5 class="ui header text darkgray"><b>PAGE SETTINGS</b></h5>
                 </div>
                 <div class="content">
                     <div class="custom-form-card">
-                        <div class="field">
+                        <div class="ui field">
                             <label for="unit">
                                 <small>Page size</small>
                             </label>
                             <!--select option insert here -->
-                            <select class="ui selection dropdown">
-                                <template v-for="datum in paper_sizes" :key="datum.name">
+                            <select @change="generatePreviewImage('PAGEPRESET')" class="ui dropdown selection"
+                                v-model="selected_page_size">
+                                <template v-for=" datum  in  paper_sizes " :key="datum.name">
                                     <option :value="datum.id">{{ datum.name }}</option>
                                 </template>
                             </select>
                         </div>
                         <div class="two fields">
                             <div class="field">
-                                <label for="width">
+                                <label for="pagewidth">
                                     <small>Page width</small>
-                                    <div class="left pointing basic ui label red">Custom</div>
+                                    <div class="left pointing basic ui label red"
+                                        :class="selected_page_size == 'Custom' ? '' : 'invisible'">Custom</div>
                                 </label>
-                                <div class="ui right labeled input">
-                                    <input step="1" type="number" min="0" v-model="form.width" />
-                                    <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
+                                <div class="ui right labeled input"
+                                    :class="selected_page_size != 'Custom' ? 'disabled' : ''">
+                                    <input @change="generatePreviewImage('PAGEWIDTH')" step="1" type="number" min="0"
+                                        v-model="form['PAGEWIDTH']" />
+                                    <div class="ui basic label blue input-unit">{{ "in" }}</div>
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="height">
+                                <label for="pageheight">
                                     <small>Page height</small>
-                                    <div class="left pointing basic ui label red">Custom</div>
+                                    <div class="left pointing basic ui label red"
+                                        :class="selected_page_size == 'Custom' ? '' : 'invisible'">Custom</div>
                                 </label>
-                                <div class="ui right labeled input">
-                                    <input step="1" type="number" min="0" v-model="form.height" />
-                                    <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
+                                <div class="ui right labeled input"
+                                    :class="selected_page_size != 'Custom' ? 'disabled' : ''">
+                                    <input @change="generatePreviewImage('PAGEHEIGHT')" step="1" type="number" min="0"
+                                        v-model="form['PAGEHEIGHT']" />
+                                    <div class="ui basic label blue input-unit">{{ "in" }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="custom-form-card" style="margin-top:10px">
-                        <div style="display:flex;justify-content:space-between">
-                            <div class="field" style="align-self:center;width:100%;">
-                                <div class="ui checkbox">
-                                    <input type="checkbox" name="example">
-                                    <label><small>Registration marks</small></label>
-                                </div>
+                </div>
 
-                                <select class="ui selection dropdown">
-                                    <template v-for="datum in form.registration_marks" :key="datum.description">
-                                        <option :value="datum.id">{{ datum.description }}</option>
-                                    </template>
-                                </select>
+                <!-- registration mark -->
+
+                <div class="header" style="margin:30px 0px 10px 0px ;display:flex;">
+                    <div class="ui checkbox">
+                        <input @change="generatePreviewImage('REGISTRATION')" type="checkbox" v-model="reg_mark_chkbox">
+                        <label for="">
+                            <h5 class="ui header text darkgray"><b>REGISTRATION MARKS</b></h5>
+                        </label>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="custom-form-card">
+                        <div class="field">
+                            <label for="registration_mark_diameter">
+                                <small>Diameter</small>
+                            </label>
+                            <div class="ui right labeled input" :class="reg_mark_chkbox == false ? 'disabled' : ''">
+                                <input @change="generatePreviewImage('MARK')" type="number" min="0" max="1000"
+                                    v-model="form['MARK']" />
+                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
                             </div>
                         </div>
+                        <div class="field">
+                            <div class="grouped fields">
+                                <div class="two fields">
+                                    <template v-for=" datum  in  registration_marks " :key="datum.id">
+                                        <div class="field">
+                                            <div class="ui radio checkbox"
+                                                :class="reg_mark_chkbox == false ? 'disabled' : ''">
+                                                <input @change="generatePreviewImage(datum.symbol)" type="radio"
+                                                    name="regmark" :value="datum.id" v-model="selected_reg_mark">
+                                                <label>{{ datum.description }}</label>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ui horizontal divider">
+                    <small>Other Specifications</small>
+                </div>
+
+                <div class="custom-form-card" style="margin-top:10px">
+                    <template v-for=" datum  in  pro_setting_form ">
                         <div class="field">
                             <label for="segments_per_arc">
-                                <small>Segments per arc</small>
+                                <small>{{ datum.name }}</small>
                             </label>
                             <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">Seg</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="slot_width">
-                                <small>Slot width</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
+                                <input @change="generatePreviewImage(datum.symbol)" type="text" :min="minval" :max="maxval"
+                                    v-model="form[`${datum.symbol}`]" />
                                 <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
                             </div>
                         </div>
-                        <div class="field">
-                            <label for="closing_flap_size">
-                                <small>Closing flap size</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="glue_flap_angle">
-                                <small>Glue flap angle</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">°</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="glue_flap_size">
-                                <small>Glue flap size</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="crash_lock_corner_radius">
-                                <small>Crash lock corner radius</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label for="crash_lock_flap_size">
-                                <small>Crash lock flap size</small>
-                            </label>
-                            <div class="ui right labeled input">
-                                <input step=".1" type="text" min="0" />
-                                <div class="ui basic label blue input-unit">{{ selected_unit }}</div>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -284,27 +210,61 @@
 <script>
 export default {
     name: "CommonForm",
-    props:["boxData"],
+    props: ["boxData"],
+    watch: {
+        selected_unit(n, o) {
+            // alert(o +"  :  "+ n)
+            // let formElements =  this.boxData.parameters.
+            this.convertFormValues(o, n);
+        },
+        selected_page_size(v) {
+            if (v != "Auto") {
+                let paper = this.paper_sizes.filter(i => i.id == v)[0];
+                this.form["PAGEWIDTH"] = paper.width;
+                this.form["PAGEHEIGHT"] = paper.height;
+            }
+        },
+        reg_mark_chkbox(v) {
+            if (v) {
+                this.form["REGISTRATION"] = this.selected_reg_mark;
+            } else {
+                this.form["REGISTRATION"] = 'none';
+            }
+        },
+        form(v) {
+            // alert(v);
+        },
+        boxData(v) {
+            console.log("BOXDATA");
+            console.log(v);
+            this.extractFormElements();
+            this.generatePreviewImage();
+        }
+    },
     data() {
         return {
+            form_elements: [], // segregated form
+            form_elements_inline: [], // inline form
             box_preview: "Sample",
             box_preview_options: ["Box outline", "Sample"],
             selected_unit: "mm",
-            units: [
-                { name: "mm", size_in_mm: 0 },
-                { name: "cm", size_in_mm: 0 },
-                { name: "inch", size_in_mm: 0 },
+            reg_mark_chkbox: false,
+            selected_reg_mark: "page",
+            selected_page_size: "Auto",
+            pro_setting_form: [],
+            box_outline_preview: "",
+            info_toggle: false,
+            registration_marks: [
+                // {id:1,description:"No registrations marks"},
+                { id: "page", description: "In the corners of the page" },
+                { id: "model", description: "Around each model" },
             ],
-            form: {
-                length: 0,
-                width: 0,
-                height: 0,
-                registration_marks: [
-                    // {id:1,description:"No registrations marks"},
-                    { id: 2, description: "In the corners of the page" },
-                    { id: 3, description: "Around each model" },
-                ]
-            },
+            units: [
+                { name: "mm", mm: 1, cm: .1, inch: 0.0393700787 },
+                { name: "cm", mm: 10, cm: 1, inch: 0.3937007874 },
+                { name: "inch", mm: 25.4, cm: 2.54, inch: 1 },
+            ],
+            form: {},
             // paper sizes default unit is in inches
             paper_sizes: [
                 { id: "Auto", name: "Fit page to drawing", width: 0, height: 0 },
@@ -330,21 +290,75 @@ export default {
         }
     },
     methods: {
-        convertTo(n, u) {
-            let result = 0;
-            switch (u) {
-                case 'mm':
-                    result = n * 25.4;
-                    break;
-                case 'cm':
-                    result = n * 2.54;
-                    break;
-                // case 'cm':
-                //         result = n * 2.54;
-                //     break;
-            }
-            return result;
+        generatePreviewImage(el) {
+            // alert(el + " element has detected change"); // el variable for testing each element
+            let temp = this.form, url = "", akeys = Object.keys(temp);
+            akeys.forEach((v) => {
+                switch (v) {
+                    case "REGISTRATION":
+                    case "MARK":
+                        if (this.reg_mark_chkbox) {
+                            url = url + `&${v}=${temp[v]}`;
+                        }
+                        break;
+                    case "PAGEWIDTH":
+                    case "PAGEHEIGHT":
+                        if (this.selected_page_size != "Auto") {
+                            url = url + `&${v}=${temp[v]}`;
+                        }
+                        break;
+                    default:
+                        if (temp[v] != 0) {
+                            if (this.reg_mark_chkbox == false) { }
+                            url = url + `&${v}=${temp[v]}`;
+                        }
+                        break;
+                }
+            });
+            this.box_outline_preview = `https://templatemaker-dev.signcut.com?REQUEST=DIELINESPREVIEW&MODEL=${this.boxData.id}&CUSTOMER=whisqu` + url;
         },
+        slug(name) {
+            return name.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "").toLowerCase();
+        },
+        extractFormElements() {
+            let tmp = this.boxData, parameter_class = Object.keys(this.boxData.parameters), form_elements = [], form_elements_inline = [];
+            parameter_class.forEach(((v) => {
+                let temp = [...Object.values(tmp["parameters"][v])];
+                if (v == "professional") {
+                    temp = [...(Object.values(tmp["parameters"][v])).filter(i => ["REGISTRATION", "MARK", "BLEED", "OVERCUT", "DASH", "GAP", "FILMIN"].includes(i.symbol))]
+                    this.pro_setting_form = [...(Object.values(tmp["parameters"][v])).filter(i => ["BLEED", "OVERCUT", "DASH", "GAP", "FILMIN"].includes(i.symbol))]
+                } else if (v == "standard") {
+                    temp = [...(Object.values(tmp["parameters"][v])).filter(i => ["PAGEPRESET", "PAGEHEIGHT", "PAGEWIDTH"].includes(i.symbol))]
+                }
+                form_elements[v] = [...form_elements, ...temp];
+                form_elements_inline = [...form_elements_inline, ...temp];
+
+            }));
+            this.form_elements = form_elements;
+            this.form_elements_inline = form_elements_inline;
+            this.initializeFormData();
+        },
+        initializeFormData() {
+            Object.keys(this.form_elements).forEach(((v) => {
+                this.form_elements[v].forEach(((v1) => {
+                    this.form[v1.symbol] = v1.value;
+                }));
+            }))
+            
+            console.log(this.form);
+        },
+        resetFormValues() {
+            this.initializeFormData();
+        },
+        convertFormValues(from, to) {
+            let tmp = this.form, operation = this.units.filter(i => i.name == from)[0];
+            Object.entries(tmp).filter(i=> !["PAGEWIDTH","PAGEHEIGHT"].includes(i[0])).forEach(((v) => {
+                let el = this.form_elements_inline.filter(i => i.symbol == v[0])[0];
+                    if (el["type"] == "measure") {
+                        this.form[v[0]] = (to == "mm" ? Math.round((v[1] * operation[to])): Math.round((v[1] * operation[to])*100) / 100);
+                    }
+            }));
+        }
     }
 }
 </script>
@@ -359,10 +373,17 @@ export default {
     /* width: 75px; */
     text-align: center;
 }
-.box-preview-button{
-    border:solid 1px lightgray;width:50%;cursor:pointer;background-color:white;padding:10px 2px;text-align:center;
+
+.box-preview-button {
+    border: solid 1px lightgray;
+    width: 50%;
+    cursor: pointer;
+    background-color: white;
+    padding: 10px 2px;
+    text-align: center;
 }
-.box-preview-button:hover{
-    background-color:lightgray;
+
+.box-preview-button:hover {
+    background-color: lightgray;
 }
 </style>

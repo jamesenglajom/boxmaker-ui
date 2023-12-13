@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div id="app-body">
     <NuxtPage />
   </div>
 </template>
@@ -15,7 +15,11 @@ export default {
 
 <style>
 @import url("fomantic-ui-css/semantic.min.css");
-body {
-  background-color: rgb(231, 231, 231);
+
+@media only screen and (min-width: 760px) {
+  body {
+    background-color: rgb(231, 231, 231);
+    width:760px;
+  }
 }
 </style>

@@ -7,13 +7,13 @@
                     <div @click="closeFlyout" style="background-color:lightgrey;cursor:pointer;padding:5px 10px;border-radius:4px;">
                         <i class="arrow left icon" ></i>
                     </div>
-                    <div style="align-self:center;width:25px;margin-left:15px;">
-                        <NuxtPicture :src="`/assets/images/box_icons/${boxImg}`" class="ui image"/>
+                    <div style="align-self:center;width:30px;margin-left:15px;">
+                        <NuxtPicture height="100px" width="100px" :src="`_nuxt/assets/images/box_icons/${box? box.img: ''}`" class="ui image"/>
                     </div>
                     <div class="content" style="align-self:center;margin-left:10px">
                         <!-- Arced Top Box -->
                         <div class="box_name">
-                        {{ boxData ? boxData.name: '' }}
+                        {{ box!=undefined ? box.name: '' }}
                         </div>
                     </div>
                 </div>
@@ -22,21 +22,19 @@
                 </div>
             </div>
             <div class="content">
-                <ComForm :boxData="boxData"></ComForm>
+                <ComForm :boxData="box"></ComForm>
             </div>
         </div>
-        <!-- <div ref="flyoutDimmer" class="ui pusher dimmer" :class="flyout ? 'active' : ''" style="">
-            <div class="ui basic segment"></div>
-        </div> -->
     </div>
 </template>
 
 <script>
+import {getBoxBySlugName} from "@/composables/boxdata";
 export default {
-    props: ["isOpen","boxData",'boxImg'],
+    props: ["isOpen","box"],
     data() {
         return {
-            flyout: false
+            flyout: false,
         }
     },
     methods: {
@@ -68,6 +66,7 @@ export default {
     width: 90% !important;
     z-index: 999;
     overflow: hidden;
+    max-width:720px;
 }
 
 .ui.flyout.visible>.ui.header {

@@ -2,6 +2,7 @@
 /// <reference types="@nuxt/ui" />
 /// <reference types="@nuxt/devtools" />
 /// <reference types="@nuxt/image" />
+/// <reference types="floating-vue" />
 /// <reference types="@nuxt/devtools" />
 /// <reference types="@nuxt/telemetry" />
 /// <reference types="nuxt" />

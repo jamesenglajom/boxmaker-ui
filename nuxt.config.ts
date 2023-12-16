@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr:true,
   modules: ['@nuxt/ui', // 'vue-fomantic-ui'
-  '@nuxt/devtools', "@nuxt/image"],
+  '@nuxt/devtools', "@nuxt/image", "floating-vue/nuxt"],
   // css:['fomantic-ui-css/semantic.min.css']
   // vue: {  
   //   compilerOptions: {

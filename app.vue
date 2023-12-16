@@ -5,13 +5,8 @@
 </template>
 
 <script>
-export default {
-  data(){ 
-  },
-  methods:{
-  }
-}
 </script>
+
 
 <style>
 @import url("fomantic-ui-css/semantic.min.css");

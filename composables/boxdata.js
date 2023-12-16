@@ -1,3 +1,7 @@
+// static data
+// soon to be requested from api
+
+
 const api_data = {
     "arced": { "id": "arced", "name": "Arced Top Box", "description": "Box with decorative, arced top and snap-lock-bottom.", "tags": ["proffesional", "box", "packaging", "flatpack", "premium", "glueless"], "metrics": [], "validations": [], "MODEL": "arced", "CUSTOMER": "whisqu", "action": "//templatemaker-dev.signcut.com/", "parameters": { "standard": { "UNITS": { "name": "Units", "symbol": "UNITS", "value": "mm", "expression": "", "type": "radio", "dirty": false, "tooltip": null, "options": { "mm": "mm", "cm": "cm", "inch": "inch" }, "uuid": "0be8c90d" }, "MARGIN": { "name": "Margin", "symbol": "MARGIN", "value": 10, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "64257b84" }, "PAGEPRESET": { "name": "Page Size", "symbol": "PAGEPRESET", "value": "Auto", "expression": "", "type": "select", "dirty": false, "tooltip": null, "options": { "Auto": "Fit page to drawing", "Custom": "Custom: you decide.", "A4": "A4 Portrait (210 x 297 mm )", "A4L": "A4 Landscape (297 x 210 mm )", "Letter": "US Letter Portrait (8.5 x 11 inch)", "LetterL": "US Letter Landscape (11 x 8.5 inch)", "A3": "A3 Portrait ( 297 x 420 mm)", "A3L": "A3 Landscape (410 x 297 mm)", "12x12": "12 x 12 inch for desktop cutting plotters", "12x24": "12 x 24 inch for desktop cutting plotters", "24x12": "24 x 12 inch for desktop cutting plotters", "A3PLUS": "A3 Plus (Portrait)", "A3PLUSL": "A3 Plus (Landscape)", "1020x710": "1020 x 710 mm", "710x1020": "710 x 2020 mm", "915x540": "915 x 540 mm", "540x915": "540 x 915 mm", "FLUTE": "Flute Board, 1200 x 2400 mm", "FLUTEL": "Flute Board Landscape, 2400x1200 mm", "GLOWFORGE": "Glowforge (Portrait", "GLOWFORGEL": "Glowforge (Landscape)" }, "uuid": "1f1b09df" }, "PAGEWIDTH": { "name": "Page Width", "symbol": "PAGEWIDTH", "value": 200, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "9c003460" }, "PAGEHEIGHT": { "name": "Page Height", "symbol": "PAGEHEIGHT", "value": 200, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "a88bfef9" }, "RESOLUTION": { "name": "Resolution", "symbol": "RESOLUTION", "value": 72, "expression": "", "type": "number", "dirty": false, "tooltip": null, "minval": -500, "maxval": 500, "uuid": "6f30fc15" }, "PERFORATION": { "name": "Perforation Length", "symbol": "PERFORATION", "value": 5, "expression": "", "type": "measure", "dirty": false, "tooltip": "Length of the perforation", "minval": 0, "maxval": 1000, "uuid": "924f5b02" }, "LAYOUT": { "name": "Page Arrangement", "symbol": "LAYOUT", "value": "VERTICAL", "expression": "", "type": "radio", "dirty": false, "tooltip": "For SVG-pages and Preview, how should the pages be stacked?", "options": { "VER": "Vertically", "HOR": "Horizontally" }, "uuid": "f86dbac9" }, "REQUEST": { "name": "Request", "symbol": "REQUEST", "value": "JSONALL", "expression": "", "type": "radio", "dirty": true, "tooltip": null, "options": { "PDF": "PDF", "SVG": "SVG", "CRICUT": "Cricut", "PERFSVG": "Perforated SVG", "DXF": "DXF", "PNG": "PNG", "PS": "PS", "TILES": "Tiles (PDF)", "SIGNCUT": "SIGNCUT", "SINGLESTYLEDXF": "Perforated DXF" }, "uuid": "e6afacd2" } }, "parameters": { "L": { "name": "Length", "symbol": "L", "value": 100, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "a00970c4" }, "W": { "name": "Width", "symbol": "W", "value": 70, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "a41d41ab" }, "H": { "name": "Height", "symbol": "H", "value": 50, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "12bea1fd" } }, "options": { "T": { "name": "Material thickness", "symbol": "T", "value": 0.5, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "62035653" }, "N": { "name": "Segments per arc", "symbol": "N", "value": 8, "expression": "", "type": "number", "dirty": false, "tooltip": null, "minval": -500, "maxval": 500, "uuid": "fb1e9ec5" }, "SLOT": { "name": "Slot Width", "symbol": "SLOT", "value": 2, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "e43c94a2" }, "FLAP": { "name": "Closing Flap Size", "symbol": "FLAP", "value": 20, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "b1551576" }, "GLUEANGLE": { "name": "Glue Flap Angle", "symbol": "GLUEANGLE", "value": 80, "expression": "", "type": "angle", "dirty": false, "tooltip": null, "minval": -360, "maxval": 360, "uuid": "fecaf3e8" }, "GLUE": { "name": "Glue Flap Size", "symbol": "GLUE", "value": 15, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "6df1052f" }, "R": { "name": "Crash Lock Corner Radius", "symbol": "R", "value": 10, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "c049fd9e" }, "OS": { "name": "Crash lock flap size", "symbol": "OS", "value": 10, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "34a21e4b" } }, "professional": { "REGISTRATION": { "name": "Registration marks", "symbol": "REGISTRATION", "value": "page", "expression": "", "type": "select", "dirty": false, "tooltip": null, "options": { "none": "No Registration Marks", "page": "In the corners of the page", "model": "Around each model" }, "uuid": "32a0fcb3" }, "MARK": { "name": "Registration Mark Diameter", "symbol": "MARK", "value": 6, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "d4b23bf9" }, "MARKCLEAR": { "name": "Registration mark clearance", "symbol": "MARKCLEAR", "value": 6, "expression": "", "type": "measure", "dirty": false, "tooltip": "Space between registration mark and model", "minval": 0, "maxval": 1000, "uuid": "ee4f06f5" }, "BLEED": { "name": "Bleed tolerance", "symbol": "BLEED", "value": 3, "expression": "", "type": "measure", "dirty": false, "tooltip": "Size of bleed area outside models.", "minval": 0, "maxval": 1000, "uuid": "dc58e152" }, "OVERCUT": { "name": "Overcut", "symbol": "OVERCUT", "value": 0, "expression": "", "type": "measure", "dirty": false, "tooltip": "For models that use this, the length that one line segment extends beyond another one when these meet at a sharp angle", "minval": 0, "maxval": 1000, "uuid": "c99847f2" }, "DASH": { "name": "Push-out Cut length", "symbol": "DASH", "value": 40, "expression": "", "type": "measure", "dirty": false, "tooltip": "Maximum length of a line segment. (Use this for chopping up continuous strokes into smaller segments).", "minval": 0, "maxval": 1000, "uuid": "fc55c8b0" }, "GAP": { "name": "Push-out Bridge Length", "symbol": "GAP", "value": 0, "expression": "", "type": "measure", "dirty": false, "tooltip": "Gap length between line segments. (Use this for chopping up continuous strokes into smaller segments).", "minval": 0, "maxval": 1000, "uuid": "384b930e" }, "FILMIN": { "name": "Sharp corner radius", "symbol": "FILMIN", "value": 0, "expression": "", "type": "measure", "dirty": false, "tooltip": "Minimal radius of sharp corners.", "minval": 0, "maxval": 1000, "uuid": "00e0e5f9" }, "NESTING": { "name": "Nesting", "symbol": "NESTING", "value": "manual", "expression": "", "type": "radio", "dirty": false, "tooltip": null, "options": { "auto": "Auto", "manual": "Manual", "none": "No nesting" }, "uuid": "1a7eea06" }, "COLS": { "name": "Columns", "symbol": "COLS", "value": 1, "expression": "", "type": "number", "dirty": false, "tooltip": null, "minval": -500, "maxval": 50, "uuid": "fb381ae6" }, "ROWS": { "name": "Rows", "symbol": "ROWS", "value": 1, "expression": "", "type": "number", "dirty": false, "tooltip": null, "minval": -500, "maxval": 50, "uuid": "121c183d" }, "COLSPACE": { "name": "Space between columns", "symbol": "COLSPACE", "value": 5, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "84eaaf04" }, "ROWSPACE": { "name": "Space between rows", "symbol": "ROWSPACE", "value": 5, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "e4e0b250" }, "OUTLINETEXT": { "name": "Outline text", "symbol": "OUTLINETEXT", "value": 1, "expression": "", "type": "boolean", "dirty": false, "tooltip": "Outlines all text as paths", "uuid": "603b4c6d" }, "APPROX": { "name": "Maximum Arc Segment Length", "symbol": "APPROX", "value": 0.5, "expression": "", "type": "measure", "dirty": false, "tooltip": "Only used in JSONIMAGE: approximate length of a segment when dividing an arc up into straight segments.", "minval": 0, "maxval": 1000, "uuid": "388d5b34" } } }, "gallery": [], "snippets": [], "model": true, "version": "" },
     "bag": { "id": "bag", "name": "Bag", "description": "A typical paper bag that can be stored completely flat. This template can be used to create goodie bags, grocery bags and wrappings for wine bottles. (Among others) or a large grocery bag. The top of the bag is folded for reinforcement.", "tags": ["Proffesional", "Box", "Packaging", "Gift Wrapping"], "metrics": [], "validations": [], "MODEL": "bag", "CUSTOMER": "whisqu", "action": "//templatemaker-dev.signcut.com/", "parameters": { "standard": { "UNITS": { "name": "Units", "symbol": "UNITS", "value": "mm", "expression": "", "type": "radio", "dirty": false, "tooltip": null, "options": { "mm": "mm", "cm": "cm", "inch": "inch" }, "uuid": "16dc0e5d" }, "MARGIN": { "name": "Margin", "symbol": "MARGIN", "value": 10, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "28f55148" }, "PAGEPRESET": { "name": "Page Size", "symbol": "PAGEPRESET", "value": "Auto", "expression": "", "type": "select", "dirty": false, "tooltip": null, "options": { "Auto": "Fit page to drawing", "Custom": "Custom: you decide.", "A4": "A4 Portrait (210 x 297 mm )", "A4L": "A4 Landscape (297 x 210 mm )", "Letter": "US Letter Portrait (8.5 x 11 inch)", "LetterL": "US Letter Landscape (11 x 8.5 inch)", "A3": "A3 Portrait ( 297 x 420 mm)", "A3L": "A3 Landscape (410 x 297 mm)", "12x12": "12 x 12 inch for desktop cutting plotters", "12x24": "12 x 24 inch for desktop cutting plotters", "24x12": "24 x 12 inch for desktop cutting plotters", "A3PLUS": "A3 Plus (Portrait)", "A3PLUSL": "A3 Plus (Landscape)", "1020x710": "1020 x 710 mm", "710x1020": "710 x 2020 mm", "915x540": "915 x 540 mm", "540x915": "540 x 915 mm", "FLUTE": "Flute Board, 1200 x 2400 mm", "FLUTEL": "Flute Board Landscape, 2400x1200 mm", "GLOWFORGE": "Glowforge (Portrait", "GLOWFORGEL": "Glowforge (Landscape)" }, "uuid": "cf4670eb" }, "PAGEWIDTH": { "name": "Page Width", "symbol": "PAGEWIDTH", "value": 200, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "33cb871b" }, "PAGEHEIGHT": { "name": "Page Height", "symbol": "PAGEHEIGHT", "value": 200, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "53b084c4" }, "RESOLUTION": { "name": "Resolution", "symbol": "RESOLUTION", "value": 72, "expression": "", "type": "number", "dirty": false, "tooltip": null, "minval": -500, "maxval": 500, "uuid": "83c36ca5" }, "PERFORATION": { "name": "Perforation Length", "symbol": "PERFORATION", "value": 5, "expression": "", "type": "measure", "dirty": false, "tooltip": "Length of the perforation", "minval": 0, "maxval": 1000, "uuid": "0485cd4c" }, "LAYOUT": { "name": "Page Arrangement", "symbol": "LAYOUT", "value": "VERTICAL", "expression": "", "type": "radio", "dirty": false, "tooltip": "For SVG-pages and Preview, how should the pages be stacked?", "options": { "VER": "Vertically", "HOR": "Horizontally" }, "uuid": "0eb5770f" }, "REQUEST": { "name": "Request", "symbol": "REQUEST", "value": "JSONALL", "expression": "", "type": "radio", "dirty": true, "tooltip": null, "options": { "PDF": "PDF", "SVG": "SVG", "CRICUT": "Cricut", "PERFSVG": "Perforated SVG", "DXF": "DXF", "PNG": "PNG", "PS": "PS", "TILES": "Tiles (PDF)", "SIGNCUT": "SIGNCUT", "SINGLESTYLEDXF": "Perforated DXF" }, "uuid": "21220fdd" } }, "parameters": { "L": { "name": "Length", "symbol": "L", "value": 80, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "c287f255" }, "W": { "name": "Width", "symbol": "W", "value": 50, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "10ec5e58" }, "H": { "name": "Height", "symbol": "H", "value": 150, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "705d6740" }, "F": { "name": "Fold", "symbol": "F", "value": 20, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "23693b69" } }, "options": { "g": { "name": "Glue Flap Size", "symbol": "g", "value": 15, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "ce335e1b" } }, "professional": { "REGISTRATION": { "name": "Registration marks", "symbol": "REGISTRATION", "value": "page", "expression": "", "type": "select", "dirty": false, "tooltip": null, "options": { "none": "No Registration Marks", "page": "In the corners of the page", "model": "Around each model" }, "uuid": "8bc8f9cd" }, "MARK": { "name": "Registration Mark Diameter", "symbol": "MARK", "value": 6, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "5dc7984c" }, "MARKCLEAR": { "name": "Registration mark clearance", "symbol": "MARKCLEAR", "value": 6, "expression": "", "type": "measure", "dirty": false, "tooltip": "Space between registration mark and model", "minval": 0, "maxval": 1000, "uuid": "a08b5310" }, "BLEED": { "name": "Bleed tolerance", "symbol": "BLEED", "value": 3, "expression": "", "type": "measure", "dirty": false, "tooltip": "Size of bleed area outside models.", "minval": 0, "maxval": 1000, "uuid": "66f4cf2b" }, "OVERCUT": { "name": "Overcut", "symbol": "OVERCUT", "value": 0, "expression": "", "type": "measure", "dirty": false, "tooltip": "For models that use this, the length that one line segment extends beyond another one when these meet at a sharp angle", "minval": 0, "maxval": 1000, "uuid": "b8b9c2e5" }, "DASH": { "name": "Push-out Cut length", "symbol": "DASH", "value": 40, "expression": "", "type": "measure", "dirty": false, "tooltip": "Maximum length of a line segment. (Use this for chopping up continuous strokes into smaller segments).", "minval": 0, "maxval": 1000, "uuid": "dd885d5f" }, "GAP": { "name": "Push-out Bridge Length", "symbol": "GAP", "value": 0, "expression": "", "type": "measure", "dirty": false, "tooltip": "Gap length between line segments. (Use this for chopping up continuous strokes into smaller segments).", "minval": 0, "maxval": 1000, "uuid": "fef2808e" }, "FILMIN": { "name": "Sharp corner radius", "symbol": "FILMIN", "value": 0, "expression": "", "type": "measure", "dirty": false, "tooltip": "Minimal radius of sharp corners.", "minval": 0, "maxval": 1000, "uuid": "f32171ff" }, "NESTING": { "name": "Nesting", "symbol": "NESTING", "value": "manual", "expression": "", "type": "radio", "dirty": false, "tooltip": null, "options": { "auto": "Auto", "manual": "Manual", "none": "No nesting" }, "uuid": "104d3ebe" }, "COLS": { "name": "Columns", "symbol": "COLS", "value": 1, "expression": "", "type": "number", "dirty": false, "tooltip": null, "minval": -500, "maxval": 50, "uuid": "b6496a58" }, "ROWS": { "name": "Rows", "symbol": "ROWS", "value": 1, "expression": "", "type": "number", "dirty": false, "tooltip": null, "minval": -500, "maxval": 50, "uuid": "98d8f7c4" }, "COLSPACE": { "name": "Space between columns", "symbol": "COLSPACE", "value": 5, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "73ef85bc" }, "ROWSPACE": { "name": "Space between rows", "symbol": "ROWSPACE", "value": 5, "expression": "", "type": "measure", "dirty": false, "tooltip": null, "minval": 0, "maxval": 1000, "uuid": "0199e261" }, "OUTLINETEXT": { "name": "Outline text", "symbol": "OUTLINETEXT", "value": 1, "expression": "", "type": "boolean", "dirty": false, "tooltip": "Outlines all text as paths", "uuid": "d0d325d7" }, "APPROX": { "name": "Maximum Arc Segment Length", "symbol": "APPROX", "value": 0.5, "expression": "", "type": "measure", "dirty": false, "tooltip": "Only used in JSONIMAGE: approximate length of a segment when dividing an arc up into straight segments.", "minval": 0, "maxval": 1000, "uuid": "14d8b793" } } }, "gallery": [], "snippets": [], "model": true, "version": "" },
@@ -35,6 +39,11 @@ const api_data = {
 };
 
 
+
+
+//  exported variables and functions 
+
+// get all box array
 export const boxes = () => {
     return Object.values(api_data);
 };
@@ -50,6 +59,7 @@ export const tags = () => {
     return tags.map(i => { return { id: slug(i), name: i.toLowerCase(), no_of_boxes: getBoxbyTags([slug(i)]).length } });
 }
 
+// get filted box array by tags
 export const getBoxbyTags = (tags) => {
     let filtered_boxes = [];
     if (tags.length != 0) {
@@ -58,28 +68,94 @@ export const getBoxbyTags = (tags) => {
                 boxes().forEach((v1) => {
                     let temp = v1.tags.map(e => slug(e));
                     if (temp.includes(slug(v))) {
-                        filtered_boxes.push(v1.name);
+                        filtered_boxes.push(v1);
                     }
                 })
             });
         }
     } else {
-        filtered_boxes = boxes().map(i => i.name);
+        filtered_boxes = boxes();
     }
-    return [...new Set(filtered_boxes)].map(i => { return { id: slug(i), name: i, img: imgName(i) } });
+    return [...new Set(filtered_boxes)].map(i => { return { ...i, img: imgName(i.name) } });
 }
 
-export const getBoxBySlugName = (name) => {
+// get single box by Id
+export const getBoxById = (id) => {
     let box = boxes();
-    box = box.filter(i=> slug(i.name) == slug(name));
-    return box.map(i=> ({...i,img:imgName(i.name)}))[0];
+    box = box.filter(i=> i.id == id);
+    return box.map(i=> ({...i, img:imgName(i.name), slug:slug(i.name), form: getFormStructure(i) }))[0];
 }
+
+// function to convert form data
+export const convert = (from,to,data) => {
+    // specify to-convert properties
+    return getFormInlineProps("arced")
+}
+
+
+// local functions
+
+function imgName(str){
+    return str.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "-").toLowerCase() + ".svg";
+}
+
+function getFormStructure(box){
+    let structure = {},
+    professional_fields_filter = ["REGISTRATION","MARK","BLEED","OVERCUT","DASH","GAP","FILMIN"],
+    standard_fields_filter = ["PAGEPRESET","PAGEWIDTH","PAGEHEIGHT","UNITS"],
+    units_options = box.parameters.standard.UNITS.options,
+    pagepresets_options = box.parameters.standard.PAGEPRESET.options,
+    regmarks_options = box.parameters.professional.REGISTRATION.options,
+    options_field = Object.values(box.parameters.options),
+    parameters_field = Object.values(box.parameters.parameters),
+    professional_field = Object.values(box.parameters.professional).filter(i=> professional_fields_filter.includes(i.symbol)),
+    standard_field = Object.values(box.parameters.standard).filter(i=> standard_fields_filter.includes(i.symbol))
+    ;
+
+    // STRUCTURES
+    // general outputs
+    structure["sample_image"] = `https://templatemaker.signcut.com/?MODEL=${box.id}&CUSTOMER=whisqu&REQUEST=EXPLANATION`;
+    structure["preview_image"] = `https://templatemaker-dev.signcut.com?REQUEST=DIELINESPREVIEW&CUSTOMER=whisqu&MODEL=${box.id}`;
+    structure["description"] = box.description;
+    // option selects
+    // structure["units_options"] = Object.keys(units_options).map(i=> ({value:i, name: units_options[i] }));
+    structure["units_options"] = [
+        {value: "mm",name: "millimeter", abbr: "mm"},
+        {value: "cm",name: "millimeter", abbr: "cm"},
+        {value: "inch",name: "inches", abbr: "in"},
+    ];
+    structure["pagepresets_options"] = Object.keys(pagepresets_options).map(i=> ({value:i, name: pagepresets_options[i] }));
+    structure["regmarks_options"] = Object.keys(regmarks_options).map(i=> ({value:i, name: regmarks_options[i] }));
+    // input options
+    structure["parameters_field"] = parameters_field;
+    structure["options_field"] = options_field;
+    structure["professional_field"] = professional_field;
+    structure["standard_field"] = standard_field;
+
+    // VALUES
+    let values = {},temp = [];
+    temp = [...parameters_field,...options_field,...professional_field,...standard_field];
+    values = temp.reduce((o, key) => ({ ...o, [key.symbol]: key.value}), {});
+    return {structure: structure, values: values};
+}
+
+function getFormInlineProps(id){
+    let form_structure = getBoxById(id).form.structure,
+    fields = ["parameters_field","options_field","standard_field","professional_field"];
+    fields = fields.reduce(((p,c)=> { 
+        return [...p, ...form_structure[c]]}
+        ),[]);
+    return fields;
+}
+
+
+
+
+
+
 // functions global :: toTransfer
 function slug(str) {
     return str.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "").toLowerCase();
 }
 
-function imgName(str){
-    return str.replace(/[^a-zA-Z ]/g, "").replace(/\s/g, "-").toLowerCase() + ".svg";
-}
 

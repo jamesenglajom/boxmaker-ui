@@ -2,31 +2,41 @@
     <div style="">
         <div class="ui grid" style="margin-bottom:40px;">
             <div class="one column" style="width:100%;">
-                <button class="ui labeled icon button" @click="show_tag_selection = !show_tag_selection">
-                    <i class="filter icon"></i>
-                    <small><b>{{ available_tags.length }}</b> TAGS</small>
-                </button>
-                <div  class="selected-wrapper" :class="show_tag_selection==false ? 'show-height' : 'hide-height'">
-                    <div class="selected-inner">
-                        
+                <div style="display:flex">
+                    <div>
+                        <button class="ui labeled icon basic button" data-tooltip="Filter tags" data-inverted=""
+                            @click="show_tag_selection = !show_tag_selection">
+                            <i class="filter icon" sryle="background-white"></i>
+                            <small><b>{{ available_tags.length }}</b> TAGS</small>
+                        </button>
+                    </div>
                     <template v-if="selected_tags.length == 0">
-                        <div style="padding:3px 10px;border-radius:5px;border:solid 1px gray;" ><small><b>ALL</b></small>
-                        </div>
+                        <button class="ui button basic">ALL</button>
                     </template>
                     <template v-else>
-                        <template v-for="datum in available_tags.filter(i => !selected_tags.includes(i.id) == false)">
-                            <div style="margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;">
-                                <small><b>{{ datum.name.toUpperCase() }}</b></small>
-                            </div>
-                        </template>
+                        <button @click="clearTags" class="ui icon button">
+                            <i class="undo icon"></i>
+                        </button>
                     </template>
+                </div>
+
+
+                <div class="selected-wrapper" :class="show_tag_selection == false ? 'show-height' : 'hide-height'">
+                    <div class="selected-inner">
+
+                        <template v-if="selected_tags.length != 0">
+                            <template v-for="datum in available_tags.filter(i => !selected_tags.includes(i.id) == false)">
+                                <div
+                                    style="margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;">
+                                    <small><b>{{ datum.name.toUpperCase() }}</b></small>
+                                </div>
+                            </template>
+                        </template>
                     </div>
                 </div>
             </div>
 
-            <div
-            :style="show_tag_selection ? 'display:default' : 'display:none;'"
-             class="selection-wrapper">
+            <div :style="show_tag_selection ? 'display:default' : 'display:none;'" class="selection-wrapper">
                 <div class="ui grid">
                     <template v-for="(datum, i1) in Math.ceil(available_tags.length / 3)">
                         <div class="stackable three column row" style="padding:0px;margin:0px;">
@@ -82,6 +92,10 @@ export default {
         }
     },
     methods: {
+        clearTags(){
+            this.selected_tags = [];
+            this.$emit("selectedTagsId", this.selected_tags)
+        },
         handleSelect(id) {
             let selected = "";
             if (this.selected_tags.includes(id)) {
@@ -91,7 +105,7 @@ export default {
                 selected = [...this.selected_tags, selected.id];
             }
             this.selected_tags = selected;
-            console.log(this.selected_tags)
+            // console.log(this.selected_tags)
             this.$emit("selectedTagsId", this.selected_tags)
         }
     }
@@ -129,18 +143,17 @@ export default {
 
 }
 
-.selected-inner{
-    flex-wrap:wrap;
-    width:100%;
-    margin-top:2px;
-    display:flex;
+.selected-inner {
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 2px;
+    display: flex;
 }
 
 
-.selected-wrapper{
-    width:100%;
-    display:flex;
+.selected-wrapper {
+    width: 100%;
+    display: flex;
 
 }
-
 </style>

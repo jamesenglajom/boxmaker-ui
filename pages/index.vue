@@ -1,6 +1,6 @@
 <template>
     <div class="ui container">
-        <ElFlyout :isOpen="flyout" @isClosed="closeFlyout" :box="selected_box"></ElFlyout>
+        <ElFlyout :isOpen="flyout" @isClosed="closeFlyout" :box="selected_box?selected_box:{}"></ElFlyout>
         <div class="ui segment">
             <div class="ui" style="width:100%;text-align:right;">
                 <div style="text-align:right;" class="ui labeled button" tabindex="0">
@@ -23,13 +23,7 @@
 
 
 <script>
-import { getBoxbyTags } from '@/composables/boxdata';
 export default {
-    setup() {
-        return {
-            getBoxbyTags
-        }
-    },
     data() {
         return {
             flyout:false,
@@ -42,10 +36,13 @@ export default {
             this.selectedTags = v;
         },
         handleSelectedBox(v){
+            // alert(`index page selected_box = ${v}`)
+            // console.log(v);
             this.selected_box = v;
             this.flyout = true;
         },
         closeFlyout(){
+            this.selected_box=null;
             this.flyout = false;            
         }
     }

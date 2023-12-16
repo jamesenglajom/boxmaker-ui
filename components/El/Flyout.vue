@@ -18,18 +18,17 @@
                     </div>
                 </div>
                 <div style="align-self:center">
-                    <button class="ui button green">PROCEED</button>
+                    <button class="ui button red mini">PROCEED</button>
                 </div>
             </div>
             <div class="content">
-                <ComForm :boxData="box"></ComForm>
+                <ComForm :boxId="box.id"></ComForm>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import {getBoxBySlugName} from "@/composables/boxdata";
 export default {
     props: ["isOpen","box"],
     data() {

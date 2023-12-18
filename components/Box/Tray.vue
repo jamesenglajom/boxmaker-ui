@@ -31,7 +31,7 @@
                 <div style="align-self:center;justify-content:center;text-align:center;">
                   <center>
                     <NuxtPicture style="width:60px;color:rgb(0,78,97);" class="ui image"
-                      :src="`_nuxt/assets/images/box_icons/${datum.img}`" />
+                      :src="`/assets/images/box_icons/${datum.img}`" />
                   </center>
                   <!-- <div class="label"
                     style="color:rgb(0,78,97);padding:3px;margin-top:7px;font-size:.85em;text-align:center;">
@@ -49,7 +49,8 @@
           <template v-for="(datum, index) in getBoxbyTags(selectedTags)" :key="datum">
             <div class="item" @click="boxSelect(datum.id)">
               <div class="ui tiny image">
-                <img :src="`_nuxt/assets/images/box_icons/${datum.img}`">
+                    <NuxtPicture style="width:60px;color:rgb(0,78,97);" class="ui image"
+                      :src="`/assets/images/box_icons/${datum.img}`" />
               </div>
               <div class="content" style="margin-left:20px">
                 <div class="header">{{ datum.name }}</div>
@@ -85,7 +86,7 @@ export default {
   },
   data() {
     return {
-      view: "list"
+      view: "icon"
     }
   }
 }

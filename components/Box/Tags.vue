@@ -57,7 +57,7 @@
                                                 <label :for="available_tags[(i1 * 3 + i2)].id">{{ available_tags[(i1 * 3 +
                                                     i2)].name
                                                 }}
-                                                    <a style="margin:0;position:absolute;right:10px;top:7px;" class="ui label" :data-tooltip="`${available_tags[(i1 * 3 + i2)].no_of_boxes} availble boxes`">
+                                                    <a style="margin:0;position:absolute;right:10px;top:7px;" class="ui label" :data-tooltip="`${available_tags[(i1 * 3 + i2)].no_of_boxes} available boxes`">
                                                         {{ available_tags[(i1 * 3 + i2)].no_of_boxes }}
                                                     </a>
                                                 </label>

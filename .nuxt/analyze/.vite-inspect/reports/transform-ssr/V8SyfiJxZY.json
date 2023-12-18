@@ -1,0 +1,294 @@
+{
+  "resolvedId": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue?vue&type=style&index=0&lang.css",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "\n.image-item-container:hover {\n  /* background-color: rgb(255, 212, 59); yellow bg hover */\n  background-color: #666666;\n\n}\n\n.image-item-container {\n  /* margin:10px; */\n  width: 100px;\n  height: 100px;\n  border-radius: 7px;\n  background-color: transparent;\n  position: relative;\n  cursor: pointer;\n}\n\n.ui.items>.item:hover {\n  background-color: #cccccc;\n  cursor: pointer;\n}\n\n.ui.items>.item {\n  padding: 15px;\n}\n",
+      "start": 1702940404210,
+      "end": 1702940404210,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue"
+        ],
+        "names": [],
+        "mappings": ";AAgGA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;EAC1B,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;EACzD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAE3B;;AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;EACpB,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC;EACjB,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC;EACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC;EACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;EAClB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EAC7B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EAClB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB;;AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;EACpB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EACzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB;;AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;EACd,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;AACf",
+        "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue",
+        "sourceRoot": "",
+        "sourcesContent": [
+          "<template>\n  <div>\n    <div style=\"display:flex;justify-content:space-between\">\n      <div style=\"align-self:center\">\n        <h3>{{ getBoxbyTags(selectedTags).length == boxes().length ? boxes().length : `${getBoxbyTags(selectedTags).length} of ${boxes().length}` }} Models</h3>\n      </div>\n      <div style=\"align-self:center\">\n\n        <div class=\"ui icon buttons\">\n          <button @click=\"view = 'icon'\" :class=\"view == 'icon' ? 'active' : ''\" class=\"ui button basic\"\n            data-tooltip=\"Icon view\" data-inverted=\"\"><i class=\"th icon\"></i></button>\n          <button @click=\"view = 'list'\" :class=\"view == 'list' ? 'active' : ''\" class=\"ui button basic\"\n            data-tooltip=\"List view\" data-inverted=\"\"><i class=\"th list icon\"></i></button>\n        </div>\n      </div>\n    </div>\n    <div class=\"ui divider\"></div>\n    <div class=\"ui segment secondary\">\n\n\n\n\n      <!-- icon view -->\n      <template v-if=\"view == 'icon'\">\n        <div class=\"ui\" style=\"display:flex;flex-wrap:wrap;\">\n          <template v-for=\"(datum, index) in getBoxbyTags(selectedTags)\" :key=\"datum\">\n            <div class=\"image-item-container\" @click=\"boxSelect(datum.id)\" :data-tooltip=\"datum.name\" data-inverted=\"\">\n              <!-- <div class=\"tag\" :class=\"index%2==0?'free':'pro'\">{{index%2==0?'FREE':'PRO'}}</div> -->\n              <div style=\"display:flex;justify-content:center;height:100px;\">\n\n                <div style=\"align-self:center;justify-content:center;text-align:center;\">\n                  <center>\n                    <NuxtPicture style=\"width:60px;color:rgb(0,78,97);\" class=\"ui image\"\n                      :src=\"`/assets/images/box_icons/${datum.img}`\" />\n                  </center>\n                  <!-- <div class=\"label\"\n                    style=\"color:rgb(0,78,97);padding:3px;margin-top:7px;font-size:.85em;text-align:center;\">\n                    {{ datum.name }}</div> -->\n                </div>\n              </div>\n            </div>\n          </template>\n        </div>\n      </template>\n\n      <!-- list view -->\n      <template v-else-if=\"view == 'list'\">\n        <div class=\"ui items\">\n          <template v-for=\"(datum, index) in getBoxbyTags(selectedTags)\" :key=\"datum\">\n            <div class=\"item\" @click=\"boxSelect(datum.id)\">\n              <div class=\"ui tiny image\">\n                    <NuxtPicture style=\"width:60px;color:rgb(0,78,97);\" class=\"ui image\"\n                      :src=\"`/assets/images/box_icons/${datum.img}`\" />\n              </div>\n              <div class=\"content\" style=\"margin-left:20px\">\n                <div class=\"header\">{{ datum.name }}</div>\n                <div class=\"meta\" style=\"display:flex;flex-wrap:wrap;\">\n                  <template v-for=\"tag in datum.tags\">\n                    <div style=\"margin-top:2px;padding:4px 10px;border-radius:25px;background-color:#666666;color:white;\">\n                      {{ tag }}</div>\n                  </template>\n                </div>\n                <div class=\"description\">\n                  <p>{{ datum.description }}</p>\n                </div>\n              </div>\n            </div>\n            <template v-if=\"getBoxbyTags(selectedTags).length - 1 > index\">\n              <div class=\"ui divider\"></div>\n            </template>\n          </template>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script>\nimport { getBoxbyTags, getBoxById, boxes } from '@/composables/boxdata';\nexport default {\n  props: [\"selectedTags\"],\n  methods: {\n    boxSelect(v) {\n      this.$emit(\"selected\", getBoxById(v))\n    }\n  },\n  data() {\n    return {\n      view: \"icon\"\n    }\n  }\n}\n\n</script>\n\n<style>\n.image-item-container:hover {\n  /* background-color: rgb(255, 212, 59); yellow bg hover */\n  background-color: #666666;\n\n}\n\n.image-item-container {\n  /* margin:10px; */\n  width: 100px;\n  height: 100px;\n  border-radius: 7px;\n  background-color: transparent;\n  position: relative;\n  cursor: pointer;\n}\n\n.ui.items>.item:hover {\n  background-color: #cccccc;\n  cursor: pointer;\n}\n\n.ui.items>.item {\n  padding: 15px;\n}\n</style>"
+        ]
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940404210,
+      "end": 1702940404210,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940404210,
+      "end": 1702940404210,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940404211,
+      "end": 1702940404212,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940404211,
+      "end": 1702940404212,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1702940404212,
+      "end": 1702940404212,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": ".image-item-container:hover{background-color:#666}.image-item-container{background-color:transparent;border-radius:7px;cursor:pointer;height:100px;position:relative;width:100px}.ui.items>.item:hover{background-color:#ccc;cursor:pointer}.ui.items>.item{padding:15px}",
+      "start": 1702940404212,
+      "end": 1702940404242,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue",
+        "mappings": "AACA,4BAEE,qBAEF,CAEA,sBAKE,4BAA6B,CAD7B,iBAAkB,CAGlB,cAAe,CAJf,YAAa,CAGb,iBAAkB,CAJlB,WAMF,CAEA,sBACE,qBAAyB,CACzB,cACF,CAEA,gBACE,YACF",
+        "names": [],
+        "sources": [
+          "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue"
+        ],
+        "sourcesContent": [
+          "\n.image-item-container:hover {\n  /* background-color: rgb(255, 212, 59); yellow bg hover */\n  background-color: #666666;\n\n}\n\n.image-item-container {\n  /* margin:10px; */\n  width: 100px;\n  height: 100px;\n  border-radius: 7px;\n  background-color: transparent;\n  position: relative;\n  cursor: pointer;\n}\n\n.ui.items>.item:hover {\n  background-color: #cccccc;\n  cursor: pointer;\n}\n\n.ui.items>.item {\n  padding: 15px;\n}\n"
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1702940404242,
+      "end": 1702940404242,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1702940404242,
+      "end": 1702940404243,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1702940404243,
+      "end": 1702940404243,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": ".image-item-container:hover{background-color:#666}.image-item-container{background-color:transparent;border-radius:7px;cursor:pointer;height:100px;position:relative;width:100px}.ui.items>.item:hover{background-color:#ccc;cursor:pointer}.ui.items>.item{padding:15px}",
+      "start": 1702940404243,
+      "end": 1702940404243,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue",
+        "mappings": "AAAA,4BAA4B,qBAAqB,CAAC,sBAAsB,4BAA4B,CAAC,iBAAiB,CAAC,cAAc,CAAC,YAAY,CAAC,iBAAiB,CAAC,WAAW,CAAC,sBAAsB,qBAAqB,CAAC,cAAc,CAAC,gBAAgB,YAAY",
+        "names": [],
+        "sources": [
+          "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue"
+        ],
+        "sourcesContent": [
+          null
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1702940404245,
+      "end": 1702940404245,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "export default ''",
+      "start": 1702940404245,
+      "end": 1702940404245,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1702940404245,
+      "end": 1702940404245,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1702940404245,
+      "end": 1702940404245,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1702940404245,
+      "end": 1702940404245,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1702940404245,
+      "end": 1702940404245,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940404246,
+      "end": 1702940404246,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940404246,
+      "end": 1702940404247,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940404246,
+      "end": 1702940404247,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1702940404247,
+      "end": 1702940404247,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1702940404247,
+      "end": 1702940404247,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1702940404247,
+      "end": 1702940404247,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1702940404247,
+      "end": 1702940404247,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1702940404247,
+      "end": 1702940404247,
+      "order": "normal"
+    }
+  ]
+}

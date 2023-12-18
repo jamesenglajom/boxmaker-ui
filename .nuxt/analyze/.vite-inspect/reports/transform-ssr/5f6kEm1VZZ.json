@@ -1,0 +1,261 @@
+{
+  "resolvedId": "/Users/jameslajom/Documents/git/boxmaker-ui/.nuxt/app.config.mjs",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "\nimport { updateAppConfig } from '#app/config'\nimport { defuFn } from 'defu'\n\nconst inlineConfig = {\n  \"nuxt\": {\n    \"buildId\": \"544710de-5cc7-4a6d-954d-1b2401a0e412\"\n  },\n  \"ui\": {\n    \"primary\": \"green\",\n    \"gray\": \"cool\",\n    \"colors\": [\n      \"red\",\n      \"orange\",\n      \"amber\",\n      \"yellow\",\n      \"lime\",\n      \"green\",\n      \"emerald\",\n      \"teal\",\n      \"cyan\",\n      \"sky\",\n      \"blue\",\n      \"indigo\",\n      \"violet\",\n      \"purple\",\n      \"fuchsia\",\n      \"pink\",\n      \"rose\",\n      \"primary\"\n    ],\n    \"strategy\": \"merge\"\n  }\n}\n\n// Vite - webpack is handled directly in #app/config\nif (import.meta.hot) {\n  import.meta.hot.accept((newModule) => {\n    updateAppConfig(newModule.default)\n  })\n}\n\n\n\nexport default /* #__PURE__ */ defuFn(inlineConfig)\n",
+      "start": 1702940402556,
+      "end": 1702940404181,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404181,
+      "end": 1702940404181,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940404209,
+      "end": 1702940404209,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940404209,
+      "end": 1702940404209,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404210,
+      "end": 1702940404210,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1702940404210,
+      "end": 1702940404210,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404210,
+      "end": 1702940404211,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1702940404212,
+      "end": 1702940404212,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "result": "\nimport { updateAppConfig } from '#app/config'\nimport { defuFn } from 'defu'\n\nconst inlineConfig = {\n  \"nuxt\": {\n    \"buildId\": \"544710de-5cc7-4a6d-954d-1b2401a0e412\"\n  },\n  \"ui\": {\n    \"primary\": \"green\",\n    \"gray\": \"cool\",\n    \"colors\": [\n      \"red\",\n      \"orange\",\n      \"amber\",\n      \"yellow\",\n      \"lime\",\n      \"green\",\n      \"emerald\",\n      \"teal\",\n      \"cyan\",\n      \"sky\",\n      \"blue\",\n      \"indigo\",\n      \"violet\",\n      \"purple\",\n      \"fuchsia\",\n      \"pink\",\n      \"rose\",\n      \"primary\"\n    ],\n    \"strategy\": \"merge\"\n  }\n}\n\n// Vite - webpack is handled directly in #app/config\nif (undefined) {\n  undefined.accept((newModule) => {\n    updateAppConfig(newModule.default)\n  })\n}\n\n\n\nexport default /* #__PURE__ */ defuFn(inlineConfig)\n",
+      "start": 1702940404212,
+      "end": 1702940404212,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "/Users/jameslajom/Documents/git/boxmaker-ui/.nuxt/app.config.mjs"
+        ],
+        "names": [],
+        "mappings": "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"
+      }
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1702940404212,
+      "end": 1702940404212,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1702940404239,
+      "end": 1702940404239,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1702940404240,
+      "end": 1702940404240,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1702940404241,
+      "end": 1702940404241,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1702940404242,
+      "end": 1702940404242,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1702940404242,
+      "end": 1702940404242,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1702940404242,
+      "end": 1702940404242,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940404242,
+      "end": 1702940404242,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940404242,
+      "end": 1702940404242,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940404243,
+      "end": 1702940404243,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940404243,
+      "end": 1702940404243,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1702940404244,
+      "end": 1702940404244,
+      "order": "normal"
+    }
+  ]
+}

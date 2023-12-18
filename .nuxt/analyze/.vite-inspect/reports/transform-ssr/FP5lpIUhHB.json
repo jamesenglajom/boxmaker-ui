@@ -1,0 +1,294 @@
+{
+  "resolvedId": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue?vue&type=style&index=0&lang.css",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n",
+      "start": 1702940404140,
+      "end": 1702940404140,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue"
+        ],
+        "names": [],
+        "mappings": "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",
+        "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue",
+        "sourceRoot": "",
+        "sourcesContent": [
+          "<template>\n    <div style=\"\">\n        <div class=\"ui grid\" style=\"margin-bottom:40px;\">\n            <div class=\"one column\" style=\"width:100%;\">\n                <div style=\"display:flex\">\n                    <div>\n                        <button class=\"ui labeled icon basic button\" data-tooltip=\"Filter tags\" data-inverted=\"\"\n                            @click=\"show_tag_selection = !show_tag_selection\">\n                            <i class=\"filter icon\" sryle=\"background-white\"></i>\n                            <small><b>{{ available_tags.length }}</b> TAGS</small>\n                        </button>\n                    </div>\n                    <template v-if=\"selected_tags.length == 0\">\n                        <button class=\"ui button basic\">ALL</button>\n                    </template>\n                    <template v-else>\n                        <button @click=\"clearTags\" class=\"ui icon button\">\n                            <i class=\"undo icon\"></i>\n                        </button>\n                    </template>\n                </div>\n\n\n                <div class=\"selected-wrapper\" :class=\"show_tag_selection == false ? 'show-height' : 'hide-height'\">\n                    <div class=\"selected-inner\">\n\n                        <template v-if=\"selected_tags.length != 0\">\n                            <template v-for=\"datum in available_tags.filter(i => !selected_tags.includes(i.id) == false)\">\n                                <div\n                                    style=\"margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;\">\n                                    <small><b>{{ datum.name.toUpperCase() }}</b></small>\n                                </div>\n                            </template>\n                        </template>\n                    </div>\n                </div>\n            </div>\n\n            <div :style=\"show_tag_selection ? 'display:default' : 'display:none;'\" class=\"selection-wrapper\">\n                <div class=\"ui grid\">\n                    <template v-for=\"(datum, i1) in Math.ceil(available_tags.length / 3)\">\n                        <div class=\"stackable three column row\" style=\"padding:0px;margin:0px;\">\n                            <template v-for=\"(datum, i2) in 3\">\n                                <template v-if=\"(i1 * 3 + i2) < available_tags.length\">\n                                    <div class=\"column\" style=\"padding:2px;\">\n\n                                        <div :for=\"available_tags[(i1 * 3 + i2)].id\"\n                                            style=\"align-self:center;display:flex;background:#CCCCCC;padding:10px 10px 8px 10px;border-radius:3px;position:relative\">\n\n                                            <div style=\"align-self: center;\">\n                                                <input type=\"checkbox\" class=\"ui checkbox\"\n                                                    @change=\"handleSelect(available_tags[(i1 * 3 + i2)].id)\"\n                                                    :checked=\"selected_tags.filter(i => i == available_tags[(i1 * 3 + i2)].id).length > 0\"\n                                                    :name=\"available_tags[(i1 * 3 + i2)].id\">\n                                            </div>\n                                            <div style=\"align-self: center;margin-left:10px;\">\n                                                <label :for=\"available_tags[(i1 * 3 + i2)].id\">{{ available_tags[(i1 * 3 +\n                                                    i2)].name\n                                                }}\n                                                    <a style=\"margin:0;position:absolute;right:10px;top:7px;\" class=\"ui label\" :data-tooltip=\"`${available_tags[(i1 * 3 + i2)].no_of_boxes} available boxes`\">\n                                                        {{ available_tags[(i1 * 3 + i2)].no_of_boxes }}\n                                                    </a>\n                                                </label>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </template>\n                            </template>\n                        </div>\n                    </template>\n                </div>\n            </div>\n        </div>\n\n\n\n    </div>\n</template>\n\n<script>\nimport { tags } from \"@/composables/boxdata.js\"\nexport default {\n    setup() {\n        const available_tags = tags()\n        return {\n            available_tags\n        }\n    },\n    mounted() {\n        this.local_tags = this.available_tags;\n        // console.log(this.local_tags)\n    },\n    data() {\n        return {\n            selected_tags: [],\n            local_tags: [],\n            show_tag_selection: false\n        }\n    },\n    methods: {\n        clearTags() {\n            this.selected_tags = [];\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        },\n        handleSelect(id) {\n            let selected = \"\";\n            if (this.selected_tags.includes(id)) {\n                selected = this.selected_tags.filter(i => i != id);\n            } else {\n                selected = this.local_tags.filter(i => i.id == id)[0];\n                selected = [...this.selected_tags, selected.id];\n            }\n            this.selected_tags = selected;\n            // console.log(this.selected_tags)\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        }\n    }\n}\n</script>\n\n<style>\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n</style>\n"
+        ]
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940404140,
+      "end": 1702940404140,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940404140,
+      "end": 1702940404140,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940404140,
+      "end": 1702940404140,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940404140,
+      "end": 1702940404140,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1702940404140,
+      "end": 1702940404140,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": "#selection-container{display:flex;flex-wrap:wrap;margin-bottom:30px;width:100%}#selected-container{margin-bottom:30px}#selection-container>div{border-radius:25px;cursor:pointer;margin:2px;padding:2px 10px}#selection-container>div:hover{background-color:gray;color:#fff}.selected{background-color:#414141;border:1px inset #a9a9a9;color:#fff}.selected-inner{flex-wrap:wrap;margin-top:2px}.selected-inner,.selected-wrapper{display:flex;width:100%}",
+      "start": 1702940404140,
+      "end": 1702940404173,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue",
+        "mappings": "AACA,qBACI,YAAa,CAEb,cAAe,CACf,kBAAmB,CAFnB,UAGJ,CAEA,oBACI,kBACJ,CAEA,yBAGI,kBAAmB,CACnB,cAAe,CAFf,UAAW,CADX,gBAIJ,CAEA,+BACI,qBAAsB,CACtB,UACJ,CAEA,UACI,wBAAiC,CAEjC,wBAA0B,CAD1B,UAGJ,CAEA,gBACI,cAAe,CAEf,cAEJ,CAGA,kCAJI,YAAa,CAFb,UAUJ",
+        "names": [],
+        "sources": [
+          "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue"
+        ],
+        "sourcesContent": [
+          "\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n"
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1702940404173,
+      "end": 1702940404173,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1702940404173,
+      "end": 1702940404173,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1702940404173,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "#selection-container{display:flex;flex-wrap:wrap;margin-bottom:30px;width:100%}#selected-container{margin-bottom:30px}#selection-container>div{border-radius:25px;cursor:pointer;margin:2px;padding:2px 10px}#selection-container>div:hover{background-color:gray;color:#fff}.selected{background-color:#414141;border:1px inset #a9a9a9;color:#fff}.selected-inner{flex-wrap:wrap;margin-top:2px}.selected-inner,.selected-wrapper{display:flex;width:100%}",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue",
+        "mappings": "AAAA,qBAAqB,YAAY,CAAC,cAAc,CAAC,kBAAkB,CAAC,UAAU,CAAC,oBAAoB,kBAAkB,CAAC,yBAAyB,kBAAkB,CAAC,cAAc,CAAC,UAAU,CAAC,gBAAgB,CAAC,+BAA+B,qBAAqB,CAAC,UAAU,CAAC,UAAU,wBAAwB,CAAC,wBAAwB,CAAC,UAAU,CAAC,gBAAgB,cAAc,CAAC,cAAc,CAAC,kCAAkC,YAAY,CAAC,UAAU",
+        "names": [],
+        "sources": [
+          "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue"
+        ],
+        "sourcesContent": [
+          null
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "export default ''",
+      "start": 1702940404174,
+      "end": 1702940404174,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1702940404175,
+      "end": 1702940404175,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1702940404175,
+      "end": 1702940404175,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1702940404175,
+      "end": 1702940404175,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1702940404175,
+      "end": 1702940404176,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1702940404176,
+      "end": 1702940404176,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1702940404176,
+      "end": 1702940404176,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940404176,
+      "end": 1702940404176,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940404176,
+      "end": 1702940404176,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940404176,
+      "end": 1702940404176,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940404176,
+      "end": 1702940404176,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1702940404177,
+      "end": 1702940404177,
+      "order": "normal"
+    }
+  ]
+}

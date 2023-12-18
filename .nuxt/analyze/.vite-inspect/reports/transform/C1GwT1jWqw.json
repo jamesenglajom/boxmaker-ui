@@ -1,0 +1,215 @@
+{
+  "resolvedId": "/Users/jameslajom/Documents/git/boxmaker-ui/components/El/Flyout.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "\n<template>\n    <div id=\"flyout-element\">\n        <div ref=\"flyout\" class=\"ui flyout left\" :class=\"flyout ? 'overlay visible' : ''\" tab-index=\"-1\">\n            <div class=\"ui header\" style=\"display:flex;justify-content:space-between\">\n                <div style=\"display:flex;align-self:center\">\n                    <div @click=\"closeFlyout\" style=\"background-color:lightgrey;cursor:pointer;padding:5px 10px;border-radius:4px;\">\n                        <i class=\"arrow left icon\" ></i>\n                    </div>\n                    <div style=\"align-self:center;width:30px;margin-left:15px;\">\n                        <NuxtPicture height=\"100px\" width=\"100px\" :src=\"`/assets/images/box_icons/${box? box.img: ''}`\" class=\"ui image\"/>\n                    </div>\n                    <div class=\"content\" style=\"align-self:center;margin-left:10px\">\n                        <!-- Arced Top Box -->\n                        <div class=\"box_name\">\n                        {{ box!=undefined ? box.name: '' }}\n                        </div>\n                    </div>\n                </div>\n                <div style=\"align-self:center\">\n                    <button class=\"ui button red mini\">PROCEED</button>\n                </div>\n            </div>\n            <div class=\"content\">\n                <ComForm :boxId=\"box.id\"></ComForm>\n            </div>\n        </div>\n    </div>\n</template>\n\n<script>\nexport default {\n    props: [\"isOpen\",\"box\"],\n    data() {\n        return {\n            flyout: false,\n        }\n    },\n    methods: {\n        closeFlyout() {\n            this.flyout = false;\n            this.$emit(\"isClosed\", true)\n        },\n    },\n    watch: {\n        isOpen(value) {\n            if (value) {\n                this.flyout = value;\n            }\n        },\n        flyout(value) {\n            if (value) {\n                document.querySelector('body').style.overflow = \"hidden\";\n\n            } else {\n                document.querySelector('body').style.overflow = \"visible\";\n            }\n        },\n    }\n}\n</script>\n<style>\n.ui.flyout.overlay {\n    background: whitesmoke;\n    width: 90% !important;\n    z-index: 999;\n    overflow: hidden;\n    max-width:720px;\n}\n\n.ui.flyout.visible>.ui.header {\n    background: white;\n    border: none !important;\n\n}\n\n.ui.flyout.visible>.content {\n    -webkit-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    -moz-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    background: whitesmoke;\n    overflow-y: scroll;\n    max-height: calc(100vh - 65px);\n    display: relative;\n    padding:0px;    \n}\n\n.ui.pusher.dimmer.active {\n    height: 100vh !important;\n    top: auto !important;\n    z-index: 1;\n}\n</style>",
+      "start": 1702940385899,
+      "end": 1702940387370,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940387370,
+      "end": 1702940387370,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940387370,
+      "end": 1702940387370,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1702940387370,
+      "end": 1702940387370,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1702940387370,
+      "end": 1702940387370,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1702940387370,
+      "end": 1702940387370,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1702940387370,
+      "end": 1702940387370,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1702940387370,
+      "end": 1702940387370,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "\nconst _sfc_main = {\n    props: [\"isOpen\",\"box\"],\n    data() {\n        return {\n            flyout: false,\n        }\n    },\n    methods: {\n        closeFlyout() {\n            this.flyout = false;\n            this.$emit(\"isClosed\", true)\n        },\n    },\n    watch: {\n        isOpen(value) {\n            if (value) {\n                this.flyout = value;\n            }\n        },\n        flyout(value) {\n            if (value) {\n                document.querySelector('body').style.overflow = \"hidden\";\n\n            } else {\n                document.querySelector('body').style.overflow = \"visible\";\n            }\n        },\n    }\n}\n\nimport { createElementVNode as _createElementVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { id: \"flyout-element\" }\nconst _hoisted_2 = {\n  class: \"ui header\",\n  style: {\"display\":\"flex\",\"justify-content\":\"space-between\"}\n}\nconst _hoisted_3 = { style: {\"display\":\"flex\",\"align-self\":\"center\"} }\nconst _hoisted_4 = /*#__PURE__*/_createElementVNode(\"i\", { class: \"arrow left icon\" }, null, -1)\nconst _hoisted_5 = [\n  _hoisted_4\n]\nconst _hoisted_6 = { style: {\"align-self\":\"center\",\"width\":\"30px\",\"margin-left\":\"15px\"} }\nconst _hoisted_7 = {\n  class: \"content\",\n  style: {\"align-self\":\"center\",\"margin-left\":\"10px\"}\n}\nconst _hoisted_8 = { class: \"box_name\" }\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"div\", { style: {\"align-self\":\"center\"} }, [\n  /*#__PURE__*/_createElementVNode(\"button\", { class: \"ui button red mini\" }, \"PROCEED\")\n], -1)\nconst _hoisted_10 = { class: \"content\" }\n\nfunction _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {\n  const _component_NuxtPicture = _resolveComponent(\"NuxtPicture\")\n  const _component_ComForm = _resolveComponent(\"ComForm\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", {\n      ref: \"flyout\",\n      class: _normalizeClass([\"ui flyout left\", $data.flyout ? 'overlay visible' : '']),\n      \"tab-index\": \"-1\"\n    }, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"div\", {\n            onClick: _cache[0] || (_cache[0] = (...args) => ($options.closeFlyout && $options.closeFlyout(...args))),\n            style: {\"background-color\":\"lightgrey\",\"cursor\":\"pointer\",\"padding\":\"5px 10px\",\"border-radius\":\"4px\"}\n          }, _hoisted_5),\n          _createElementVNode(\"div\", _hoisted_6, [\n            _createVNode(_component_NuxtPicture, {\n              height: \"100px\",\n              width: \"100px\",\n              src: `/assets/images/box_icons/${$props.box? $props.box.img: ''}`,\n              class: \"ui image\"\n            }, null, 8, [\"src\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_7, [\n            _createElementVNode(\"div\", _hoisted_8, _toDisplayString($props.box!=undefined ? $props.box.name: ''), 1)\n          ])\n        ]),\n        _hoisted_9\n      ]),\n      _createElementVNode(\"div\", _hoisted_10, [\n        _createVNode(_component_ComForm, {\n          boxId: $props.box.id\n        }, null, 8, [\"boxId\"])\n      ])\n    ], 2)\n  ]))\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/components/El/Flyout.vue?vue&type=style&index=0&lang.css\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render]])",
+      "start": 1702940387370,
+      "end": 1702940387378,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940387378,
+      "end": 1702940387378,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940387378,
+      "end": 1702940387380,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "result": "import { default as __nuxt_component_0 } from \"/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/@nuxt/image/dist/runtime/components/nuxt-picture\";\nimport { default as __nuxt_component_1 } from \"/Users/jameslajom/Documents/git/boxmaker-ui/components/ComForm/index.vue\";\n\nconst _sfc_main = {\n    props: [\"isOpen\",\"box\"],\n    data() {\n        return {\n            flyout: false,\n        }\n    },\n    methods: {\n        closeFlyout() {\n            this.flyout = false;\n            this.$emit(\"isClosed\", true)\n        },\n    },\n    watch: {\n        isOpen(value) {\n            if (value) {\n                this.flyout = value;\n            }\n        },\n        flyout(value) {\n            if (value) {\n                document.querySelector('body').style.overflow = \"hidden\";\n\n            } else {\n                document.querySelector('body').style.overflow = \"visible\";\n            }\n        },\n    }\n}\n\nimport { createElementVNode as _createElementVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { id: \"flyout-element\" }\nconst _hoisted_2 = {\n  class: \"ui header\",\n  style: {\"display\":\"flex\",\"justify-content\":\"space-between\"}\n}\nconst _hoisted_3 = { style: {\"display\":\"flex\",\"align-self\":\"center\"} }\nconst _hoisted_4 = /*#__PURE__*/_createElementVNode(\"i\", { class: \"arrow left icon\" }, null, -1)\nconst _hoisted_5 = [\n  _hoisted_4\n]\nconst _hoisted_6 = { style: {\"align-self\":\"center\",\"width\":\"30px\",\"margin-left\":\"15px\"} }\nconst _hoisted_7 = {\n  class: \"content\",\n  style: {\"align-self\":\"center\",\"margin-left\":\"10px\"}\n}\nconst _hoisted_8 = { class: \"box_name\" }\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"div\", { style: {\"align-self\":\"center\"} }, [\n  /*#__PURE__*/_createElementVNode(\"button\", { class: \"ui button red mini\" }, \"PROCEED\")\n], -1)\nconst _hoisted_10 = { class: \"content\" }\n\nfunction _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {\n  const _component_NuxtPicture = __nuxt_component_0\n  const _component_ComForm = __nuxt_component_1\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", {\n      ref: \"flyout\",\n      class: _normalizeClass([\"ui flyout left\", $data.flyout ? 'overlay visible' : '']),\n      \"tab-index\": \"-1\"\n    }, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"div\", {\n            onClick: _cache[0] || (_cache[0] = (...args) => ($options.closeFlyout && $options.closeFlyout(...args))),\n            style: {\"background-color\":\"lightgrey\",\"cursor\":\"pointer\",\"padding\":\"5px 10px\",\"border-radius\":\"4px\"}\n          }, _hoisted_5),\n          _createElementVNode(\"div\", _hoisted_6, [\n            _createVNode(_component_NuxtPicture, {\n              height: \"100px\",\n              width: \"100px\",\n              src: `/assets/images/box_icons/${$props.box? $props.box.img: ''}`,\n              class: \"ui image\"\n            }, null, 8, [\"src\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_7, [\n            _createElementVNode(\"div\", _hoisted_8, _toDisplayString($props.box!=undefined ? $props.box.name: ''), 1)\n          ])\n        ]),\n        _hoisted_9\n      ]),\n      _createElementVNode(\"div\", _hoisted_10, [\n        _createVNode(_component_ComForm, {\n          boxId: $props.box.id\n        }, null, 8, [\"boxId\"])\n      ])\n    ], 2)\n  ]))\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/components/El/Flyout.vue?vue&type=style&index=0&lang.css\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render]])",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1702940387380,
+      "end": 1702940387380,
+      "order": "normal"
+    }
+  ]
+}

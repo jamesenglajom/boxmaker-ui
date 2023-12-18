@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/tailwind-merge/dist/lib/merge-classlist.mjs",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import { sortModifiers, IMPORTANT_MODIFIER } from './modifier-utils.mjs';\n\nvar SPLIT_CLASSES_REGEX = /\\s+/;\nfunction mergeClassList(classList, configUtils) {\n  var splitModifiers = configUtils.splitModifiers,\n    getClassGroupId = configUtils.getClassGroupId,\n    getConflictingClassGroupIds = configUtils.getConflictingClassGroupIds;\n  /**\n   * Set of classGroupIds in following format:\n   * `{importantModifier}{variantModifiers}{classGroupId}`\n   * @example 'float'\n   * @example 'hover:focus:bg-color'\n   * @example 'md:!pr'\n   */\n  var classGroupsInConflict = new Set();\n  return classList.trim().split(SPLIT_CLASSES_REGEX).map(function (originalClassName) {\n    var _splitModifiers = splitModifiers(originalClassName),\n      modifiers = _splitModifiers.modifiers,\n      hasImportantModifier = _splitModifiers.hasImportantModifier,\n      baseClassName = _splitModifiers.baseClassName,\n      maybePostfixModifierPosition = _splitModifiers.maybePostfixModifierPosition;\n    var classGroupId = getClassGroupId(maybePostfixModifierPosition ? baseClassName.substring(0, maybePostfixModifierPosition) : baseClassName);\n    var hasPostfixModifier = Boolean(maybePostfixModifierPosition);\n    if (!classGroupId) {\n      if (!maybePostfixModifierPosition) {\n        return {\n          isTailwindClass: false,\n          originalClassName: originalClassName\n        };\n      }\n      classGroupId = getClassGroupId(baseClassName);\n      if (!classGroupId) {\n        return {\n          isTailwindClass: false,\n          originalClassName: originalClassName\n        };\n      }\n      hasPostfixModifier = false;\n    }\n    var variantModifier = sortModifiers(modifiers).join(':');\n    var modifierId = hasImportantModifier ? variantModifier + IMPORTANT_MODIFIER : variantModifier;\n    return {\n      isTailwindClass: true,\n      modifierId: modifierId,\n      classGroupId: classGroupId,\n      originalClassName: originalClassName,\n      hasPostfixModifier: hasPostfixModifier\n    };\n  }).reverse()\n  // Last class in conflict wins, so we need to filter conflicting classes in reverse order.\n  .filter(function (parsed) {\n    if (!parsed.isTailwindClass) {\n      return true;\n    }\n    var modifierId = parsed.modifierId,\n      classGroupId = parsed.classGroupId,\n      hasPostfixModifier = parsed.hasPostfixModifier;\n    var classId = modifierId + classGroupId;\n    if (classGroupsInConflict.has(classId)) {\n      return false;\n    }\n    classGroupsInConflict.add(classId);\n    getConflictingClassGroupIds(classGroupId, hasPostfixModifier).forEach(function (group) {\n      return classGroupsInConflict.add(modifierId + group);\n    });\n    return true;\n  }).reverse().map(function (parsed) {\n    return parsed.originalClassName;\n  }).join(' ');\n}\n\nexport { mergeClassList };\n//# sourceMappingURL=merge-classlist.mjs.map\n",
+      "start": 1702940389967,
+      "end": 1702940390012,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1702940390012,
+      "end": 1702940390012,
+      "order": "normal"
+    }
+  ]
+}

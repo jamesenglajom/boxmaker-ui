@@ -1,6 +1,6 @@
 <template>
     <div class="btn-icon-div">
-        <img height="60" :src="`_nuxt/assets/images/box_icons/${imgsrc}`" alt="">
+        <img height="60" :src="`/assets/images/box_icons/${imgsrc}`" alt="">
     </div>
 </template>
 <script>

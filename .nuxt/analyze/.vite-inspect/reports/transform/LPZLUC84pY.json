@@ -1,0 +1,214 @@
+{
+  "resolvedId": "/Users/jameslajom/Documents/git/boxmaker-ui/components/ComForm/index.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "\n<style>\n/* partition divs */\n#image-preview-container {\n    width: 100%;\n    height: 500px;\n    display: flex\n}\n\n#sample-info {\n    background: #F7F7F7;\n    border: solid .5px #CCCCCC;\n    width: 40%;\n    position: relative;\n    display: flex;\n}\n\n#sample-info>div {\n    align-self: center;\n}\n\n#box-fold-preview {\n    background: #F7F7F7;\n    border: solid .5px #CCCCCC;\n    border-left: none;\n    width: 60%;\n    position: relative;\n}\n\n#box-fold-preview>div {\n    align-self: center;\n}\n\n#box-info-display {\n    background: #1F1F21;\n    color: white;\n    position: absolute;\n    padding: 8px 16px;\n    width: 100%;\n    bottom: 0;\n    left: 0;\n}\n\n#page-select-container {\n    width: 100%;\n    border-bottom: solid .5px #CCCCCC;\n    background: #666666;\n    /* background: gray; */\n    padding: 5px;\n}\n\n#page-select-container>label {\n    color: white;\n}\n\n\n#unit-select-container {\n    margin-top: 30px;\n    padding: 2px 15px;\n    text-align: center;\n}\n\n.input>.ui.label {\n    background: #CCCCCC;\n}\nselect.ui.selection.dropdown{\n    padding:0px;\n}\ni.circular.icon{\n    font-size:.75em;\n    color:gray;\n}\n\n.v-popper__popper{\n    max-width:250px;\n}\n\n.ui.basic.label{\n    width:50px;\n    text-align:center;\n}\n</style>\n\n<template>\n    <div id=\"CommonFormComponent\">\n        <div id=\"image-preview-container\">\n            <div id=\"sample-info\" ref=\"sampleDiv\">\n                <img style=\"max-height:500px;width:100%;\" :src=\"structure.sample_image\" alt=\"\"\n                    :style=\"`height:${sampleDivHeight - infoDivHeight}px`\">\n                <div id=\"box-info-display\" ref=\"infoDiv\">\n                    {{ structure.description }}\n                </div>\n            </div>\n            <div id=\"box-fold-preview\">\n                <div id=\"page-select-container\">\n                    <label for=\"\"><small>PAGE PRESET</small></label>\n                    <select class=\"ui dropdown selection\" style=\"width:100%;\" v-model=\"form['PAGEPRESET']\">\n                        <template v-for=\" datum  in  structure.pagepresets_options\" :key=\"datum.name\">\n                            <option :value=\"datum.value\">{{ datum.name }}</option>\n                        </template>\n                    </select>\n                    <div style=\"display:flex\">\n                        <div class=\"field\" style=\"color:white;padding-right:2px\">\n                            <div class=\"label\"><small>WIDTH</small></div>\n                            <div class=\"ui right labeled input\">\n                                <input  type=\"number\" placeholder=\"Page Width\" v-model=\"form['PAGEWIDTH']\"\n                                    style=\"width:calc(100% - 80px)\" />\n                                <div class=\"ui basic label\">\n                                    {{ 'in' }}\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"field\" style=\"color:white;padding-left:2px;\">\n                            <div class=\"label\"><small>HEIGHT</small></div>\n                            <div class=\"ui right labeled input\">\n                                <input type=\"number\" placeholder=\"Page Height\" v-model=\"form['PAGEHEIGHT']\"\n                                    style=\"width:calc(100% - 80px)\" />\n                                <div class=\"ui basic label\">\n                                    {{ 'in' }}\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div>\n                    <img style=\"max-height:calc(500px - 130px);width:100%;\" :src=\"boxLayout\" alt=\"\">\n                </div>\n            </div>\n        </div>\n        <div id=\"form-container\">\n            <!-- part1 -->\n            <div id=\"unit-select-container\">\n                <div class=\"ui buttons\" >\n                    <template v-for=\"datum in structure.units_options\">\n                        <button class=\"ui button red\" v-tooltip=\"datum.name\" :class=\"form['UNITS'] == datum.value ? 'active' : ''\"\n                            @click=\"convertTo(datum.value)\">{{ datum.abbr }}</button>\n                    </template>\n                </div>\n            </div>\n\n            <!-- part2 -->\n\n            <div style=\"padding:20px;\">\n                <div class=\"ui segment\" style=\"\">\n                    <!-- FORM LABEL -->\n                    <div style=\"margin-bottom:20px;\">\n                        <h3>DIMENSION</h3>\n                    </div>\n                    <!-- FORM -->\n                    <div class=\"\" style=\"margin-bottom:20px;width:100%;display:flex;box-sizing:border-box\">\n                        <template v-for=\"(datum, index) in structure.parameters_field\">\n                            <div :style=\"`width:calc(${100 / structure.parameters_field.length}%);box-sizing:border-box;`\">\n                                <div style=\"width:100%;padding:2px;box-sizing:border-box;\">\n                                    <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                        <div\n                                            style=\"text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden\">\n                                            \n                                            <template v-if=\"datum.tooltip\">\n                                                        <i class=\"question circle icon link\" v-tooltip=\"datum.tooltip\"></i>\n                                                    </template>\n                                            <small>\n                                                {{ datum.name.toUpperCase() }}\n                                            </small>\n                                        </div>\n                                        <div class=\"ui right labeled input\" style=\"width:100%;\">\n                                            <input :min=\"datum.minval\" :max=\"datum.maxval\" type=\"number\" v-model=\"form[datum.symbol]\" :placeholder=\"datum.name\"\n                                                style=\"width:calc(100% - 80px)\">\n                                            <div class=\"ui basic label\" style=\"box-sizing:border-box;\">\n                                                {{ display_unit(datum) }}\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </template>\n                    </div>\n                    <!-- SUBMIT BUTTON -->\n                    <div style=\"width:100%;box-sizing: border-box;padding:5px;text-align:center;\">\n                        <div class=\"ui button red\">\n                            <button class=\"\" @click=\"boxLayoutPreview\">Submit</button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n\n            <!-- part3 -->\n            <div style=\"padding:0px 20px;display:flex;margin-bottom:50px;\">\n                <!-- others form -->\n                <div style=\"width:50%;padding-right:10px;\">\n                    <div class=\"ui segment\">\n                        <div style=\"margin-bottom:20px;\">\n                            <h3>OTHER SPECIFICATIONS</h3>\n                        </div>\n                        <div>\n                            <template v-for=\"(datum, index) in structure.options_field\">\n                                <div :style=\"`box-sizing:border-box;`\">\n                                    <div style=\"width:100%;padding:2px;box-sizing:border-box;\">\n                                        <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                            <div\n                                                style=\"text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden\">\n                                                \n                                                <template v-if=\"datum.tooltip\">\n                                                        <i class=\"question circle icon link\" v-tooltip=\"datum.tooltip\"></i>\n                                                    </template>\n                                                <small>\n                                                    {{ datum.name.toUpperCase() }}\n                                                </small>\n                                            </div>\n                                            <div class=\"ui right labeled input\" style=\"width:100%;\">\n                                                <input  :min=\"datum.minval\" :max=\"datum.maxval\" type=\"number\" v-model=\"form[datum.symbol]\" :placeholder=\"datum.name\"\n                                                    style=\"width:calc(100% - 80px)\">\n                                                <div class=\"ui basic label\" style=\"box-sizing:border-box;\">\n                                                    {{ display_unit(datum) }}\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </template>\n                        </div>\n                    </div>\n                </div>\n                <!-- prof form -->\n                <div style=\"width:50%;padding-left:10px;\">\n                    <div class=\"ui segment\">\n                        <div style=\"margin-bottom:20px;\">\n                            <h3>PROFESSIONAL</h3>\n                        </div>\n                        <div>\n                            <template v-for=\"(datum, index) in structure.professional_field\">\n                                <div :style=\"`box-sizing:border-box;`\">\n                                    <div style=\"width:100%;padding:2px;box-sizing:border-box;\">\n                                        <template v-if=\"datum.symbol == 'REGISTRATION'\">\n                                            <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                                <div\n                                                    style=\"text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden\">\n                                                    <small>\n                                                        {{ datum.name.toUpperCase() }}\n                                                    </small>\n                                                </div>\n                                                <select class=\"ui dropdown selection\" style=\"width:calc(100% - 1px) !important;min-width:calc(100% - 99px) !important;\"\n                                                    v-model=\"form['REGISTRATION']\">\n                                                    <template v-for=\" datum  in  structure.regmarks_options\"\n                                                        :key=\"datum.name\">\n                                                        <option :value=\"datum.value\">{{ datum.name }}</option>\n                                                    </template>\n                                                </select>\n                                            </div>\n                                        </template>\n                                        <template v-else>\n                                            <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                                <div\n                                                    style=\"position:relative;text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden;z-index:1;\">\n                                                    <template v-if=\"datum.tooltip\">\n                                                        <i class=\"question circle icon link\" v-tooltip=\"datum.tooltip\"></i>\n                                                    </template>\n                                                    <small>\n                                                        {{ datum.name.toUpperCase() }}\n                                                    </small>\n                                                </div>\n                                                <div class=\"ui right labeled input\" style=\"width:100%;\" :class=\"datum.symbol == 'MARK'? form['REGISTRATION'] == 'none'? 'disabled' :'' :''\">\n                                                    <input  :min=\"datum.minval\" :max=\"datum.maxval\" type=\"number\" v-model=\"form[datum.symbol]\"\n                                                        :placeholder=\"datum.name\" style=\"width:calc(100% - 80px)\">\n                                                    <div class=\"ui basic label\" style=\"box-sizing:border-box;\">\n                                                        {{ display_unit(datum) }}\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </template>\n                                    </div>\n                                </div>\n                            </template>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n</template>\n<script>\nimport { getBoxById,convert } from \"@/composables/boxdata\"\nexport default {\n    name: \"CommonForm\",\n    props: [\"boxId\"],\n    watch: {\n        boxId(v) {\n            if (v) {\n                let box_data = getBoxById(v);\n                this.structure = box_data.form.structure;\n                this.form = box_data.form.values;\n                this.$nextTick(() => {\n                    this.sampleDivHeight = this.$refs.sampleDiv.offsetHeight;\n                    this.infoDivHeight = this.$refs.infoDiv.offsetHeight;\n                    this.form = box_data.form.values;\n                    this.form['model'] = v;\n                    this.boxLayoutPreview();\n                });\n            }\n        }\n    },\n    methods: {\n        convertTo(unit_id) {\n            let new_unit = unit_id, old_unit = this.form[\"UNITS\"];\n            this.form[\"UNITS\"] = new_unit;\n                    console.log('index.vue')\n                    console.log(this.form)\n            convert(old_unit,new_unit, this.form);\n        },\n        display_unit(property){\n            let displays = {measure: this.form[\"UNITS\"],percantage: \"%\", number:\"n\", angle: \"  °  \"};\n            return displays[property.type];\n        },\n        boxLayoutPreview(){\n            let q = '';\n            this.structure.parameters_field.forEach((v)=>{\n                q = `${q}&${v.symbol}=${this.form[v.symbol]}`\n            });\n            this.boxLayout = this.structure.preview_image + q; \n        }\n    },\n    data() {\n        return {\n            boxLayout:'',\n            structure: {},\n            form: {},\n            sampleDivHeight: 0,\n            infoDivHeight: 0,\n        }\n    }\n}\n</script>",
+      "start": 1702940389400,
+      "end": 1702940389615,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1702940389615,
+      "end": 1702940389615,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1702940389615,
+      "end": 1702940389615,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1702940389615,
+      "end": 1702940389615,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1702940389615,
+      "end": 1702940389615,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1702940389615,
+      "end": 1702940389615,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1702940389615,
+      "end": 1702940389615,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1702940389615,
+      "end": 1702940389615,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "\nimport { getBoxById,convert } from \"@/composables/boxdata\"\nconst _sfc_main = {\n    name: \"CommonForm\",\n    props: [\"boxId\"],\n    watch: {\n        boxId(v) {\n            if (v) {\n                let box_data = getBoxById(v);\n                this.structure = box_data.form.structure;\n                this.form = box_data.form.values;\n                this.$nextTick(() => {\n                    this.sampleDivHeight = this.$refs.sampleDiv.offsetHeight;\n                    this.infoDivHeight = this.$refs.infoDiv.offsetHeight;\n                    this.form = box_data.form.values;\n                    this.form['model'] = v;\n                    this.boxLayoutPreview();\n                });\n            }\n        }\n    },\n    methods: {\n        convertTo(unit_id) {\n            let new_unit = unit_id, old_unit = this.form[\"UNITS\"];\n            this.form[\"UNITS\"] = new_unit;\n                    console.log('index.vue')\n                    console.log(this.form)\n            convert(old_unit,new_unit, this.form);\n        },\n        display_unit(property){\n            let displays = {measure: this.form[\"UNITS\"],percantage: \"%\", number:\"n\", angle: \"  °  \"};\n            return displays[property.type];\n        },\n        boxLayoutPreview(){\n            let q = '';\n            this.structure.parameters_field.forEach((v)=>{\n                q = `${q}&${v.symbol}=${this.form[v.symbol]}`\n            });\n            this.boxLayout = this.structure.preview_image + q; \n        }\n    },\n    data() {\n        return {\n            boxLayout:'',\n            structure: {},\n            form: {},\n            sampleDivHeight: 0,\n            infoDivHeight: 0,\n        }\n    }\n}\n\nimport { normalizeStyle as _normalizeStyle, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, vModelSelect as _vModelSelect, withDirectives as _withDirectives, vModelText as _vModelText, normalizeClass as _normalizeClass, resolveDirective as _resolveDirective, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = { id: \"CommonFormComponent\" }\nconst _hoisted_2 = { id: \"image-preview-container\" }\nconst _hoisted_3 = {\n  id: \"sample-info\",\n  ref: \"sampleDiv\"\n}\nconst _hoisted_4 = [\"src\"]\nconst _hoisted_5 = { id: \"box-fold-preview\" }\nconst _hoisted_6 = { id: \"page-select-container\" }\nconst _hoisted_7 = /*#__PURE__*/_createElementVNode(\"label\", { for: \"\" }, [\n  /*#__PURE__*/_createElementVNode(\"small\", null, \"PAGE PRESET\")\n], -1)\nconst _hoisted_8 = [\"value\"]\nconst _hoisted_9 = { style: {\"display\":\"flex\"} }\nconst _hoisted_10 = {\n  class: \"field\",\n  style: {\"color\":\"white\",\"padding-right\":\"2px\"}\n}\nconst _hoisted_11 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"label\" }, [\n  /*#__PURE__*/_createElementVNode(\"small\", null, \"WIDTH\")\n], -1)\nconst _hoisted_12 = { class: \"ui right labeled input\" }\nconst _hoisted_13 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"ui basic label\" }, /*#__PURE__*/_toDisplayString('in'), -1)\nconst _hoisted_14 = {\n  class: \"field\",\n  style: {\"color\":\"white\",\"padding-left\":\"2px\"}\n}\nconst _hoisted_15 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"label\" }, [\n  /*#__PURE__*/_createElementVNode(\"small\", null, \"HEIGHT\")\n], -1)\nconst _hoisted_16 = { class: \"ui right labeled input\" }\nconst _hoisted_17 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"ui basic label\" }, /*#__PURE__*/_toDisplayString('in'), -1)\nconst _hoisted_18 = [\"src\"]\nconst _hoisted_19 = { id: \"form-container\" }\nconst _hoisted_20 = { id: \"unit-select-container\" }\nconst _hoisted_21 = { class: \"ui buttons\" }\nconst _hoisted_22 = [\"onClick\"]\nconst _hoisted_23 = { style: {\"padding\":\"20px\"} }\nconst _hoisted_24 = {\n  class: \"ui segment\",\n  style: {}\n}\nconst _hoisted_25 = /*#__PURE__*/_createElementVNode(\"div\", { style: {\"margin-bottom\":\"20px\"} }, [\n  /*#__PURE__*/_createElementVNode(\"h3\", null, \"DIMENSION\")\n], -1)\nconst _hoisted_26 = {\n  class: \"\",\n  style: {\"margin-bottom\":\"20px\",\"width\":\"100%\",\"display\":\"flex\",\"box-sizing\":\"border-box\"}\n}\nconst _hoisted_27 = { style: {\"width\":\"100%\",\"padding\":\"2px\",\"box-sizing\":\"border-box\"} }\nconst _hoisted_28 = { style: {\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"} }\nconst _hoisted_29 = { style: {\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\"} }\nconst _hoisted_30 = {\n  key: 0,\n  class: \"question circle icon link\"\n}\nconst _hoisted_31 = {\n  class: \"ui right labeled input\",\n  style: {\"width\":\"100%\"}\n}\nconst _hoisted_32 = [\"min\", \"max\", \"onUpdate:modelValue\", \"placeholder\"]\nconst _hoisted_33 = {\n  class: \"ui basic label\",\n  style: {\"box-sizing\":\"border-box\"}\n}\nconst _hoisted_34 = { style: {\"width\":\"100%\",\"box-sizing\":\"border-box\",\"padding\":\"5px\",\"text-align\":\"center\"} }\nconst _hoisted_35 = { class: \"ui button red\" }\nconst _hoisted_36 = { style: {\"padding\":\"0px 20px\",\"display\":\"flex\",\"margin-bottom\":\"50px\"} }\nconst _hoisted_37 = { style: {\"width\":\"50%\",\"padding-right\":\"10px\"} }\nconst _hoisted_38 = { class: \"ui segment\" }\nconst _hoisted_39 = /*#__PURE__*/_createElementVNode(\"div\", { style: {\"margin-bottom\":\"20px\"} }, [\n  /*#__PURE__*/_createElementVNode(\"h3\", null, \"OTHER SPECIFICATIONS\")\n], -1)\nconst _hoisted_40 = { style: `box-sizing:border-box;` }\nconst _hoisted_41 = { style: {\"width\":\"100%\",\"padding\":\"2px\",\"box-sizing\":\"border-box\"} }\nconst _hoisted_42 = { style: {\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"} }\nconst _hoisted_43 = { style: {\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\"} }\nconst _hoisted_44 = {\n  key: 0,\n  class: \"question circle icon link\"\n}\nconst _hoisted_45 = {\n  class: \"ui right labeled input\",\n  style: {\"width\":\"100%\"}\n}\nconst _hoisted_46 = [\"min\", \"max\", \"onUpdate:modelValue\", \"placeholder\"]\nconst _hoisted_47 = {\n  class: \"ui basic label\",\n  style: {\"box-sizing\":\"border-box\"}\n}\nconst _hoisted_48 = { style: {\"width\":\"50%\",\"padding-left\":\"10px\"} }\nconst _hoisted_49 = { class: \"ui segment\" }\nconst _hoisted_50 = /*#__PURE__*/_createElementVNode(\"div\", { style: {\"margin-bottom\":\"20px\"} }, [\n  /*#__PURE__*/_createElementVNode(\"h3\", null, \"PROFESSIONAL\")\n], -1)\nconst _hoisted_51 = { style: `box-sizing:border-box;` }\nconst _hoisted_52 = { style: {\"width\":\"100%\",\"padding\":\"2px\",\"box-sizing\":\"border-box\"} }\nconst _hoisted_53 = {\n  key: 0,\n  style: {\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"}\n}\nconst _hoisted_54 = { style: {\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\"} }\nconst _hoisted_55 = [\"value\"]\nconst _hoisted_56 = {\n  key: 1,\n  style: {\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"}\n}\nconst _hoisted_57 = { style: {\"position\":\"relative\",\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\",\"z-index\":\"1\"} }\nconst _hoisted_58 = {\n  key: 0,\n  class: \"question circle icon link\"\n}\nconst _hoisted_59 = [\"min\", \"max\", \"onUpdate:modelValue\", \"placeholder\"]\nconst _hoisted_60 = {\n  class: \"ui basic label\",\n  style: {\"box-sizing\":\"border-box\"}\n}\n\nfunction _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {\n  const _directive_tooltip = _resolveDirective(\"tooltip\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createElementVNode(\"div\", _hoisted_3, [\n        _createElementVNode(\"img\", {\n          style: _normalizeStyle([{\"max-height\":\"500px\",\"width\":\"100%\"}, `height:${$data.sampleDivHeight - $data.infoDivHeight}px`]),\n          src: $data.structure.sample_image,\n          alt: \"\"\n        }, null, 12, _hoisted_4),\n        _createElementVNode(\"div\", {\n          id: \"box-info-display\",\n          ref: \"infoDiv\"\n        }, _toDisplayString($data.structure.description), 513)\n      ], 512),\n      _createElementVNode(\"div\", _hoisted_5, [\n        _createElementVNode(\"div\", _hoisted_6, [\n          _hoisted_7,\n          _withDirectives(_createElementVNode(\"select\", {\n            class: \"ui dropdown selection\",\n            style: {\"width\":\"100%\"},\n            \"onUpdate:modelValue\": _cache[0] || (_cache[0] = $event => (($data.form['PAGEPRESET']) = $event))\n          }, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($data.structure.pagepresets_options, (datum) => {\n              return (_openBlock(), _createElementBlock(\"option\", {\n                key: datum.name,\n                value: datum.value\n              }, _toDisplayString(datum.name), 9, _hoisted_8))\n            }), 128))\n          ], 512), [\n            [_vModelSelect, $data.form['PAGEPRESET']]\n          ]),\n          _createElementVNode(\"div\", _hoisted_9, [\n            _createElementVNode(\"div\", _hoisted_10, [\n              _hoisted_11,\n              _createElementVNode(\"div\", _hoisted_12, [\n                _withDirectives(_createElementVNode(\"input\", {\n                  type: \"number\",\n                  placeholder: \"Page Width\",\n                  \"onUpdate:modelValue\": _cache[1] || (_cache[1] = $event => (($data.form['PAGEWIDTH']) = $event)),\n                  style: {\"width\":\"calc(100% - 80px)\"}\n                }, null, 512), [\n                  [_vModelText, $data.form['PAGEWIDTH']]\n                ]),\n                _hoisted_13\n              ])\n            ]),\n            _createElementVNode(\"div\", _hoisted_14, [\n              _hoisted_15,\n              _createElementVNode(\"div\", _hoisted_16, [\n                _withDirectives(_createElementVNode(\"input\", {\n                  type: \"number\",\n                  placeholder: \"Page Height\",\n                  \"onUpdate:modelValue\": _cache[2] || (_cache[2] = $event => (($data.form['PAGEHEIGHT']) = $event)),\n                  style: {\"width\":\"calc(100% - 80px)\"}\n                }, null, 512), [\n                  [_vModelText, $data.form['PAGEHEIGHT']]\n                ]),\n                _hoisted_17\n              ])\n            ])\n          ])\n        ]),\n        _createElementVNode(\"div\", null, [\n          _createElementVNode(\"img\", {\n            style: {\"max-height\":\"calc(500px - 130px)\",\"width\":\"100%\"},\n            src: $data.boxLayout,\n            alt: \"\"\n          }, null, 8, _hoisted_18)\n        ])\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_19, [\n      _createElementVNode(\"div\", _hoisted_20, [\n        _createElementVNode(\"div\", _hoisted_21, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($data.structure.units_options, (datum) => {\n            return _withDirectives((_openBlock(), _createElementBlock(\"button\", {\n              class: _normalizeClass([\"ui button red\", $data.form['UNITS'] == datum.value ? 'active' : '']),\n              onClick: $event => ($options.convertTo(datum.value))\n            }, _toDisplayString(datum.abbr), 11, _hoisted_22)), [\n              [_directive_tooltip, datum.name]\n            ])\n          }), 256))\n        ])\n      ]),\n      _createElementVNode(\"div\", _hoisted_23, [\n        _createElementVNode(\"div\", _hoisted_24, [\n          _hoisted_25,\n          _createElementVNode(\"div\", _hoisted_26, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($data.structure.parameters_field, (datum, index) => {\n              return (_openBlock(), _createElementBlock(\"div\", {\n                style: _normalizeStyle(`width:calc(${100 / $data.structure.parameters_field.length}%);box-sizing:border-box;`)\n              }, [\n                _createElementVNode(\"div\", _hoisted_27, [\n                  _createElementVNode(\"div\", _hoisted_28, [\n                    _createElementVNode(\"div\", _hoisted_29, [\n                      (datum.tooltip)\n                        ? _withDirectives((_openBlock(), _createElementBlock(\"i\", _hoisted_30, null, 512)), [\n                            [_directive_tooltip, datum.tooltip]\n                          ])\n                        : _createCommentVNode(\"\", true),\n                      _createElementVNode(\"small\", null, _toDisplayString(datum.name.toUpperCase()), 1)\n                    ]),\n                    _createElementVNode(\"div\", _hoisted_31, [\n                      _withDirectives(_createElementVNode(\"input\", {\n                        min: datum.minval,\n                        max: datum.maxval,\n                        type: \"number\",\n                        \"onUpdate:modelValue\": $event => (($data.form[datum.symbol]) = $event),\n                        placeholder: datum.name,\n                        style: {\"width\":\"calc(100% - 80px)\"}\n                      }, null, 8, _hoisted_32), [\n                        [_vModelText, $data.form[datum.symbol]]\n                      ]),\n                      _createElementVNode(\"div\", _hoisted_33, _toDisplayString($options.display_unit(datum)), 1)\n                    ])\n                  ])\n                ])\n              ], 4))\n            }), 256))\n          ]),\n          _createElementVNode(\"div\", _hoisted_34, [\n            _createElementVNode(\"div\", _hoisted_35, [\n              _createElementVNode(\"button\", {\n                class: \"\",\n                onClick: _cache[3] || (_cache[3] = (...args) => ($options.boxLayoutPreview && $options.boxLayoutPreview(...args)))\n              }, \"Submit\")\n            ])\n          ])\n        ])\n      ]),\n      _createElementVNode(\"div\", _hoisted_36, [\n        _createElementVNode(\"div\", _hoisted_37, [\n          _createElementVNode(\"div\", _hoisted_38, [\n            _hoisted_39,\n            _createElementVNode(\"div\", null, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($data.structure.options_field, (datum, index) => {\n                return (_openBlock(), _createElementBlock(\"div\", _hoisted_40, [\n                  _createElementVNode(\"div\", _hoisted_41, [\n                    _createElementVNode(\"div\", _hoisted_42, [\n                      _createElementVNode(\"div\", _hoisted_43, [\n                        (datum.tooltip)\n                          ? _withDirectives((_openBlock(), _createElementBlock(\"i\", _hoisted_44, null, 512)), [\n                              [_directive_tooltip, datum.tooltip]\n                            ])\n                          : _createCommentVNode(\"\", true),\n                        _createElementVNode(\"small\", null, _toDisplayString(datum.name.toUpperCase()), 1)\n                      ]),\n                      _createElementVNode(\"div\", _hoisted_45, [\n                        _withDirectives(_createElementVNode(\"input\", {\n                          min: datum.minval,\n                          max: datum.maxval,\n                          type: \"number\",\n                          \"onUpdate:modelValue\": $event => (($data.form[datum.symbol]) = $event),\n                          placeholder: datum.name,\n                          style: {\"width\":\"calc(100% - 80px)\"}\n                        }, null, 8, _hoisted_46), [\n                          [_vModelText, $data.form[datum.symbol]]\n                        ]),\n                        _createElementVNode(\"div\", _hoisted_47, _toDisplayString($options.display_unit(datum)), 1)\n                      ])\n                    ])\n                  ])\n                ]))\n              }), 256))\n            ])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_48, [\n          _createElementVNode(\"div\", _hoisted_49, [\n            _hoisted_50,\n            _createElementVNode(\"div\", null, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($data.structure.professional_field, (datum, index) => {\n                return (_openBlock(), _createElementBlock(\"div\", _hoisted_51, [\n                  _createElementVNode(\"div\", _hoisted_52, [\n                    (datum.symbol == 'REGISTRATION')\n                      ? (_openBlock(), _createElementBlock(\"div\", _hoisted_53, [\n                          _createElementVNode(\"div\", _hoisted_54, [\n                            _createElementVNode(\"small\", null, _toDisplayString(datum.name.toUpperCase()), 1)\n                          ]),\n                          _withDirectives(_createElementVNode(\"select\", {\n                            class: \"ui dropdown selection\",\n                            style: {\"width\":\"calc(100% - 1px) !important\",\"min-width\":\"calc(100% - 99px) !important\"},\n                            \"onUpdate:modelValue\": _cache[4] || (_cache[4] = $event => (($data.form['REGISTRATION']) = $event))\n                          }, [\n                            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList($data.structure.regmarks_options, (datum) => {\n                              return (_openBlock(), _createElementBlock(\"option\", {\n                                key: datum.name,\n                                value: datum.value\n                              }, _toDisplayString(datum.name), 9, _hoisted_55))\n                            }), 128))\n                          ], 512), [\n                            [_vModelSelect, $data.form['REGISTRATION']]\n                          ])\n                        ]))\n                      : (_openBlock(), _createElementBlock(\"div\", _hoisted_56, [\n                          _createElementVNode(\"div\", _hoisted_57, [\n                            (datum.tooltip)\n                              ? _withDirectives((_openBlock(), _createElementBlock(\"i\", _hoisted_58, null, 512)), [\n                                  [_directive_tooltip, datum.tooltip]\n                                ])\n                              : _createCommentVNode(\"\", true),\n                            _createElementVNode(\"small\", null, _toDisplayString(datum.name.toUpperCase()), 1)\n                          ]),\n                          _createElementVNode(\"div\", {\n                            class: _normalizeClass([\"ui right labeled input\", datum.symbol == 'MARK'? $data.form['REGISTRATION'] == 'none'? 'disabled' :'' :'']),\n                            style: {\"width\":\"100%\"}\n                          }, [\n                            _withDirectives(_createElementVNode(\"input\", {\n                              min: datum.minval,\n                              max: datum.maxval,\n                              type: \"number\",\n                              \"onUpdate:modelValue\": $event => (($data.form[datum.symbol]) = $event),\n                              placeholder: datum.name,\n                              style: {\"width\":\"calc(100% - 80px)\"}\n                            }, null, 8, _hoisted_59), [\n                              [_vModelText, $data.form[datum.symbol]]\n                            ]),\n                            _createElementVNode(\"div\", _hoisted_60, _toDisplayString($options.display_unit(datum)), 1)\n                          ], 2)\n                        ]))\n                  ])\n                ]))\n              }), 256))\n            ])\n          ])\n        ])\n      ])\n    ])\n  ]))\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/components/ComForm/index.vue?vue&type=style&index=0&lang.css\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render]])",
+      "start": 1702940389615,
+      "end": 1702940389634,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1702940389634,
+      "end": 1702940389634,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1702940389634,
+      "end": 1702940389637,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1702940389637,
+      "end": 1702940389638,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1702940389638,
+      "end": 1702940389638,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1702940389638,
+      "end": 1702940389638,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1702940389638,
+      "end": 1702940389638,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1702940389638,
+      "end": 1702940389638,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1702940389638,
+      "end": 1702940389638,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1702940389638,
+      "end": 1702940389638,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1702940389638,
+      "end": 1702940389638,
+      "order": "normal"
+    }
+  ]
+}

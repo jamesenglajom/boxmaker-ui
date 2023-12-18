@@ -74,6 +74,11 @@ i.circular.icon{
 .v-popper__popper{
     max-width:250px;
 }
+
+.ui.basic.label{
+    width:50px;
+    text-align:center;
+}
 </style>
 
 <template>
@@ -118,7 +123,7 @@ i.circular.icon{
                     </div>
                 </div>
                 <div>
-                    <img style="max-height:calc(500px - 130px);width:100%;" :src="structure.preview_image" alt="">
+                    <img style="max-height:calc(500px - 130px);width:100%;" :src="boxLayout" alt="">
                 </div>
             </div>
         </div>
@@ -172,7 +177,7 @@ i.circular.icon{
                     <!-- SUBMIT BUTTON -->
                     <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;">
                         <div class="ui button red">
-                            <button class="">Submit</button>
+                            <button class="" @click="boxLayoutPreview">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -283,13 +288,14 @@ export default {
         boxId(v) {
             if (v) {
                 let box_data = getBoxById(v);
-                console.log(convert("f","t",this.form));
                 this.structure = box_data.form.structure;
                 this.form = box_data.form.values;
                 this.$nextTick(() => {
                     this.sampleDivHeight = this.$refs.sampleDiv.offsetHeight;
                     this.infoDivHeight = this.$refs.infoDiv.offsetHeight;
                     this.form = box_data.form.values;
+                    this.form['model'] = v;
+                    this.boxLayoutPreview();
                 });
             }
         }
@@ -298,14 +304,25 @@ export default {
         convertTo(unit_id) {
             let new_unit = unit_id, old_unit = this.form["UNITS"];
             this.form["UNITS"] = new_unit;
+                    console.log('index.vue')
+                    console.log(this.form)
+            convert(old_unit,new_unit, this.form);
         },
         display_unit(property){
             let displays = {measure: this.form["UNITS"],percantage: "%", number:"n", angle: "  °  "};
             return displays[property.type];
+        },
+        boxLayoutPreview(){
+            let q = '';
+            this.structure.parameters_field.forEach((v)=>{
+                q = `${q}&${v.symbol}=${this.form[v.symbol]}`
+            });
+            this.boxLayout = this.structure.preview_image + q; 
         }
     },
     data() {
         return {
+            boxLayout:'',
             structure: {},
             form: {},
             sampleDivHeight: 0,

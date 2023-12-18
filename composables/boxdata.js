@@ -89,7 +89,27 @@ export const getBoxById = (id) => {
 // function to convert form data
 export const convert = (from,to,data) => {
     // specify to-convert properties
-    return getFormInlineProps("arced")
+    let units = {
+        mm: { name: "mm", mm: 1, cm: .1, inch: 0.0393700787 },
+        cm: { name: "cm", mm: 10, cm: 1, inch: 0.3937007874 },
+        inch:{ name: "inch", mm: 25.4, cm: 2.54, inch: 1 }
+    }
+    let temp = data,
+    prop = getFormInlineProps(data['model'])
+    ;
+    Object.keys(data).forEach((v)=>{
+        if(['PAGEWIDTH', 'PAGEHEIGHT'].includes(v)==false){
+            let tmp = prop.filter(i => i.symbol == v);
+            if(tmp.length != 0 && tmp[0].type == 'measure'){
+                temp[v] = parseFloat(temp[v] * units[from][to]).toFixed(2);
+            }
+        }
+    });
+
+    // console.log(prop)
+    // console.log(temp)
+
+    return temp;
 }
 
 
@@ -140,16 +160,13 @@ function getFormStructure(box){
 }
 
 function getFormInlineProps(id){
-    let form_structure = getBoxById(id).form.structure,
+    let form_structure = getBoxById(id)['form']['structure'],
     fields = ["parameters_field","options_field","standard_field","professional_field"];
     fields = fields.reduce(((p,c)=> { 
         return [...p, ...form_structure[c]]}
         ),[]);
     return fields;
 }
-
-
-
 
 
 

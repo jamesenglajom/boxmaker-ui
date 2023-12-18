@@ -43,8 +43,10 @@
                             <template v-for="(datum, i2) in 3">
                                 <template v-if="(i1 * 3 + i2) < available_tags.length">
                                     <div class="column" style="padding:2px;">
+
                                         <div :for="available_tags[(i1 * 3 + i2)].id"
-                                            style="align-self:center;display:flex;background:#CCCCCC;padding:10px 10px 8px 10px;border-radius:3px;">
+                                            style="align-self:center;display:flex;background:#CCCCCC;padding:10px 10px 8px 10px;border-radius:3px;position:relative">
+
                                             <div style="align-self: center;">
                                                 <input type="checkbox" class="ui checkbox"
                                                     @change="handleSelect(available_tags[(i1 * 3 + i2)].id)"
@@ -54,7 +56,11 @@
                                             <div style="align-self: center;margin-left:10px;">
                                                 <label :for="available_tags[(i1 * 3 + i2)].id">{{ available_tags[(i1 * 3 +
                                                     i2)].name
-                                                }}</label>
+                                                }}
+                                                    <a style="margin:0;position:absolute;right:10px;top:7px;" class="ui label" :data-tooltip="`${available_tags[(i1 * 3 + i2)].no_of_boxes} availble boxes`">
+                                                        {{ available_tags[(i1 * 3 + i2)].no_of_boxes }}
+                                                    </a>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -92,7 +98,7 @@ export default {
         }
     },
     methods: {
-        clearTags(){
+        clearTags() {
             this.selected_tags = [];
             this.$emit("selectedTagsId", this.selected_tags)
         },

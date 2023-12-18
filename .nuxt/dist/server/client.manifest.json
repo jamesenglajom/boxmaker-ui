@@ -7,12 +7,12 @@
     "module": true,
     "resourceType": "script"
   },
-  "C:/xampp/htdocs/projects/boxmaker/node_modules/nuxt/dist/app/entry.js": {
+  "/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "isEntry": true,
-    "file": "C:/xampp/htdocs/projects/boxmaker/node_modules/nuxt/dist/app/entry.js"
+    "file": "/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/nuxt/dist/app/entry.js"
   }
 }

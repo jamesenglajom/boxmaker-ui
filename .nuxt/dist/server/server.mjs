@@ -1,1 +1,1 @@
-export { default } from "file:///C:/xampp/htdocs/projects/boxmaker/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
+export { default } from "file:///Users/jameslajom/Documents/git/boxmaker-ui/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

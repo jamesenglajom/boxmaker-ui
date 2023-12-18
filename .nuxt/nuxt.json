@@ -1,7 +1,7 @@
 {
-  "_hash": "8IMDRxvEwv",
+  "_hash": "mDnCH1zVTc",
   "project": {
-    "rootDir": "C:/xampp/htdocs/projects/boxmaker"
+    "rootDir": "/Users/jameslajom/Documents/git/boxmaker-ui"
   },
   "versions": {
     "nuxt": "3.8.2"

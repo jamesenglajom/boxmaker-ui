@@ -1,7 +1,9 @@
 <template>
     <div class="ui container">
         <ElFlyout :isOpen="flyout" @isClosed="closeFlyout" :box="selected_box?selected_box:{}"></ElFlyout>
-        <div class="ui segment">
+
+
+        <!-- <div class="ui segment">
             <div class="ui" style="width:100%;text-align:right;">
                 <div style="text-align:right;" class="ui labeled button" tabindex="0">
                     <div class="ui yellow button">
@@ -12,7 +14,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="ui segment">
             <BoxTags @selectedTagsId="handleSelectedTags"></BoxTags>
             <BoxTray :selectedTags="selectedTags" @selected="handleSelectedBox"></BoxTray>

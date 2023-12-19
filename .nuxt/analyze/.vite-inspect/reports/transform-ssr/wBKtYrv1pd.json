@@ -4,129 +4,129 @@
     {
       "name": "vite:load-fallback",
       "result": "import { h, defineComponent, ref, computed, onMounted } from \"vue\";\nimport { prerenderStaticImages } from \"../utils/prerender.mjs\";\nimport { useBaseImage, baseImageProps } from \"./_base.mjs\";\nimport { useImage, useHead, useNuxtApp } from \"#imports\";\nimport { getFileExtension } from \"#image\";\nexport const pictureProps = {\n  ...baseImageProps,\n  legacyFormat: { type: String, default: null },\n  imgAttrs: { type: Object, default: null }\n};\nexport default defineComponent({\n  name: \"NuxtPicture\",\n  props: pictureProps,\n  emits: [\"load\"],\n  setup: (props, ctx) => {\n    const $img = useImage();\n    const _base = useBaseImage(props);\n    const originalFormat = computed(() => getFileExtension(props.src));\n    const isTransparent = computed(() => [\"png\", \"webp\", \"gif\", \"svg\"].includes(originalFormat.value));\n    const legacyFormat = computed(() => {\n      if (props.legacyFormat) {\n        return props.legacyFormat;\n      }\n      return isTransparent.value ? \"png\" : \"jpeg\";\n    });\n    const sources = computed(() => {\n      const formats = props.format?.split(\",\") || (originalFormat.value === \"svg\" ? [\"svg\"] : $img.options.format?.length ? [...$img.options.format] : [\"webp\"]);\n      if (formats[0] === \"svg\") {\n        return [{ src: props.src }];\n      }\n      if (!formats.includes(legacyFormat.value)) {\n        formats.push(legacyFormat.value);\n      } else {\n        formats.splice(formats.indexOf(legacyFormat.value), 1);\n        formats.push(legacyFormat.value);\n      }\n      return formats.map((format) => {\n        const { srcset, sizes, src } = $img.getSizes(props.src, {\n          ..._base.options.value,\n          sizes: props.sizes || $img.options.screens,\n          densities: props.densities,\n          modifiers: { ..._base.modifiers.value, format }\n        });\n        return { src, type: `image/${format}`, sizes, srcset };\n      });\n    });\n    const lastSourceIndex = computed(() => sources.value.length - 1);\n    if (props.preload) {\n      const link = {\n        rel: \"preload\",\n        as: \"image\",\n        imagesrcset: sources.value[0].srcset,\n        nonce: props.nonce\n      };\n      if (sources.value?.[0]?.sizes) {\n        link.imagesizes = sources.value[0].sizes;\n      }\n      useHead({ link: [link] });\n    }\n    const imgAttrs = { ...props.imgAttrs, \"data-nuxt-pic\": \"\" };\n    for (const key in ctx.attrs) {\n      if (key in baseImageProps && !(key in imgAttrs)) {\n        imgAttrs[key] = ctx.attrs[key];\n      }\n    }\n    const imgEl = ref();\n    if (process.server && process.env.prerender) {\n      for (const src of sources.value) {\n        prerenderStaticImages(src.src, src.srcset);\n      }\n    }\n    const nuxtApp = useNuxtApp();\n    const initialLoad = nuxtApp.isHydrating;\n    onMounted(() => {\n      if (!imgEl.value) {\n        return;\n      }\n      if (imgEl.value.complete && initialLoad && !imgEl.value.getAttribute(\"data-error\")) {\n        ctx.emit(\"load\", new Event(\"load\"));\n      }\n      imgEl.value.onload = (event) => {\n        ctx.emit(\"load\", event);\n      };\n    });\n    return () => h(\"picture\", null, [\n      ...sources.value.slice(0, -1).map((source) => {\n        return h(\"source\", {\n          type: source.type,\n          sizes: source.sizes,\n          srcset: source.srcset\n        });\n      }),\n      h(\"img\", {\n        ref: imgEl,\n        ..._base.attrs.value,\n        ...process.server ? { onerror: \"this.setAttribute('data-error', 1)\" } : {},\n        ...imgAttrs,\n        src: sources.value[lastSourceIndex.value].src,\n        sizes: sources.value[lastSourceIndex.value].sizes,\n        srcset: sources.value[lastSourceIndex.value].srcset\n      })\n    ]);\n  }\n});\n",
-      "start": 1702950469148,
-      "end": 1702950469530,
+      "start": 1702950702853,
+      "end": 1702950704006,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702950469530,
-      "end": 1702950469530,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702950469531,
-      "end": 1702950469531,
+      "start": 1702950704006,
+      "end": 1702950704006,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { h, defineComponent, ref, computed, onMounted } from \"vue\";\nimport { prerenderStaticImages } from \"../utils/prerender.mjs\";\nimport { useBaseImage, baseImageProps } from \"./_base.mjs\";\nimport { useImage, useHead, useNuxtApp } from \"#imports\";\nimport { getFileExtension } from \"#image\";\nexport const pictureProps = {\n  ...baseImageProps,\n  legacyFormat: { type: String, default: null },\n  imgAttrs: { type: Object, default: null }\n};\nexport default defineComponent({\n  name: \"NuxtPicture\",\n  props: pictureProps,\n  emits: [\"load\"],\n  setup: (props, ctx) => {\n    const $img = useImage();\n    const _base = useBaseImage(props);\n    const originalFormat = computed(() => getFileExtension(props.src));\n    const isTransparent = computed(() => [\"png\", \"webp\", \"gif\", \"svg\"].includes(originalFormat.value));\n    const legacyFormat = computed(() => {\n      if (props.legacyFormat) {\n        return props.legacyFormat;\n      }\n      return isTransparent.value ? \"png\" : \"jpeg\";\n    });\n    const sources = computed(() => {\n      const formats = props.format?.split(\",\") || (originalFormat.value === \"svg\" ? [\"svg\"] : $img.options.format?.length ? [...$img.options.format] : [\"webp\"]);\n      if (formats[0] === \"svg\") {\n        return [{ src: props.src }];\n      }\n      if (!formats.includes(legacyFormat.value)) {\n        formats.push(legacyFormat.value);\n      } else {\n        formats.splice(formats.indexOf(legacyFormat.value), 1);\n        formats.push(legacyFormat.value);\n      }\n      return formats.map((format) => {\n        const { srcset, sizes, src } = $img.getSizes(props.src, {\n          ..._base.options.value,\n          sizes: props.sizes || $img.options.screens,\n          densities: props.densities,\n          modifiers: { ..._base.modifiers.value, format }\n        });\n        return { src, type: `image/${format}`, sizes, srcset };\n      });\n    });\n    const lastSourceIndex = computed(() => sources.value.length - 1);\n    if (props.preload) {\n      const link = {\n        rel: \"preload\",\n        as: \"image\",\n        imagesrcset: sources.value[0].srcset,\n        nonce: props.nonce\n      };\n      if (sources.value?.[0]?.sizes) {\n        link.imagesizes = sources.value[0].sizes;\n      }\n      useHead({ link: [link] });\n    }\n    const imgAttrs = { ...props.imgAttrs, \"data-nuxt-pic\": \"\" };\n    for (const key in ctx.attrs) {\n      if (key in baseImageProps && !(key in imgAttrs)) {\n        imgAttrs[key] = ctx.attrs[key];\n      }\n    }\n    const imgEl = ref();\n    if (true && process.env.prerender) {\n      for (const src of sources.value) {\n        prerenderStaticImages(src.src, src.srcset);\n      }\n    }\n    const nuxtApp = useNuxtApp();\n    const initialLoad = nuxtApp.isHydrating;\n    onMounted(() => {\n      if (!imgEl.value) {\n        return;\n      }\n      if (imgEl.value.complete && initialLoad && !imgEl.value.getAttribute(\"data-error\")) {\n        ctx.emit(\"load\", new Event(\"load\"));\n      }\n      imgEl.value.onload = (event) => {\n        ctx.emit(\"load\", event);\n      };\n    });\n    return () => h(\"picture\", null, [\n      ...sources.value.slice(0, -1).map((source) => {\n        return h(\"source\", {\n          type: source.type,\n          sizes: source.sizes,\n          srcset: source.srcset\n        });\n      }),\n      h(\"img\", {\n        ref: imgEl,\n        ..._base.attrs.value,\n        ...true ? { onerror: \"this.setAttribute('data-error', 1)\" } : {},\n        ...imgAttrs,\n        src: sources.value[lastSourceIndex.value].src,\n        sizes: sources.value[lastSourceIndex.value].sizes,\n        srcset: sources.value[lastSourceIndex.value].srcset\n      })\n    ]);\n  }\n});\n",
-      "start": 1702950469531,
-      "end": 1702950469532,
+      "start": 1702950704007,
+      "end": 1702950704007,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -139,63 +139,63 @@
     },
     {
       "name": "vite:css-post",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702950469532,
-      "end": 1702950469532,
+      "start": 1702950704008,
+      "end": 1702950704008,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useImage } from '/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/@nuxt/image/dist/runtime/composables';\nimport { useHead } from '@unhead/vue';\nimport { useNuxtApp } from '#app/nuxt';\nimport { h, defineComponent, ref, computed, onMounted } from \"vue\";\nimport { prerenderStaticImages } from \"../utils/prerender.mjs\";\nimport { useBaseImage, baseImageProps } from \"./_base.mjs\";\nimport { getFileExtension } from \"#image\";\nexport const pictureProps = {\n  ...baseImageProps,\n  legacyFormat: { type: String, default: null },\n  imgAttrs: { type: Object, default: null }\n};\nexport default defineComponent({\n  name: \"NuxtPicture\",\n  props: pictureProps,\n  emits: [\"load\"],\n  setup: (props, ctx) => {\n    const $img = useImage();\n    const _base = useBaseImage(props);\n    const originalFormat = computed(() => getFileExtension(props.src));\n    const isTransparent = computed(() => [\"png\", \"webp\", \"gif\", \"svg\"].includes(originalFormat.value));\n    const legacyFormat = computed(() => {\n      if (props.legacyFormat) {\n        return props.legacyFormat;\n      }\n      return isTransparent.value ? \"png\" : \"jpeg\";\n    });\n    const sources = computed(() => {\n      const formats = props.format?.split(\",\") || (originalFormat.value === \"svg\" ? [\"svg\"] : $img.options.format?.length ? [...$img.options.format] : [\"webp\"]);\n      if (formats[0] === \"svg\") {\n        return [{ src: props.src }];\n      }\n      if (!formats.includes(legacyFormat.value)) {\n        formats.push(legacyFormat.value);\n      } else {\n        formats.splice(formats.indexOf(legacyFormat.value), 1);\n        formats.push(legacyFormat.value);\n      }\n      return formats.map((format) => {\n        const { srcset, sizes, src } = $img.getSizes(props.src, {\n          ..._base.options.value,\n          sizes: props.sizes || $img.options.screens,\n          densities: props.densities,\n          modifiers: { ..._base.modifiers.value, format }\n        });\n        return { src, type: `image/${format}`, sizes, srcset };\n      });\n    });\n    const lastSourceIndex = computed(() => sources.value.length - 1);\n    if (props.preload) {\n      const link = {\n        rel: \"preload\",\n        as: \"image\",\n        imagesrcset: sources.value[0].srcset,\n        nonce: props.nonce\n      };\n      if (sources.value?.[0]?.sizes) {\n        link.imagesizes = sources.value[0].sizes;\n      }\n      useHead({ link: [link] });\n    }\n    const imgAttrs = { ...props.imgAttrs, \"data-nuxt-pic\": \"\" };\n    for (const key in ctx.attrs) {\n      if (key in baseImageProps && !(key in imgAttrs)) {\n        imgAttrs[key] = ctx.attrs[key];\n      }\n    }\n    const imgEl = ref();\n    if (true && process.env.prerender) {\n      for (const src of sources.value) {\n        prerenderStaticImages(src.src, src.srcset);\n      }\n    }\n    const nuxtApp = useNuxtApp();\n    const initialLoad = nuxtApp.isHydrating;\n    onMounted(() => {\n      if (!imgEl.value) {\n        return;\n      }\n      if (imgEl.value.complete && initialLoad && !imgEl.value.getAttribute(\"data-error\")) {\n        ctx.emit(\"load\", new Event(\"load\"));\n      }\n      imgEl.value.onload = (event) => {\n        ctx.emit(\"load\", event);\n      };\n    });\n    return () => h(\"picture\", null, [\n      ...sources.value.slice(0, -1).map((source) => {\n        return h(\"source\", {\n          type: source.type,\n          sizes: source.sizes,\n          srcset: source.srcset\n        });\n      }),\n      h(\"img\", {\n        ref: imgEl,\n        ..._base.attrs.value,\n        ...true ? { onerror: \"this.setAttribute('data-error', 1)\" } : {},\n        ...imgAttrs,\n        src: sources.value[lastSourceIndex.value].src,\n        sizes: sources.value[lastSourceIndex.value].sizes,\n        srcset: sources.value[lastSourceIndex.value].srcset\n      })\n    ]);\n  }\n});\n",
-      "start": 1702950469532,
-      "end": 1702950469533,
+      "start": 1702950704008,
+      "end": 1702950704009,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -209,8 +209,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useImage } from '/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/@nuxt/image/dist/runtime/composables';\nimport { useHead } from '@unhead/vue';\nimport { useNuxtApp } from '#app/nuxt';\nimport { h, defineComponent, ref, computed, onMounted } from \"vue\";\nimport { prerenderStaticImages } from \"../utils/prerender.mjs\";\nimport { useBaseImage, baseImageProps } from \"./_base.mjs\";\nimport { getFileExtension } from \"#image\";\nexport const pictureProps = {\n  ...baseImageProps,\n  legacyFormat: { type: String, default: null },\n  imgAttrs: { type: Object, default: null }\n};\nexport default defineComponent({\n  name: \"NuxtPicture\",\n  props: pictureProps,\n  emits: [\"load\"],\n  setup: (props, ctx) => {\n    const $img = useImage();\n    const _base = useBaseImage(props);\n    const originalFormat = computed(() => getFileExtension(props.src));\n    const isTransparent = computed(() => [\"png\", \"webp\", \"gif\", \"svg\"].includes(originalFormat.value));\n    const legacyFormat = computed(() => {\n      if (props.legacyFormat) {\n        return props.legacyFormat;\n      }\n      return isTransparent.value ? \"png\" : \"jpeg\";\n    });\n    const sources = computed(() => {\n      const formats = props.format?.split(\",\") || (originalFormat.value === \"svg\" ? [\"svg\"] : $img.options.format?.length ? [...$img.options.format] : [\"webp\"]);\n      if (formats[0] === \"svg\") {\n        return [{ src: props.src }];\n      }\n      if (!formats.includes(legacyFormat.value)) {\n        formats.push(legacyFormat.value);\n      } else {\n        formats.splice(formats.indexOf(legacyFormat.value), 1);\n        formats.push(legacyFormat.value);\n      }\n      return formats.map((format) => {\n        const { srcset, sizes, src } = $img.getSizes(props.src, {\n          ..._base.options.value,\n          sizes: props.sizes || $img.options.screens,\n          densities: props.densities,\n          modifiers: { ..._base.modifiers.value, format }\n        });\n        return { src, type: `image/${format}`, sizes, srcset };\n      });\n    });\n    const lastSourceIndex = computed(() => sources.value.length - 1);\n    if (props.preload) {\n      const link = {\n        rel: \"preload\",\n        as: \"image\",\n        imagesrcset: sources.value[0].srcset,\n        nonce: props.nonce\n      };\n      if (sources.value?.[0]?.sizes) {\n        link.imagesizes = sources.value[0].sizes;\n      }\n      useHead({ link: [link] });\n    }\n    const imgAttrs = { ...props.imgAttrs, \"data-nuxt-pic\": \"\" };\n    for (const key in ctx.attrs) {\n      if (key in baseImageProps && !(key in imgAttrs)) {\n        imgAttrs[key] = ctx.attrs[key];\n      }\n    }\n    const imgEl = ref();\n    if (true && process.env.prerender) {\n      for (const src of sources.value) {\n        prerenderStaticImages(src.src, src.srcset);\n      }\n    }\n    const nuxtApp = useNuxtApp();\n    const initialLoad = nuxtApp.isHydrating;\n    onMounted(() => {\n      if (!imgEl.value) {\n        return;\n      }\n      if (imgEl.value.complete && initialLoad && !imgEl.value.getAttribute(\"data-error\")) {\n        ctx.emit(\"load\", new Event(\"load\"));\n      }\n      imgEl.value.onload = (event) => {\n        ctx.emit(\"load\", event);\n      };\n    });\n    return () => h(\"picture\", null, [\n      ...sources.value.slice(0, -1).map((source) => {\n        return h(\"source\", {\n          type: source.type,\n          sizes: source.sizes,\n          srcset: source.srcset\n        });\n      }),\n      h(\"img\", {\n        ref: imgEl,\n        ..._base.attrs.value,\n        ...true ? { onerror: \"this.setAttribute('data-error', 1)\" } : {},\n        ...imgAttrs,\n        src: sources.value[lastSourceIndex.value].src,\n        sizes: sources.value[lastSourceIndex.value].sizes,\n        srcset: sources.value[lastSourceIndex.value].srcset\n      })\n    ]);\n  }\n});\n",
-      "start": 1702950469532,
-      "end": 1702950469533,
+      "start": 1702950704008,
+      "end": 1702950704009,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -223,45 +223,45 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1702950469533,
-      "end": 1702950469533,
+      "start": 1702950704009,
+      "end": 1702950704009,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702950469533,
-      "end": 1702950469533,
+      "start": 1702950704009,
+      "end": 1702950704009,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702950469533,
-      "end": 1702950469533,
+      "start": 1702950704009,
+      "end": 1702950704009,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702950469533,
-      "end": 1702950469533,
+      "start": 1702950704009,
+      "end": 1702950704009,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1702950469533,
-      "end": 1702950469533,
+      "start": 1702950704009,
+      "end": 1702950704009,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702950469533,
-      "end": 1702950469533,
+      "start": 1702950704009,
+      "end": 1702950704009,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { useImage } from '/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/@nuxt/image/dist/runtime/composables';\nimport { useHead } from '@unhead/vue';\nimport { useNuxtApp } from '#app/nuxt';\nimport { h, defineComponent, ref, computed, onMounted } from \"vue\";\nimport { prerenderStaticImages } from \"../utils/prerender.mjs\";\nimport { useBaseImage, baseImageProps } from \"./_base.mjs\";\nimport { getFileExtension } from \"#image\";\nexport const pictureProps = {\n  ...baseImageProps,\n  legacyFormat: { type: String, default: null },\n  imgAttrs: { type: Object, default: null }\n};\nexport default defineComponent({\n  name: \"NuxtPicture\",\n  props: pictureProps,\n  emits: [\"load\"],\n  setup: (props, ctx) => {\n    const $img = useImage();\n    const _base = useBaseImage(props);\n    const originalFormat = computed(() => getFileExtension(props.src));\n    const isTransparent = computed(() => [\"png\", \"webp\", \"gif\", \"svg\"].includes(originalFormat.value));\n    const legacyFormat = computed(() => {\n      if (props.legacyFormat) {\n        return props.legacyFormat;\n      }\n      return isTransparent.value ? \"png\" : \"jpeg\";\n    });\n    const sources = computed(() => {\n      const formats = props.format?.split(\",\") || (originalFormat.value === \"svg\" ? [\"svg\"] : $img.options.format?.length ? [...$img.options.format] : [\"webp\"]);\n      if (formats[0] === \"svg\") {\n        return [{ src: props.src }];\n      }\n      if (!formats.includes(legacyFormat.value)) {\n        formats.push(legacyFormat.value);\n      } else {\n        formats.splice(formats.indexOf(legacyFormat.value), 1);\n        formats.push(legacyFormat.value);\n      }\n      return formats.map((format) => {\n        const { srcset, sizes, src } = $img.getSizes(props.src, {\n          ..._base.options.value,\n          sizes: props.sizes || $img.options.screens,\n          densities: props.densities,\n          modifiers: { ..._base.modifiers.value, format }\n        });\n        return { src, type: `image/${format}`, sizes, srcset };\n      });\n    });\n    const lastSourceIndex = computed(() => sources.value.length - 1);\n    if (props.preload) {\n      const link = {\n        rel: \"preload\",\n        as: \"image\",\n        imagesrcset: sources.value[0].srcset,\n        nonce: props.nonce\n      };\n      if (sources.value?.[0]?.sizes) {\n        link.imagesizes = sources.value[0].sizes;\n      }\n      useHead({ link: [link] });\n    }\n    const imgAttrs = { ...props.imgAttrs, \"data-nuxt-pic\": \"\" };\n    for (const key in ctx.attrs) {\n      if (key in baseImageProps && !(key in imgAttrs)) {\n        imgAttrs[key] = ctx.attrs[key];\n      }\n    }\n    const imgEl = ref();\n    if (true && process.env.prerender) {\n      for (const src of sources.value) {\n        prerenderStaticImages(src.src, src.srcset);\n      }\n    }\n    const nuxtApp = useNuxtApp();\n    const initialLoad = nuxtApp.isHydrating;\n     /*#__PURE__*/ false && onMounted(() => {\n      if (!imgEl.value) {\n        return;\n      }\n      if (imgEl.value.complete && initialLoad && !imgEl.value.getAttribute(\"data-error\")) {\n        ctx.emit(\"load\", new Event(\"load\"));\n      }\n      imgEl.value.onload = (event) => {\n        ctx.emit(\"load\", event);\n      };\n    });\n    return () => h(\"picture\", null, [\n      ...sources.value.slice(0, -1).map((source) => {\n        return h(\"source\", {\n          type: source.type,\n          sizes: source.sizes,\n          srcset: source.srcset\n        });\n      }),\n      h(\"img\", {\n        ref: imgEl,\n        ..._base.attrs.value,\n        ...true ? { onerror: \"this.setAttribute('data-error', 1)\" } : {},\n        ...imgAttrs,\n        src: sources.value[lastSourceIndex.value].src,\n        sizes: sources.value[lastSourceIndex.value].sizes,\n        srcset: sources.value[lastSourceIndex.value].srcset\n      })\n    ]);\n  }\n});\n",
-      "start": 1702950469533,
-      "end": 1702950469534,
+      "start": 1702950704009,
+      "end": 1702950704010,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -274,14 +274,14 @@
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702950469534,
-      "end": 1702950469534,
+      "start": 1702950704010,
+      "end": 1702950704010,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702950469534,
-      "end": 1702950469534,
+      "start": 1702950704010,
+      "end": 1702950704010,
       "order": "normal"
     }
   ]

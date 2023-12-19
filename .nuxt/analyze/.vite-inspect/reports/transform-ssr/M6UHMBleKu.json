@@ -4,69 +4,69 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n    <div class=\"ui container\">\n        <ElFlyout :isOpen=\"flyout\" @isClosed=\"closeFlyout\" :box=\"selected_box?selected_box:{}\"></ElFlyout>\n\n\n        <!-- <div class=\"ui segment\">\n            <div class=\"ui\" style=\"width:100%;text-align:right;\">\n                <div style=\"text-align:right;\" class=\"ui labeled button\" tabindex=\"0\">\n                    <div class=\"ui yellow button\">\n                        <i class=\"coins icon\"></i> + Coins\n                    </div>\n                    <a class=\"ui basic yellow left pointing label\">\n                        1,048\n                    </a>\n                </div>\n            </div>\n        </div> -->\n        <div class=\"ui segment\">\n            <BoxTags @selectedTagsId=\"handleSelectedTags\"></BoxTags>\n            <BoxTray :selectedTags=\"selectedTags\" @selected=\"handleSelectedBox\"></BoxTray>\n        </div>\n        <div class=\"ui dimmer fluid\" :class=\"flyout ? 'active' : ''\"></div>\n    </div>\n</template>\n\n\n<script>\nexport default {\n    data() {\n        return {\n            flyout:false,\n            selectedTags: [],\n            selected_box: null,\n        }\n    },\n    methods: {\n        handleSelectedTags(v) {\n            this.selectedTags = v;\n        },\n        handleSelectedBox(v){\n            // alert(`index page selected_box = ${v}`)\n            // console.log(v);\n            this.selected_box = v;\n            this.flyout = true;\n        },\n        closeFlyout(){\n            this.selected_box=null;\n            this.flyout = false;            \n        }\n    }\n}\n\n</script>\n\n<style>\n.ui.dimmer.active {\n    position: fixed;\n    min-height: 100vh;\n    height: 100vh;\n    z-index: 5;\n    max-width:760px;\n}\n</style>",
-      "start": 1702954568170,
-      "end": 1702954571601,
+      "start": 1702954874029,
+      "end": 1702954877195,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702954571601,
-      "end": 1702954571601,
+      "start": 1702954877195,
+      "end": 1702954877195,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "\nconst _sfc_main = {\n    data() {\n        return {\n            flyout:false,\n            selectedTags: [],\n            selected_box: null,\n        }\n    },\n    methods: {\n        handleSelectedTags(v) {\n            this.selectedTags = v;\n        },\n        handleSelectedBox(v){\n            // alert(`index page selected_box = ${v}`)\n            // console.log(v);\n            this.selected_box = v;\n            this.flyout = true;\n        },\n        closeFlyout(){\n            this.selected_box=null;\n            this.flyout = false;            \n        }\n    }\n}\n\n\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nfunction _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {\n  const _component_ElFlyout = _resolveComponent(\"ElFlyout\")\n  const _component_BoxTags = _resolveComponent(\"BoxTags\")\n  const _component_BoxTray = _resolveComponent(\"BoxTray\")\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"ui container\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_ElFlyout, {\n    isOpen: $data.flyout,\n    onIsClosed: $options.closeFlyout,\n    box: $data.selected_box?$data.selected_box:{}\n  }, null, _parent))\n  _push(`<div class=\"ui segment\">`)\n  _push(_ssrRenderComponent(_component_BoxTags, { onSelectedTagsId: $options.handleSelectedTags }, null, _parent))\n  _push(_ssrRenderComponent(_component_BoxTray, {\n    selectedTags: $data.selectedTags,\n    onSelected: $options.handleSelectedBox\n  }, null, _parent))\n  _push(`</div><div class=\"${_ssrRenderClass([$data.flyout ? 'active' : '', \"ui dimmer fluid\"])}\"></div></div>`)\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/pages/index.vue?vue&type=style&index=0&lang.css\"\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"pages/index.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['ssrRender',_sfc_ssrRender]])",
-      "start": 1702954571601,
-      "end": 1702954571605,
+      "start": 1702954877195,
+      "end": 1702954877198,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -83,165 +83,165 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702954571605,
-      "end": 1702954571605,
+      "start": 1702954877199,
+      "end": 1702954877199,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702954571605,
-      "end": 1702954571753,
+      "start": 1702954877199,
+      "end": 1702954877341,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702954571754,
-      "end": 1702954571754,
+      "start": 1702954877341,
+      "end": 1702954877341,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1702954571783,
-      "end": 1702954571783,
+      "start": 1702954877368,
+      "end": 1702954877368,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702954571783,
-      "end": 1702954571783,
+      "start": 1702954877368,
+      "end": 1702954877368,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702954571783,
-      "end": 1702954571783,
+      "start": 1702954877369,
+      "end": 1702954877369,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702954571783,
-      "end": 1702954571783,
+      "start": 1702954877369,
+      "end": 1702954877369,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702954571783,
-      "end": 1702954571783,
+      "start": 1702954877369,
+      "end": 1702954877369,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702954571784,
-      "end": 1702954571784,
+      "start": 1702954877369,
+      "end": 1702954877369,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702954571784,
-      "end": 1702954571784,
+      "start": 1702954877369,
+      "end": 1702954877369,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702954571784,
-      "end": 1702954571784,
+      "start": 1702954877369,
+      "end": 1702954877369,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702954571784,
-      "end": 1702954571784,
+      "start": 1702954877369,
+      "end": 1702954877369,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702954571784,
-      "end": 1702954571785,
+      "start": 1702954877369,
+      "end": 1702954877370,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702954571784,
-      "end": 1702954571785,
+      "start": 1702954877369,
+      "end": 1702954877370,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702954571785,
-      "end": 1702954571785,
+      "start": 1702954877371,
+      "end": 1702954877371,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702954571785,
-      "end": 1702954571785,
+      "start": 1702954877371,
+      "end": 1702954877371,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702954571785,
-      "end": 1702954571785,
+      "start": 1702954877371,
+      "end": 1702954877371,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702954571785,
-      "end": 1702954571785,
+      "start": 1702954877371,
+      "end": 1702954877371,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1702954571785,
-      "end": 1702954571785,
+      "start": 1702954877371,
+      "end": 1702954877371,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"/Users/jameslajom/Documents/git/boxmaker-ui/components/El/Flyout.vue\";\nimport { default as __nuxt_component_1 } from \"/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue\";\nimport { default as __nuxt_component_2 } from \"/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue\";\n\nconst _sfc_main = {\n    data() {\n        return {\n            flyout:false,\n            selectedTags: [],\n            selected_box: null,\n        }\n    },\n    methods: {\n        handleSelectedTags(v) {\n            this.selectedTags = v;\n        },\n        handleSelectedBox(v){\n            // alert(`index page selected_box = ${v}`)\n            // console.log(v);\n            this.selected_box = v;\n            this.flyout = true;\n        },\n        closeFlyout(){\n            this.selected_box=null;\n            this.flyout = false;            \n        }\n    }\n}\n\n\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nfunction _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {\n  const _component_ElFlyout = __nuxt_component_0\n  const _component_BoxTags = __nuxt_component_1\n  const _component_BoxTray = __nuxt_component_2\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"ui container\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_ElFlyout, {\n    isOpen: $data.flyout,\n    onIsClosed: $options.closeFlyout,\n    box: $data.selected_box?$data.selected_box:{}\n  }, null, _parent))\n  _push(`<div class=\"ui segment\">`)\n  _push(_ssrRenderComponent(_component_BoxTags, { onSelectedTagsId: $options.handleSelectedTags }, null, _parent))\n  _push(_ssrRenderComponent(_component_BoxTray, {\n    selectedTags: $data.selectedTags,\n    onSelected: $options.handleSelectedBox\n  }, null, _parent))\n  _push(`</div><div class=\"${_ssrRenderClass([$data.flyout ? 'active' : '', \"ui dimmer fluid\"])}\"></div></div>`)\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/pages/index.vue?vue&type=style&index=0&lang.css\"\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"pages/index.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['ssrRender',_sfc_ssrRender]])",
-      "start": 1702954571785,
-      "end": 1702954571786,
+      "start": 1702954877371,
+      "end": 1702954877371,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -254,20 +254,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702954571786,
-      "end": 1702954571786,
+      "start": 1702954877371,
+      "end": 1702954877371,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702954571786,
-      "end": 1702954571786,
+      "start": 1702954877372,
+      "end": 1702954877372,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702954571787,
-      "end": 1702954571787,
+      "start": 1702954877372,
+      "end": 1702954877372,
       "order": "normal"
     }
   ]

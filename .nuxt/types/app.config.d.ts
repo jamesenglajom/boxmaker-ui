@@ -5,7 +5,7 @@ import type { Defu } from 'defu'
 
 declare const inlineConfig = {
   "nuxt": {
-    "buildId": "e01fa420-c957-4cdc-bc7b-318c5f3f82db"
+    "buildId": "1ca98cbf-79b2-4ccb-bbf6-8436d077649c"
   },
   "ui": {
     "primary": "green",

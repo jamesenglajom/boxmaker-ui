@@ -4,69 +4,69 @@
     {
       "name": "vite:load-fallback",
       "result": "\n<style>\n/* partition divs */\n#image-preview-container {\n    width: 100%;\n    height: 500px;\n    display: flex\n}\n\n#sample-info {\n    background: #F7F7F7;\n    border: solid .5px #CCCCCC;\n    width: 40%;\n    position: relative;\n    display: flex;\n}\n\n#sample-info>div {\n    align-self: center;\n}\n\n#box-fold-preview {\n    background: #F7F7F7;\n    border: solid .5px #CCCCCC;\n    border-left: none;\n    width: 60%;\n    position: relative;\n}\n\n#box-fold-preview>div {\n    align-self: center;\n}\n\n#box-info-display {\n    background: #1F1F21;\n    color: white;\n    position: absolute;\n    padding: 8px 16px;\n    width: 100%;\n    bottom: 0;\n    left: 0;\n}\n\n#page-select-container {\n    width: 100%;\n    border-bottom: solid .5px #CCCCCC;\n    background: #666666;\n    /* background: gray; */\n    padding: 5px;\n}\n\n#page-select-container>label {\n    color: white;\n}\n\n\n#unit-select-container {\n    margin-top: 30px;\n    padding: 2px 15px;\n    text-align: center;\n}\n\n.input>.ui.label {\n    background: #CCCCCC;\n}\nselect.ui.selection.dropdown{\n    padding:0px;\n}\ni.circular.icon{\n    font-size:.75em;\n    color:gray;\n}\n\n.v-popper__popper{\n    max-width:250px;\n}\n\n.ui.basic.label{\n    width:50px;\n    text-align:center;\n}\n</style>\n\n<template>\n    <div id=\"CommonFormComponent\">\n        <div id=\"image-preview-container\">\n            <div id=\"sample-info\" ref=\"sampleDiv\">\n                <img style=\"max-height:500px;width:100%;\" :src=\"structure.sample_image\" alt=\"\"\n                    :style=\"`height:${sampleDivHeight - infoDivHeight}px`\">\n                <div id=\"box-info-display\" ref=\"infoDiv\">\n                    {{ structure.description }}\n                </div>\n            </div>\n            <div id=\"box-fold-preview\">\n                <div id=\"page-select-container\">\n                    <label for=\"\"><small>PAGE PRESET</small></label>\n                    <select class=\"ui dropdown selection\" style=\"width:100%;\" v-model=\"form['PAGEPRESET']\">\n                        <template v-for=\" datum  in  structure.pagepresets_options\" :key=\"datum.name\">\n                            <option :value=\"datum.value\">{{ datum.name }}</option>\n                        </template>\n                    </select>\n                    <div style=\"display:flex\">\n                        <div class=\"field\" style=\"color:white;padding-right:2px\">\n                            <div class=\"label\"><small>WIDTH</small></div>\n                            <div class=\"ui right labeled input\">\n                                <input  type=\"number\" placeholder=\"Page Width\" v-model=\"form['PAGEWIDTH']\"\n                                    style=\"width:calc(100% - 80px)\" />\n                                <div class=\"ui basic label\">\n                                    {{ 'in' }}\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"field\" style=\"color:white;padding-left:2px;\">\n                            <div class=\"label\"><small>HEIGHT</small></div>\n                            <div class=\"ui right labeled input\">\n                                <input type=\"number\" placeholder=\"Page Height\" v-model=\"form['PAGEHEIGHT']\"\n                                    style=\"width:calc(100% - 80px)\" />\n                                <div class=\"ui basic label\">\n                                    {{ 'in' }}\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div>\n                    <img style=\"max-height:calc(500px - 130px);width:100%;\" :src=\"boxLayout\" alt=\"\">\n                </div>\n            </div>\n        </div>\n        <div id=\"form-container\">\n            <!-- part1 -->\n            <div id=\"unit-select-container\">\n                <div class=\"ui buttons\" >\n                    <template v-for=\"datum in structure.units_options\">\n                        <button class=\"ui button red\" v-tooltip=\"datum.name\" :class=\"form['UNITS'] == datum.value ? 'active' : ''\"\n                            @click=\"convertTo(datum.value)\">{{ datum.abbr }}</button>\n                    </template>\n                </div>\n            </div>\n\n            <!-- part2 -->\n\n            <div style=\"padding:20px;\">\n                <div class=\"ui segment\" style=\"\">\n                    <!-- FORM LABEL -->\n                    <div style=\"margin-bottom:20px;\">\n                        <h3>DIMENSION</h3>\n                    </div>\n                    <!-- FORM -->\n                    <div class=\"\" style=\"margin-bottom:20px;width:100%;display:flex;box-sizing:border-box\">\n                        <template v-for=\"(datum, index) in structure.parameters_field\">\n                            <div :style=\"`width:calc(${100 / structure.parameters_field.length}%);box-sizing:border-box;`\">\n                                <div style=\"width:100%;padding:2px;box-sizing:border-box;\">\n                                    <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                        <div\n                                            style=\"text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden\">\n                                            \n                                            <template v-if=\"datum.tooltip\">\n                                                        <i class=\"question circle icon link\" v-tooltip=\"datum.tooltip\"></i>\n                                                    </template>\n                                            <small>\n                                                {{ datum.name.toUpperCase() }}\n                                            </small>\n                                        </div>\n                                        <div class=\"ui right labeled input\" style=\"width:100%;\">\n                                            <input :min=\"datum.minval\" :max=\"datum.maxval\" type=\"number\" v-model=\"form[datum.symbol]\" :placeholder=\"datum.name\"\n                                                style=\"width:calc(100% - 80px)\">\n                                            <div class=\"ui basic label\" style=\"box-sizing:border-box;\">\n                                                {{ display_unit(datum) }}\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </template>\n                    </div>\n                    <!-- SUBMIT BUTTON -->\n                    <div style=\"width:100%;box-sizing: border-box;padding:5px;text-align:center;\">\n                        <div class=\"ui button red\">\n                            <button class=\"\" @click=\"boxLayoutPreview\">Submit</button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n\n            <!-- part3 -->\n            <div style=\"padding:0px 20px;display:flex;margin-bottom:50px;\">\n                <!-- others form -->\n                <div style=\"width:50%;padding-right:10px;\">\n                    <div class=\"ui segment\">\n                        <div style=\"margin-bottom:20px;\">\n                            <h3>OTHER SPECIFICATIONS</h3>\n                        </div>\n                        <div>\n                            <template v-for=\"(datum, index) in structure.options_field\">\n                                <div :style=\"`box-sizing:border-box;`\">\n                                    <div style=\"width:100%;padding:2px;box-sizing:border-box;\">\n                                        <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                            <div\n                                                style=\"text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden\">\n                                                \n                                                <template v-if=\"datum.tooltip\">\n                                                        <i class=\"question circle icon link\" v-tooltip=\"datum.tooltip\"></i>\n                                                    </template>\n                                                <small>\n                                                    {{ datum.name.toUpperCase() }}\n                                                </small>\n                                            </div>\n                                            <div class=\"ui right labeled input\" style=\"width:100%;\">\n                                                <input  :min=\"datum.minval\" :max=\"datum.maxval\" type=\"number\" v-model=\"form[datum.symbol]\" :placeholder=\"datum.name\"\n                                                    style=\"width:calc(100% - 80px)\">\n                                                <div class=\"ui basic label\" style=\"box-sizing:border-box;\">\n                                                    {{ display_unit(datum) }}\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </template>\n                        </div>\n                    </div>\n                </div>\n                <!-- prof form -->\n                <div style=\"width:50%;padding-left:10px;\">\n                    <div class=\"ui segment\">\n                        <div style=\"margin-bottom:20px;\">\n                            <h3>PROFESSIONAL</h3>\n                        </div>\n                        <div>\n                            <template v-for=\"(datum, index) in structure.professional_field\">\n                                <div :style=\"`box-sizing:border-box;`\">\n                                    <div style=\"width:100%;padding:2px;box-sizing:border-box;\">\n                                        <template v-if=\"datum.symbol == 'REGISTRATION'\">\n                                            <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                                <div\n                                                    style=\"text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden\">\n                                                    <small>\n                                                        {{ datum.name.toUpperCase() }}\n                                                    </small>\n                                                </div>\n                                                <select class=\"ui dropdown selection\" style=\"width:calc(100% - 1px) !important;min-width:calc(100% - 99px) !important;\"\n                                                    v-model=\"form['REGISTRATION']\">\n                                                    <template v-for=\" datum  in  structure.regmarks_options\"\n                                                        :key=\"datum.name\">\n                                                        <option :value=\"datum.value\">{{ datum.name }}</option>\n                                                    </template>\n                                                </select>\n                                            </div>\n                                        </template>\n                                        <template v-else>\n                                            <div style=\"width:calc(100%);box-sizing:border-box;\">\n                                                <div\n                                                    style=\"position:relative;text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden;z-index:1;\">\n                                                    <template v-if=\"datum.tooltip\">\n                                                        <i class=\"question circle icon link\" v-tooltip=\"datum.tooltip\"></i>\n                                                    </template>\n                                                    <small>\n                                                        {{ datum.name.toUpperCase() }}\n                                                    </small>\n                                                </div>\n                                                <div class=\"ui right labeled input\" style=\"width:100%;\" :class=\"datum.symbol == 'MARK'? form['REGISTRATION'] == 'none'? 'disabled' :'' :''\">\n                                                    <input  :min=\"datum.minval\" :max=\"datum.maxval\" type=\"number\" v-model=\"form[datum.symbol]\"\n                                                        :placeholder=\"datum.name\" style=\"width:calc(100% - 80px)\">\n                                                    <div class=\"ui basic label\" style=\"box-sizing:border-box;\">\n                                                        {{ display_unit(datum) }}\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </template>\n                                    </div>\n                                </div>\n                            </template>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n</template>\n<script>\nimport { getBoxById,convert } from \"@/composables/boxdata\"\nexport default {\n    name: \"CommonForm\",\n    props: [\"boxId\"],\n    watch: {\n        boxId(v) {\n            if (v) {\n                let box_data = getBoxById(v);\n                this.structure = box_data.form.structure;\n                this.form = box_data.form.values;\n                this.$nextTick(() => {\n                    this.sampleDivHeight = this.$refs.sampleDiv.offsetHeight;\n                    this.infoDivHeight = this.$refs.infoDiv.offsetHeight;\n                    this.form = box_data.form.values;\n                    this.form['model'] = v;\n                    this.boxLayoutPreview();\n                });\n            }\n        }\n    },\n    methods: {\n        convertTo(unit_id) {\n            let new_unit = unit_id, old_unit = this.form[\"UNITS\"];\n            this.form[\"UNITS\"] = new_unit;\n                    console.log('index.vue')\n                    console.log(this.form)\n            convert(old_unit,new_unit, this.form);\n        },\n        display_unit(property){\n            let displays = {measure: this.form[\"UNITS\"],percantage: \"%\", number:\"n\", angle: \"  °  \"};\n            return displays[property.type];\n        },\n        boxLayoutPreview(){\n            let q = '';\n            this.structure.parameters_field.forEach((v)=>{\n                q = `${q}&${v.symbol}=${this.form[v.symbol]}`\n            });\n            this.boxLayout = this.structure.preview_image + q; \n        }\n    },\n    data() {\n        return {\n            boxLayout:'',\n            structure: {},\n            form: {},\n            sampleDivHeight: 0,\n            infoDivHeight: 0,\n        }\n    }\n}\n</script>",
-      "start": 1702949920922,
-      "end": 1702949921776,
+      "start": 1702950469150,
+      "end": 1702950469543,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702949921776,
-      "end": 1702949921776,
+      "start": 1702950469543,
+      "end": 1702950469543,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "\nimport { getBoxById,convert } from \"@/composables/boxdata\"\nconst _sfc_main = {\n    name: \"CommonForm\",\n    props: [\"boxId\"],\n    watch: {\n        boxId(v) {\n            if (v) {\n                let box_data = getBoxById(v);\n                this.structure = box_data.form.structure;\n                this.form = box_data.form.values;\n                this.$nextTick(() => {\n                    this.sampleDivHeight = this.$refs.sampleDiv.offsetHeight;\n                    this.infoDivHeight = this.$refs.infoDiv.offsetHeight;\n                    this.form = box_data.form.values;\n                    this.form['model'] = v;\n                    this.boxLayoutPreview();\n                });\n            }\n        }\n    },\n    methods: {\n        convertTo(unit_id) {\n            let new_unit = unit_id, old_unit = this.form[\"UNITS\"];\n            this.form[\"UNITS\"] = new_unit;\n                    console.log('index.vue')\n                    console.log(this.form)\n            convert(old_unit,new_unit, this.form);\n        },\n        display_unit(property){\n            let displays = {measure: this.form[\"UNITS\"],percantage: \"%\", number:\"n\", angle: \"  °  \"};\n            return displays[property.type];\n        },\n        boxLayoutPreview(){\n            let q = '';\n            this.structure.parameters_field.forEach((v)=>{\n                q = `${q}&${v.symbol}=${this.form[v.symbol]}`\n            });\n            this.boxLayout = this.structure.preview_image + q; \n        }\n    },\n    data() {\n        return {\n            boxLayout:'',\n            structure: {},\n            form: {},\n            sampleDivHeight: 0,\n            infoDivHeight: 0,\n        }\n    }\n}\n\nimport { resolveDirective as _resolveDirective, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderStyle as _ssrRenderStyle, ssrRenderAttr as _ssrRenderAttr, ssrGetDirectiveProps as _ssrGetDirectiveProps, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderClass as _ssrRenderClass, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nfunction _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {\n  const _directive_tooltip = _resolveDirective(\"tooltip\")\n\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ id: \"CommonFormComponent\" }, _attrs))\n  }><div id=\"image-preview-container\"><div id=\"sample-info\"><img style=\"${\n    _ssrRenderStyle([{\"max-height\":\"500px\",\"width\":\"100%\"}, `height:${$data.sampleDivHeight - $data.infoDivHeight}px`])\n  }\"${\n    _ssrRenderAttr(\"src\", $data.structure.sample_image)\n  } alt=\"\"><div id=\"box-info-display\">${\n    _ssrInterpolate($data.structure.description)\n  }</div></div><div id=\"box-fold-preview\"><div id=\"page-select-container\"><label for=\"\"><small>PAGE PRESET</small></label><select class=\"ui dropdown selection\" style=\"${\n    _ssrRenderStyle({\"width\":\"100%\"})\n  }\"><!--[-->`)\n  _ssrRenderList($data.structure.pagepresets_options, (datum) => {\n    _push(`<option${\n      _ssrRenderAttr(\"value\", datum.value)\n    }>${\n      _ssrInterpolate(datum.name)\n    }</option>`)\n  })\n  _push(`<!--]--></select><div style=\"${\n    _ssrRenderStyle({\"display\":\"flex\"})\n  }\"><div class=\"field\" style=\"${\n    _ssrRenderStyle({\"color\":\"white\",\"padding-right\":\"2px\"})\n  }\"><div class=\"label\"><small>WIDTH</small></div><div class=\"ui right labeled input\"><input type=\"number\" placeholder=\"Page Width\"${\n    _ssrRenderAttr(\"value\", $data.form['PAGEWIDTH'])\n  } style=\"${\n    _ssrRenderStyle({\"width\":\"calc(100% - 80px)\"})\n  }\"><div class=\"ui basic label\">${\n    _ssrInterpolate('in')\n  }</div></div></div><div class=\"field\" style=\"${\n    _ssrRenderStyle({\"color\":\"white\",\"padding-left\":\"2px\"})\n  }\"><div class=\"label\"><small>HEIGHT</small></div><div class=\"ui right labeled input\"><input type=\"number\" placeholder=\"Page Height\"${\n    _ssrRenderAttr(\"value\", $data.form['PAGEHEIGHT'])\n  } style=\"${\n    _ssrRenderStyle({\"width\":\"calc(100% - 80px)\"})\n  }\"><div class=\"ui basic label\">${\n    _ssrInterpolate('in')\n  }</div></div></div></div></div><div><img style=\"${\n    _ssrRenderStyle({\"max-height\":\"calc(500px - 130px)\",\"width\":\"100%\"})\n  }\"${\n    _ssrRenderAttr(\"src\", $data.boxLayout)\n  } alt=\"\"></div></div></div><div id=\"form-container\"><div id=\"unit-select-container\"><div class=\"ui buttons\"><!--[-->`)\n  _ssrRenderList($data.structure.units_options, (datum) => {\n    _push(`<button${\n      _ssrRenderAttrs(_mergeProps({\n        class: [\"ui button red\", $data.form['UNITS'] == datum.value ? 'active' : '']\n      }, _ssrGetDirectiveProps(_ctx, _directive_tooltip, datum.name)))\n    }>${\n      _ssrInterpolate(datum.abbr)\n    }</button>`)\n  })\n  _push(`<!--]--></div></div><div style=\"${\n    _ssrRenderStyle({\"padding\":\"20px\"})\n  }\"><div class=\"ui segment\" style=\"${\n    _ssrRenderStyle({})\n  }\"><div style=\"${\n    _ssrRenderStyle({\"margin-bottom\":\"20px\"})\n  }\"><h3>DIMENSION</h3></div><div class=\"\" style=\"${\n    _ssrRenderStyle({\"margin-bottom\":\"20px\",\"width\":\"100%\",\"display\":\"flex\",\"box-sizing\":\"border-box\"})\n  }\"><!--[-->`)\n  _ssrRenderList($data.structure.parameters_field, (datum, index) => {\n    _push(`<div style=\"${\n      _ssrRenderStyle(`width:calc(${100 / $data.structure.parameters_field.length}%);box-sizing:border-box;`)\n    }\"><div style=\"${\n      _ssrRenderStyle({\"width\":\"100%\",\"padding\":\"2px\",\"box-sizing\":\"border-box\"})\n    }\"><div style=\"${\n      _ssrRenderStyle({\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"})\n    }\"><div style=\"${\n      _ssrRenderStyle({\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\"})\n    }\">`)\n    if (datum.tooltip) {\n      _push(`<i${_ssrRenderAttrs(_mergeProps({ class: \"question circle icon link\" }, _ssrGetDirectiveProps(_ctx, _directive_tooltip, datum.tooltip)))}></i>`)\n    } else {\n      _push(`<!---->`)\n    }\n    _push(`<small>${\n      _ssrInterpolate(datum.name.toUpperCase())\n    }</small></div><div class=\"ui right labeled input\" style=\"${\n      _ssrRenderStyle({\"width\":\"100%\"})\n    }\"><input${\n      _ssrRenderAttr(\"min\", datum.minval)\n    }${\n      _ssrRenderAttr(\"max\", datum.maxval)\n    } type=\"number\"${\n      _ssrRenderAttr(\"value\", $data.form[datum.symbol])\n    }${\n      _ssrRenderAttr(\"placeholder\", datum.name)\n    } style=\"${\n      _ssrRenderStyle({\"width\":\"calc(100% - 80px)\"})\n    }\"><div class=\"ui basic label\" style=\"${\n      _ssrRenderStyle({\"box-sizing\":\"border-box\"})\n    }\">${\n      _ssrInterpolate($options.display_unit(datum))\n    }</div></div></div></div></div>`)\n  })\n  _push(`<!--]--></div><div style=\"${\n    _ssrRenderStyle({\"width\":\"100%\",\"box-sizing\":\"border-box\",\"padding\":\"5px\",\"text-align\":\"center\"})\n  }\"><div class=\"ui button red\"><button class=\"\">Submit</button></div></div></div></div><div style=\"${\n    _ssrRenderStyle({\"padding\":\"0px 20px\",\"display\":\"flex\",\"margin-bottom\":\"50px\"})\n  }\"><div style=\"${\n    _ssrRenderStyle({\"width\":\"50%\",\"padding-right\":\"10px\"})\n  }\"><div class=\"ui segment\"><div style=\"${\n    _ssrRenderStyle({\"margin-bottom\":\"20px\"})\n  }\"><h3>OTHER SPECIFICATIONS</h3></div><div><!--[-->`)\n  _ssrRenderList($data.structure.options_field, (datum, index) => {\n    _push(`<div style=\"${\n      _ssrRenderStyle(`box-sizing:border-box;`)\n    }\"><div style=\"${\n      _ssrRenderStyle({\"width\":\"100%\",\"padding\":\"2px\",\"box-sizing\":\"border-box\"})\n    }\"><div style=\"${\n      _ssrRenderStyle({\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"})\n    }\"><div style=\"${\n      _ssrRenderStyle({\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\"})\n    }\">`)\n    if (datum.tooltip) {\n      _push(`<i${_ssrRenderAttrs(_mergeProps({ class: \"question circle icon link\" }, _ssrGetDirectiveProps(_ctx, _directive_tooltip, datum.tooltip)))}></i>`)\n    } else {\n      _push(`<!---->`)\n    }\n    _push(`<small>${\n      _ssrInterpolate(datum.name.toUpperCase())\n    }</small></div><div class=\"ui right labeled input\" style=\"${\n      _ssrRenderStyle({\"width\":\"100%\"})\n    }\"><input${\n      _ssrRenderAttr(\"min\", datum.minval)\n    }${\n      _ssrRenderAttr(\"max\", datum.maxval)\n    } type=\"number\"${\n      _ssrRenderAttr(\"value\", $data.form[datum.symbol])\n    }${\n      _ssrRenderAttr(\"placeholder\", datum.name)\n    } style=\"${\n      _ssrRenderStyle({\"width\":\"calc(100% - 80px)\"})\n    }\"><div class=\"ui basic label\" style=\"${\n      _ssrRenderStyle({\"box-sizing\":\"border-box\"})\n    }\">${\n      _ssrInterpolate($options.display_unit(datum))\n    }</div></div></div></div></div>`)\n  })\n  _push(`<!--]--></div></div></div><div style=\"${\n    _ssrRenderStyle({\"width\":\"50%\",\"padding-left\":\"10px\"})\n  }\"><div class=\"ui segment\"><div style=\"${\n    _ssrRenderStyle({\"margin-bottom\":\"20px\"})\n  }\"><h3>PROFESSIONAL</h3></div><div><!--[-->`)\n  _ssrRenderList($data.structure.professional_field, (datum, index) => {\n    _push(`<div style=\"${\n      _ssrRenderStyle(`box-sizing:border-box;`)\n    }\"><div style=\"${\n      _ssrRenderStyle({\"width\":\"100%\",\"padding\":\"2px\",\"box-sizing\":\"border-box\"})\n    }\">`)\n    if (datum.symbol == 'REGISTRATION') {\n      _push(`<div style=\"${\n        _ssrRenderStyle({\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"})\n      }\"><div style=\"${\n        _ssrRenderStyle({\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\"})\n      }\"><small>${\n        _ssrInterpolate(datum.name.toUpperCase())\n      }</small></div><select class=\"ui dropdown selection\" style=\"${\n        _ssrRenderStyle({\"width\":\"calc(100% - 1px) !important\",\"min-width\":\"calc(100% - 99px) !important\"})\n      }\"><!--[-->`)\n      _ssrRenderList($data.structure.regmarks_options, (datum) => {\n        _push(`<option${\n          _ssrRenderAttr(\"value\", datum.value)\n        }>${\n          _ssrInterpolate(datum.name)\n        }</option>`)\n      })\n      _push(`<!--]--></select></div>`)\n    } else {\n      _push(`<div style=\"${\n        _ssrRenderStyle({\"width\":\"calc(100%)\",\"box-sizing\":\"border-box\"})\n      }\"><div style=\"${\n        _ssrRenderStyle({\"position\":\"relative\",\"text-overflow\":\"ellipsis\",\"width\":\"calc(100% - 1px)\",\"white-space\":\"nowrap\",\"overflow\":\"hidden\",\"z-index\":\"1\"})\n      }\">`)\n      if (datum.tooltip) {\n        _push(`<i${_ssrRenderAttrs(_mergeProps({ class: \"question circle icon link\" }, _ssrGetDirectiveProps(_ctx, _directive_tooltip, datum.tooltip)))}></i>`)\n      } else {\n        _push(`<!---->`)\n      }\n      _push(`<small>${\n        _ssrInterpolate(datum.name.toUpperCase())\n      }</small></div><div style=\"${\n        _ssrRenderStyle({\"width\":\"100%\"})\n      }\" class=\"${\n        _ssrRenderClass([datum.symbol == 'MARK'? $data.form['REGISTRATION'] == 'none'? 'disabled' :'' :'', \"ui right labeled input\"])\n      }\"><input${\n        _ssrRenderAttr(\"min\", datum.minval)\n      }${\n        _ssrRenderAttr(\"max\", datum.maxval)\n      } type=\"number\"${\n        _ssrRenderAttr(\"value\", $data.form[datum.symbol])\n      }${\n        _ssrRenderAttr(\"placeholder\", datum.name)\n      } style=\"${\n        _ssrRenderStyle({\"width\":\"calc(100% - 80px)\"})\n      }\"><div class=\"ui basic label\" style=\"${\n        _ssrRenderStyle({\"box-sizing\":\"border-box\"})\n      }\">${\n        _ssrInterpolate($options.display_unit(datum))\n      }</div></div></div>`)\n    }\n    _push(`</div></div>`)\n  })\n  _push(`<!--]--></div></div></div></div></div></div>`)\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/components/ComForm/index.vue?vue&type=style&index=0&lang.css\"\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"components/ComForm/index.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['ssrRender',_sfc_ssrRender]])",
-      "start": 1702949921776,
-      "end": 1702949921799,
+      "start": 1702950469543,
+      "end": 1702950469561,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -83,182 +83,182 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469561,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469562,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702949921799,
-      "end": 1702949921799,
+      "start": 1702950469561,
+      "end": 1702950469562,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702949921799,
-      "end": 1702949921801,
+      "start": 1702950469562,
+      "end": 1702950469563,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702949921799,
-      "end": 1702949921801,
+      "start": 1702950469562,
+      "end": 1702950469563,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469563,
+      "end": 1702950469563,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469563,
+      "end": 1702950469563,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469563,
+      "end": 1702950469563,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469563,
+      "end": 1702950469563,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469563,
+      "end": 1702950469563,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469563,
+      "end": 1702950469564,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469564,
+      "end": 1702950469564,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702949921801,
-      "end": 1702949921801,
+      "start": 1702950469564,
+      "end": 1702950469564,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702949921801,
-      "end": 1702949921802,
+      "start": 1702950469564,
+      "end": 1702950469564,
       "order": "normal"
     }
   ]

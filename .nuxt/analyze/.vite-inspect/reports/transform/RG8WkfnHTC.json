@@ -4,206 +4,206 @@
     {
       "name": "vite:load-fallback",
       "result": "import { HOOK_PLUGIN_SETTINGS_SET } from './const.js';\nimport { now } from './time.js';\nexport class ApiProxy {\n    constructor(plugin, hook) {\n        this.target = null;\n        this.targetQueue = [];\n        this.onQueue = [];\n        this.plugin = plugin;\n        this.hook = hook;\n        const defaultSettings = {};\n        if (plugin.settings) {\n            for (const id in plugin.settings) {\n                const item = plugin.settings[id];\n                defaultSettings[id] = item.defaultValue;\n            }\n        }\n        const localSettingsSaveId = `__vue-devtools-plugin-settings__${plugin.id}`;\n        let currentSettings = Object.assign({}, defaultSettings);\n        try {\n            const raw = localStorage.getItem(localSettingsSaveId);\n            const data = JSON.parse(raw);\n            Object.assign(currentSettings, data);\n        }\n        catch (e) {\n            // noop\n        }\n        this.fallbacks = {\n            getSettings() {\n                return currentSettings;\n            },\n            setSettings(value) {\n                try {\n                    localStorage.setItem(localSettingsSaveId, JSON.stringify(value));\n                }\n                catch (e) {\n                    // noop\n                }\n                currentSettings = value;\n            },\n            now() {\n                return now();\n            },\n        };\n        if (hook) {\n            hook.on(HOOK_PLUGIN_SETTINGS_SET, (pluginId, value) => {\n                if (pluginId === this.plugin.id) {\n                    this.fallbacks.setSettings(value);\n                }\n            });\n        }\n        this.proxiedOn = new Proxy({}, {\n            get: (_target, prop) => {\n                if (this.target) {\n                    return this.target.on[prop];\n                }\n                else {\n                    return (...args) => {\n                        this.onQueue.push({\n                            method: prop,\n                            args,\n                        });\n                    };\n                }\n            },\n        });\n        this.proxiedTarget = new Proxy({}, {\n            get: (_target, prop) => {\n                if (this.target) {\n                    return this.target[prop];\n                }\n                else if (prop === 'on') {\n                    return this.proxiedOn;\n                }\n                else if (Object.keys(this.fallbacks).includes(prop)) {\n                    return (...args) => {\n                        this.targetQueue.push({\n                            method: prop,\n                            args,\n                            resolve: () => { },\n                        });\n                        return this.fallbacks[prop](...args);\n                    };\n                }\n                else {\n                    return (...args) => {\n                        return new Promise(resolve => {\n                            this.targetQueue.push({\n                                method: prop,\n                                args,\n                                resolve,\n                            });\n                        });\n                    };\n                }\n            },\n        });\n    }\n    async setRealTarget(target) {\n        this.target = target;\n        for (const item of this.onQueue) {\n            this.target.on[item.method](...item.args);\n        }\n        for (const item of this.targetQueue) {\n            item.resolve(await this.target[item.method](...item.args));\n        }\n    }\n}\n",
-      "start": 1702949906439,
-      "end": 1702949906777,
+      "start": 1702950454745,
+      "end": 1702950455015,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702949906777,
-      "end": 1702949906777,
+      "start": 1702950455015,
+      "end": 1702950455015,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455016,
+      "end": 1702950455016,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455045,
+      "end": 1702950455046,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455050,
+      "end": 1702950455050,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455052,
+      "end": 1702950455053,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455054,
+      "end": 1702950455054,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455059,
+      "end": 1702950455059,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455059,
+      "end": 1702950455059,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455059,
+      "end": 1702950455059,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455089,
+      "end": 1702950455089,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455090,
+      "end": 1702950455090,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455100,
+      "end": 1702950455100,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455102,
+      "end": 1702950455103,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455103,
+      "end": 1702950455103,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455103,
+      "end": 1702950455103,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455131,
+      "end": 1702950455132,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455133,
+      "end": 1702950455133,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455134,
+      "end": 1702950455137,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455138,
+      "end": 1702950455138,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455139,
+      "end": 1702950455139,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455139,
+      "end": 1702950455139,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702949906778,
-      "end": 1702949906778,
+      "start": 1702950455139,
+      "end": 1702950455139,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702949906779,
-      "end": 1702949906779,
+      "start": 1702950455139,
+      "end": 1702950455139,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702949906779,
-      "end": 1702949906779,
+      "start": 1702950455140,
+      "end": 1702950455140,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702949906779,
-      "end": 1702949906779,
+      "start": 1702950455142,
+      "end": 1702950455142,
       "order": "normal"
     }
   ]

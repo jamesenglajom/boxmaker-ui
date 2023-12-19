@@ -3,70 +3,70 @@
   "transforms": [
     {
       "name": "vite:load-fallback",
-      "result": "<template>\n  <div id=\"app-body\">\n    <NuxtPage />\n  </div>\n</template>\n\n<script>\n</script>\n\n\n<style>\n@import url(\"fomantic-ui-css/semantic.min.css\");\n\n@media only screen and (min-width: 760px) {\n  body {\n    background-color: rgb(231, 231, 231);\n    width:760px;\n  }\n}\n</style>",
-      "start": 1702940400041,
-      "end": 1702940404025,
+      "result": "<template>\n  <div id=\"app-body\">\n    <NuxtPage />\n  </div>\n</template>\n\n<script>\n</script>\n\n\n<style>\n@import url(\"fomantic-ui-css/semantic.min.css\");\n\n@media only screen and (min-width: 760px) {\n  body {\n    background-color: rgb(231, 231, 231);\n    width:760px;\n  }\n}\n\n.ui.red{\n  background-color: #b31228 !important;\n}\n\n.ui.red:hover{\n  background-color: #830e1d !important;\n}\n.ui.red.active{\n  background-color: #941021 !important;\n}\n</style>",
+      "start": 1702949915957,
+      "end": 1702949919274,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702940404025,
-      "end": 1702940404025,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702940404025,
-      "end": 1702940404025,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702940404026,
-      "end": 1702940404026,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702940404026,
-      "end": 1702940404026,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702940404026,
-      "end": 1702940404026,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702940404026,
-      "end": 1702940404026,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702940404026,
-      "end": 1702940404026,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702940404026,
-      "end": 1702940404026,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702940404026,
-      "end": 1702940404026,
+      "start": 1702949919274,
+      "end": 1702949919274,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "const _sfc_main = {}\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nfunction _sfc_ssrRender(_ctx, _push, _parent, _attrs) {\n  const _component_NuxtPage = _resolveComponent(\"NuxtPage\")\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ id: \"app-body\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent))\n  _push(`</div>`)\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/app.vue?vue&type=style&index=0&lang.css\"\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"app.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['ssrRender',_sfc_ssrRender]])",
-      "start": 1702940404026,
-      "end": 1702940404027,
+      "start": 1702949919274,
+      "end": 1702949919276,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -78,171 +78,171 @@
         "file": "/Users/jameslajom/Documents/git/boxmaker-ui/app.vue",
         "sourceRoot": "",
         "sourcesContent": [
-          "<template>\n  <div id=\"app-body\">\n    <NuxtPage />\n  </div>\n</template>\n\n<script>\n</script>\n\n\n<style>\n@import url(\"fomantic-ui-css/semantic.min.css\");\n\n@media only screen and (min-width: 760px) {\n  body {\n    background-color: rgb(231, 231, 231);\n    width:760px;\n  }\n}\n</style>"
+          "<template>\n  <div id=\"app-body\">\n    <NuxtPage />\n  </div>\n</template>\n\n<script>\n</script>\n\n\n<style>\n@import url(\"fomantic-ui-css/semantic.min.css\");\n\n@media only screen and (min-width: 760px) {\n  body {\n    background-color: rgb(231, 231, 231);\n    width:760px;\n  }\n}\n\n.ui.red{\n  background-color: #b31228 !important;\n}\n\n.ui.red:hover{\n  background-color: #830e1d !important;\n}\n.ui.red.active{\n  background-color: #941021 !important;\n}\n</style>"
         ]
       }
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702940404027,
-      "end": 1702940404027,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702940404027,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702940404027,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919276,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"/Users/jameslajom/Documents/git/boxmaker-ui/node_modules/nuxt/dist/pages/runtime/page\";\nconst _sfc_main = {}\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nfunction _sfc_ssrRender(_ctx, _push, _parent, _attrs) {\n  const _component_NuxtPage = __nuxt_component_0\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ id: \"app-body\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent))\n  _push(`</div>`)\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/app.vue?vue&type=style&index=0&lang.css\"\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"app.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['ssrRender',_sfc_ssrRender]])",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919276,
+      "end": 1702949919277,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -255,20 +255,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919277,
+      "end": 1702949919277,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919277,
+      "end": 1702949919277,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702940404028,
-      "end": 1702940404028,
+      "start": 1702949919277,
+      "end": 1702949919277,
       "order": "normal"
     }
   ]

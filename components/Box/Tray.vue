@@ -30,7 +30,7 @@
 
                 <div style="align-self:center;justify-content:center;text-align:center;">
                   <center>
-                    <NuxtPicture style="width:60px;color:rgb(0,78,97);" class="ui image"
+                    <img style="width:60px;color:rgb(0,78,97);" class="ui image"
                       :src="`/assets/images/box_icons/${datum.img}`" />
                   </center>
                   <!-- <div class="label"
@@ -49,7 +49,7 @@
           <template v-for="(datum, index) in getBoxbyTags(selectedTags)" :key="datum">
             <div class="item" @click="boxSelect(datum.id)">
               <div class="ui tiny image">
-                    <NuxtPicture style="width:60px;color:rgb(0,78,97);" class="ui image"
+                    <img style="width:60px;color:rgb(0,78,97);" class="ui image"
                       :src="`/assets/images/box_icons/${datum.img}`" />
               </div>
               <div class="content" style="margin-left:20px">

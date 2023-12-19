@@ -4,57 +4,57 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n    <div style=\"\">\n        <div class=\"ui grid\" style=\"margin-bottom:40px;\">\n            <div class=\"one column\" style=\"width:100%;\">\n                <div style=\"display:flex\">\n                    <div>\n                        <button class=\"ui labeled icon basic button\" data-tooltip=\"Filter tags\" data-inverted=\"\"\n                            @click=\"show_tag_selection = !show_tag_selection\">\n                            <i class=\"filter icon\" sryle=\"background-white\"></i>\n                            <small><b>{{ available_tags.length }}</b> TAGS</small>\n                        </button>\n                    </div>\n                    <template v-if=\"selected_tags.length == 0\">\n                        <button class=\"ui button basic\">ALL</button>\n                    </template>\n                    <template v-else>\n                        <button @click=\"clearTags\" class=\"ui icon button\">\n                            <i class=\"undo icon\"></i>\n                        </button>\n                    </template>\n                </div>\n\n\n                <div class=\"selected-wrapper\" :class=\"show_tag_selection == false ? 'show-height' : 'hide-height'\">\n                    <div class=\"selected-inner\">\n\n                        <template v-if=\"selected_tags.length != 0\">\n                            <template v-for=\"datum in available_tags.filter(i => !selected_tags.includes(i.id) == false)\">\n                                <div\n                                    style=\"margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;\">\n                                    <small><b>{{ datum.name.toUpperCase() }}</b></small>\n                                </div>\n                            </template>\n                        </template>\n                    </div>\n                </div>\n            </div>\n\n            <div :style=\"show_tag_selection ? 'display:default' : 'display:none;'\" class=\"selection-wrapper\">\n                <div class=\"ui grid\">\n                    <template v-for=\"(datum, i1) in Math.ceil(available_tags.length / 3)\">\n                        <div class=\"stackable three column row\" style=\"padding:0px;margin:0px;\">\n                            <template v-for=\"(datum, i2) in 3\">\n                                <template v-if=\"(i1 * 3 + i2) < available_tags.length\">\n                                    <div class=\"column\" style=\"padding:2px;\">\n\n                                        <div :for=\"available_tags[(i1 * 3 + i2)].id\"\n                                            style=\"align-self:center;display:flex;background:#CCCCCC;padding:10px 10px 8px 10px;border-radius:3px;position:relative\">\n\n                                            <div style=\"align-self: center;\">\n                                                <input type=\"checkbox\" class=\"ui checkbox\"\n                                                    @change=\"handleSelect(available_tags[(i1 * 3 + i2)].id)\"\n                                                    :checked=\"selected_tags.filter(i => i == available_tags[(i1 * 3 + i2)].id).length > 0\"\n                                                    :name=\"available_tags[(i1 * 3 + i2)].id\">\n                                            </div>\n                                            <div style=\"align-self: center;margin-left:10px;\">\n                                                <label :for=\"available_tags[(i1 * 3 + i2)].id\">{{ available_tags[(i1 * 3 +\n                                                    i2)].name\n                                                }}\n                                                    <a style=\"margin:0;position:absolute;right:10px;top:7px;\" class=\"ui label\" :data-tooltip=\"`${available_tags[(i1 * 3 + i2)].no_of_boxes} available boxes`\">\n                                                        {{ available_tags[(i1 * 3 + i2)].no_of_boxes }}\n                                                    </a>\n                                                </label>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </template>\n                            </template>\n                        </div>\n                    </template>\n                </div>\n            </div>\n        </div>\n\n\n\n    </div>\n</template>\n\n<script>\nimport { tags } from \"@/composables/boxdata.js\"\nexport default {\n    setup() {\n        const available_tags = tags()\n        return {\n            available_tags\n        }\n    },\n    mounted() {\n        this.local_tags = this.available_tags;\n        // console.log(this.local_tags)\n    },\n    data() {\n        return {\n            selected_tags: [],\n            local_tags: [],\n            show_tag_selection: false\n        }\n    },\n    methods: {\n        clearTags() {\n            this.selected_tags = [];\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        },\n        handleSelect(id) {\n            let selected = \"\";\n            if (this.selected_tags.includes(id)) {\n                selected = this.selected_tags.filter(i => i != id);\n            } else {\n                selected = this.local_tags.filter(i => i.id == id)[0];\n                selected = [...this.selected_tags, selected.id];\n            }\n            this.selected_tags = selected;\n            // console.log(this.selected_tags)\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        }\n    }\n}\n</script>\n\n<style>\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n</style>\n",
-      "start": 1702950682769,
-      "end": 1702950685043,
+      "start": 1702954554705,
+      "end": 1702954556900,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702950685043,
-      "end": 1702950685043,
+      "start": 1702954556900,
+      "end": 1702954556900,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702950685043,
-      "end": 1702950685043,
+      "start": 1702954556900,
+      "end": 1702954556901,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702950685043,
-      "end": 1702950685043,
+      "start": 1702954556901,
+      "end": 1702954556901,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702950685043,
-      "end": 1702950685043,
+      "start": 1702954556901,
+      "end": 1702954556901,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702950685043,
-      "end": 1702950685043,
+      "start": 1702954556901,
+      "end": 1702954556901,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702950685043,
-      "end": 1702950685043,
+      "start": 1702954556901,
+      "end": 1702954556901,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702950685043,
-      "end": 1702950685043,
+      "start": 1702954556901,
+      "end": 1702954556901,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "\nimport { tags } from \"@/composables/boxdata.js\"\nconst _sfc_main = {\n    setup() {\n        const available_tags = tags()\n        return {\n            available_tags\n        }\n    },\n    mounted() {\n        this.local_tags = this.available_tags;\n        // console.log(this.local_tags)\n    },\n    data() {\n        return {\n            selected_tags: [],\n            local_tags: [],\n            show_tag_selection: false\n        }\n    },\n    methods: {\n        clearTags() {\n            this.selected_tags = [];\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        },\n        handleSelect(id) {\n            let selected = \"\";\n            if (this.selected_tags.includes(id)) {\n                selected = this.selected_tags.filter(i => i != id);\n            } else {\n                selected = this.local_tags.filter(i => i.id == id)[0];\n                selected = [...this.selected_tags, selected.id];\n            }\n            this.selected_tags = selected;\n            // console.log(this.selected_tags)\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        }\n    }\n}\n\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, renderList as _renderList, Fragment as _Fragment, normalizeClass as _normalizeClass, normalizeStyle as _normalizeStyle } from \"vue\"\n\nconst _hoisted_1 = { style: {} }\nconst _hoisted_2 = {\n  class: \"ui grid\",\n  style: {\"margin-bottom\":\"40px\"}\n}\nconst _hoisted_3 = {\n  class: \"one column\",\n  style: {\"width\":\"100%\"}\n}\nconst _hoisted_4 = { style: {\"display\":\"flex\"} }\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"i\", {\n  class: \"filter icon\",\n  sryle: \"background-white\"\n}, null, -1)\nconst _hoisted_6 = {\n  key: 0,\n  class: \"ui button basic\"\n}\nconst _hoisted_7 = /*#__PURE__*/_createElementVNode(\"i\", { class: \"undo icon\" }, null, -1)\nconst _hoisted_8 = [\n  _hoisted_7\n]\nconst _hoisted_9 = { class: \"selected-inner\" }\nconst _hoisted_10 = { style: {\"margin\":\"1px\",\"padding\":\"3px 10px\",\"border-radius\":\"3px\",\"border\":\"solid .5px gray\",\"width\":\"auto\"} }\nconst _hoisted_11 = { class: \"ui grid\" }\nconst _hoisted_12 = {\n  class: \"stackable three column row\",\n  style: {\"padding\":\"0px\",\"margin\":\"0px\"}\n}\nconst _hoisted_13 = {\n  key: 0,\n  class: \"column\",\n  style: {\"padding\":\"2px\"}\n}\nconst _hoisted_14 = [\"for\"]\nconst _hoisted_15 = { style: {\"align-self\":\"center\"} }\nconst _hoisted_16 = [\"onChange\", \"checked\", \"name\"]\nconst _hoisted_17 = { style: {\"align-self\":\"center\",\"margin-left\":\"10px\"} }\nconst _hoisted_18 = [\"for\"]\nconst _hoisted_19 = [\"data-tooltip\"]\n\nfunction _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createElementVNode(\"div\", _hoisted_3, [\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createElementVNode(\"div\", null, [\n            _createElementVNode(\"button\", {\n              class: \"ui labeled icon basic button\",\n              \"data-tooltip\": \"Filter tags\",\n              \"data-inverted\": \"\",\n              onClick: _cache[0] || (_cache[0] = $event => ($data.show_tag_selection = !$data.show_tag_selection))\n            }, [\n              _hoisted_5,\n              _createElementVNode(\"small\", null, [\n                _createElementVNode(\"b\", null, _toDisplayString($setup.available_tags.length), 1),\n                _createTextVNode(\" TAGS\")\n              ])\n            ])\n          ]),\n          ($data.selected_tags.length == 0)\n            ? (_openBlock(), _createElementBlock(\"button\", _hoisted_6, \"ALL\"))\n            : (_openBlock(), _createElementBlock(\"button\", {\n                key: 1,\n                onClick: _cache[1] || (_cache[1] = (...args) => ($options.clearTags && $options.clearTags(...args))),\n                class: \"ui icon button\"\n              }, _hoisted_8))\n        ]),\n        _createElementVNode(\"div\", {\n          class: _normalizeClass([\"selected-wrapper\", $data.show_tag_selection == false ? 'show-height' : 'hide-height'])\n        }, [\n          _createElementVNode(\"div\", _hoisted_9, [\n            ($data.selected_tags.length != 0)\n              ? (_openBlock(true), _createElementBlock(_Fragment, { key: 0 }, _renderList($setup.available_tags.filter(i => !$data.selected_tags.includes(i.id) == false), (datum) => {\n                  return (_openBlock(), _createElementBlock(\"div\", _hoisted_10, [\n                    _createElementVNode(\"small\", null, [\n                      _createElementVNode(\"b\", null, _toDisplayString(datum.name.toUpperCase()), 1)\n                    ])\n                  ]))\n                }), 256))\n              : _createCommentVNode(\"\", true)\n          ])\n        ], 2)\n      ]),\n      _createElementVNode(\"div\", {\n        style: _normalizeStyle($data.show_tag_selection ? 'display:default' : 'display:none;'),\n        class: \"selection-wrapper\"\n      }, [\n        _createElementVNode(\"div\", _hoisted_11, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(Math.ceil($setup.available_tags.length / 3), (datum, i1) => {\n            return (_openBlock(), _createElementBlock(\"div\", _hoisted_12, [\n              (_openBlock(), _createElementBlock(_Fragment, null, _renderList(3, (datum, i2) => {\n                return (_openBlock(), _createElementBlock(_Fragment, null, [\n                  ((i1 * 3 + i2) < $setup.available_tags.length)\n                    ? (_openBlock(), _createElementBlock(\"div\", _hoisted_13, [\n                        _createElementVNode(\"div\", {\n                          for: $setup.available_tags[(i1 * 3 + i2)].id,\n                          style: {\"align-self\":\"center\",\"display\":\"flex\",\"background\":\"#CCCCCC\",\"padding\":\"10px 10px 8px 10px\",\"border-radius\":\"3px\",\"position\":\"relative\"}\n                        }, [\n                          _createElementVNode(\"div\", _hoisted_15, [\n                            _createElementVNode(\"input\", {\n                              type: \"checkbox\",\n                              class: \"ui checkbox\",\n                              onChange: $event => ($options.handleSelect($setup.available_tags[(i1 * 3 + i2)].id)),\n                              checked: $data.selected_tags.filter(i => i == $setup.available_tags[(i1 * 3 + i2)].id).length > 0,\n                              name: $setup.available_tags[(i1 * 3 + i2)].id\n                            }, null, 40, _hoisted_16)\n                          ]),\n                          _createElementVNode(\"div\", _hoisted_17, [\n                            _createElementVNode(\"label\", {\n                              for: $setup.available_tags[(i1 * 3 + i2)].id\n                            }, [\n                              _createTextVNode(_toDisplayString($setup.available_tags[(i1 * 3 +\n                                                    i2)].name) + \" \", 1),\n                              _createElementVNode(\"a\", {\n                                style: {\"margin\":\"0\",\"position\":\"absolute\",\"right\":\"10px\",\"top\":\"7px\"},\n                                class: \"ui label\",\n                                \"data-tooltip\": `${$setup.available_tags[(i1 * 3 + i2)].no_of_boxes} available boxes`\n                              }, _toDisplayString($setup.available_tags[(i1 * 3 + i2)].no_of_boxes), 9, _hoisted_19)\n                            ], 8, _hoisted_18)\n                          ])\n                        ], 8, _hoisted_14)\n                      ]))\n                    : _createCommentVNode(\"\", true)\n                ], 64))\n              }), 64))\n            ]))\n          }), 256))\n        ])\n      ], 4)\n    ])\n  ]))\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue?vue&type=style&index=0&lang.css\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render]])",
-      "start": 1702950685043,
-      "end": 1702950685054,
+      "start": 1702954556901,
+      "end": 1702954556912,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -62,152 +62,152 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702950685054,
-      "end": 1702950685054,
+      "start": 1702954556912,
+      "end": 1702954556912,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702950685054,
-      "end": 1702950685056,
+      "start": 1702954556912,
+      "end": 1702954556914,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702950685056,
-      "end": 1702950685056,
+      "start": 1702954556914,
+      "end": 1702954556914,
       "order": "normal"
     }
   ]

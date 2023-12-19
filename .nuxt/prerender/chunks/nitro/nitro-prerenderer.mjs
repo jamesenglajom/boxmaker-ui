@@ -21,7 +21,7 @@ import { ipxFSStorage, ipxHttpStorage, createIPX, createIPXH3Handler } from 'fil
 
 const inlineAppConfig = {
   "nuxt": {
-    "buildId": "e6c45e7e-7e88-4bef-a75d-b9eafb68cc1a"
+    "buildId": "e01fa420-c957-4cdc-bc7b-318c5f3f82db"
   },
   "ui": {
     "primary": "green",

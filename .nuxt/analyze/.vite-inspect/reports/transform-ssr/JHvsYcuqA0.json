@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "\n.ui.flyout.overlay {\n    background: whitesmoke;\n    width: 90% !important;\n    z-index: 999;\n    overflow: hidden;\n    max-width:720px;\n}\n\n.ui.flyout.visible>.ui.header {\n    background: white;\n    border: none !important;\n\n}\n\n.ui.flyout.visible>.content {\n    -webkit-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    -moz-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    background: whitesmoke;\n    overflow-y: scroll;\n    max-height: calc(100vh - 65px);\n    display: relative;\n    padding:0px;    \n}\n\n.ui.pusher.dimmer.active {\n    height: 100vh !important;\n    top: auto !important;\n    z-index: 1;\n}\n",
-      "start": 1702950702881,
-      "end": 1702950702881,
+      "start": 1702954573454,
+      "end": 1702954573454,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -16,45 +16,45 @@
         "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/El/Flyout.vue",
         "sourceRoot": "",
         "sourcesContent": [
-          "\n<template>\n    <div id=\"flyout-element\">\n        <div ref=\"flyout\" class=\"ui flyout left\" :class=\"flyout ? 'overlay visible' : ''\" tab-index=\"-1\">\n            <div class=\"ui header\" style=\"display:flex;justify-content:space-between\">\n                <div style=\"display:flex;align-self:center\">\n                    <div @click=\"closeFlyout\" style=\"background-color:lightgrey;cursor:pointer;padding:5px 10px;border-radius:4px;\">\n                        <i class=\"arrow left icon\" ></i>\n                    </div>\n                    <div style=\"align-self:center;width:30px;margin-left:15px;\">\n                        <NuxtPicture height=\"100px\" width=\"100px\" :src=\"`/assets/images/box_icons/${box? box.img: ''}`\" class=\"ui image\"/>\n                    </div>\n                    <div class=\"content\" style=\"align-self:center;margin-left:10px\">\n                        <!-- Arced Top Box -->\n                        <div class=\"box_name\">\n                        {{ box!=undefined ? box.name: '' }}\n                        </div>\n                    </div>\n                </div>\n                <div style=\"align-self:center\">\n                    <button class=\"ui button red mini\">PROCEED</button>\n                </div>\n            </div>\n            <div class=\"content\">\n                <ComForm :boxId=\"box.id\"></ComForm>\n            </div>\n        </div>\n    </div>\n</template>\n\n<script>\nexport default {\n    props: [\"isOpen\",\"box\"],\n    data() {\n        return {\n            flyout: false,\n        }\n    },\n    methods: {\n        closeFlyout() {\n            this.flyout = false;\n            this.$emit(\"isClosed\", true)\n        },\n    },\n    watch: {\n        isOpen(value) {\n            if (value) {\n                this.flyout = value;\n            }\n        },\n        flyout(value) {\n            if (value) {\n                document.querySelector('body').style.overflow = \"hidden\";\n\n            } else {\n                document.querySelector('body').style.overflow = \"visible\";\n            }\n        },\n    }\n}\n</script>\n<style>\n.ui.flyout.overlay {\n    background: whitesmoke;\n    width: 90% !important;\n    z-index: 999;\n    overflow: hidden;\n    max-width:720px;\n}\n\n.ui.flyout.visible>.ui.header {\n    background: white;\n    border: none !important;\n\n}\n\n.ui.flyout.visible>.content {\n    -webkit-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    -moz-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    background: whitesmoke;\n    overflow-y: scroll;\n    max-height: calc(100vh - 65px);\n    display: relative;\n    padding:0px;    \n}\n\n.ui.pusher.dimmer.active {\n    height: 100vh !important;\n    top: auto !important;\n    z-index: 1;\n}\n</style>"
+          "\n<template>\n    <div id=\"flyout-element\">\n        <div ref=\"flyout\" class=\"ui flyout left\" :class=\"flyout ? 'overlay visible' : ''\" tab-index=\"-1\">\n            <div class=\"ui header\" style=\"display:flex;justify-content:space-between\">\n                <div style=\"display:flex;align-self:center\">\n                    <div @click=\"closeFlyout\" style=\"background-color:lightgrey;cursor:pointer;padding:5px 10px;border-radius:4px;\">\n                        <i class=\"arrow left icon\" ></i>\n                    </div>\n                    <div style=\"align-self:center;width:30px;margin-left:15px;\">\n                        <img height=\"100px\" width=\"100px\" :src=\"`/assets/images/box_icons/${box? box.img: ''}`\" class=\"ui image\"/>\n                    </div>\n                    <div class=\"content\" style=\"align-self:center;margin-left:10px\">\n                        <!-- Arced Top Box -->\n                        <div class=\"box_name\">\n                        {{ box!=undefined ? box.name: '' }}\n                        </div>\n                    </div>\n                </div>\n                <div style=\"align-self:center\">\n                    <button class=\"ui button red mini\">PROCEED</button>\n                </div>\n            </div>\n            <div class=\"content\">\n                <ComForm :boxId=\"box.id\"></ComForm>\n            </div>\n        </div>\n    </div>\n</template>\n\n<script>\nexport default {\n    props: [\"isOpen\",\"box\"],\n    data() {\n        return {\n            flyout: false,\n        }\n    },\n    methods: {\n        closeFlyout() {\n            this.flyout = false;\n            this.$emit(\"isClosed\", true)\n        },\n    },\n    watch: {\n        isOpen(value) {\n            if (value) {\n                this.flyout = value;\n            }\n        },\n        flyout(value) {\n            if (value) {\n                document.querySelector('body').style.overflow = \"hidden\";\n\n            } else {\n                document.querySelector('body').style.overflow = \"visible\";\n            }\n        },\n    }\n}\n</script>\n<style>\n.ui.flyout.overlay {\n    background: whitesmoke;\n    width: 90% !important;\n    z-index: 999;\n    overflow: hidden;\n    max-width:720px;\n}\n\n.ui.flyout.visible>.ui.header {\n    background: white;\n    border: none !important;\n\n}\n\n.ui.flyout.visible>.content {\n    -webkit-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    -moz-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);\n    background: whitesmoke;\n    overflow-y: scroll;\n    max-height: calc(100vh - 65px);\n    display: relative;\n    padding:0px;    \n}\n\n.ui.pusher.dimmer.active {\n    height: 100vh !important;\n    top: auto !important;\n    z-index: 1;\n}\n</style>"
         ]
       }
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702950702881,
-      "end": 1702950702881,
+      "start": 1702954573454,
+      "end": 1702954573454,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702950702881,
-      "end": 1702950702881,
+      "start": 1702954573454,
+      "end": 1702954573454,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702950702881,
-      "end": 1702950702881,
+      "start": 1702954573454,
+      "end": 1702954573454,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702950702881,
-      "end": 1702950702881,
+      "start": 1702954573454,
+      "end": 1702954573454,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702950702881,
-      "end": 1702950702881,
+      "start": 1702954573454,
+      "end": 1702954573454,
       "order": "pre"
     },
     {
       "name": "vite:css",
       "result": ".ui.flyout.overlay{background:#f5f5f5;max-width:720px;overflow:hidden;width:90%!important;z-index:999}.ui.flyout.visible>.ui.header{background:#fff;border:none!important}.ui.flyout.visible>.content{background:#f5f5f5;box-shadow:inset 2px 2px 15px -8px #0a0a0a;display:relative;max-height:calc(100vh - 65px);overflow-y:scroll;padding:0}.ui.pusher.dimmer.active{height:100vh!important;top:auto!important;z-index:1}",
-      "start": 1702950702881,
-      "end": 1702950702927,
+      "start": 1702954573454,
+      "end": 1702954573484,
       "order": "normal",
       "sourcemaps": {
         "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/El/Flyout.vue",
@@ -71,27 +71,27 @@
     },
     {
       "name": "vite:esbuild",
-      "start": 1702950702927,
-      "end": 1702950702927,
+      "start": 1702954573484,
+      "end": 1702954573484,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702950702957,
-      "end": 1702950702957,
+      "start": 1702954573511,
+      "end": 1702954573511,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702950702958,
-      "end": 1702950702958,
+      "start": 1702954573511,
+      "end": 1702954573511,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": ".ui.flyout.overlay{background:#f5f5f5;max-width:720px;overflow:hidden;width:90%!important;z-index:999}.ui.flyout.visible>.ui.header{background:#fff;border:none!important}.ui.flyout.visible>.content{background:#f5f5f5;box-shadow:inset 2px 2px 15px -8px #0a0a0a;display:relative;max-height:calc(100vh - 65px);overflow-y:scroll;padding:0}.ui.pusher.dimmer.active{height:100vh!important;top:auto!important;z-index:1}",
-      "start": 1702950702959,
-      "end": 1702950702959,
+      "start": 1702954573512,
+      "end": 1702954573512,
       "order": "normal",
       "sourcemaps": {
         "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/El/Flyout.vue",
@@ -108,69 +108,69 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702950702962,
-      "end": 1702950702962,
+      "start": 1702954573514,
+      "end": 1702954573514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950702962,
-      "end": 1702950702962,
+      "start": 1702954573514,
+      "end": 1702954573514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950702962,
-      "end": 1702950702962,
+      "start": 1702954573514,
+      "end": 1702954573514,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702950702963,
-      "end": 1702950702963,
+      "start": 1702954573514,
+      "end": 1702954573514,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702950702963,
-      "end": 1702950702963,
+      "start": 1702954573514,
+      "end": 1702954573514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950702963,
-      "end": 1702950702963,
+      "start": 1702954573514,
+      "end": 1702954573514,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702950702963,
-      "end": 1702950702963,
+      "start": 1702954573514,
+      "end": 1702954573514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702950702963,
-      "end": 1702950702963,
+      "start": 1702954573515,
+      "end": 1702954573515,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702950702964,
-      "end": 1702950702964,
+      "start": 1702954573515,
+      "end": 1702954573515,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702950702964,
-      "end": 1702950702964,
+      "start": 1702954573515,
+      "end": 1702954573515,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
       "result": "export default ''",
-      "start": 1702950702964,
-      "end": 1702950702964,
+      "start": 1702954573515,
+      "end": 1702954573515,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -178,116 +178,116 @@
     },
     {
       "name": "vite:build-html",
-      "start": 1702950702964,
-      "end": 1702950702964,
+      "start": 1702954573515,
+      "end": 1702954573515,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702950702964,
-      "end": 1702950702964,
+      "start": 1702954573515,
+      "end": 1702954573515,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702950702964,
-      "end": 1702950702964,
+      "start": 1702954573515,
+      "end": 1702954573515,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702950702964,
-      "end": 1702950702965,
+      "start": 1702954573515,
+      "end": 1702954573516,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573516,
+      "end": 1702954573516,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573516,
+      "end": 1702954573516,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573516,
+      "end": 1702954573516,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573516,
+      "end": 1702954573516,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573516,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573516,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702950702965,
-      "end": 1702950702965,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702950702965,
-      "end": 1702950702966,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702950702966,
-      "end": 1702950702966,
+      "start": 1702954573517,
+      "end": 1702954573517,
       "order": "normal"
     }
   ]

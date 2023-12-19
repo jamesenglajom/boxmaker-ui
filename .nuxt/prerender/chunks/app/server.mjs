@@ -1,4 +1,4 @@
-import { hasInjectionContext, getCurrentInstance, version, ref, watchEffect, watch, pushScopeId, popScopeId, defineComponent, provide, shallowReactive, h, inject, Suspense, nextTick, Transition, unref, useSSRContext, createApp, effectScope, reactive, openBlock, createBlock, createElementBlock, normalizeClass, renderSlot, normalizeProps, guardReactiveProps, withScopeId, resolveComponent, normalizeStyle, withKeys, createElementVNode, Fragment, createCommentVNode, withCtx, createVNode, defineAsyncComponent, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, toRef, shallowRef, isReadonly, computed, isRef, isShallow, isReactive, toRaw, mergeProps, toDisplayString } from 'file:///Users/jameslajom/Documents/git/boxmaker-ui/node_modules/vue/index.mjs';
+import { version, ref, watchEffect, watch, getCurrentInstance, pushScopeId, popScopeId, defineComponent, provide, shallowReactive, h, inject, Suspense, nextTick, Transition, hasInjectionContext, unref, useSSRContext, createApp, effectScope, reactive, openBlock, createBlock, createElementBlock, normalizeClass, renderSlot, normalizeProps, guardReactiveProps, withScopeId, resolveComponent, normalizeStyle, withKeys, createElementVNode, Fragment, createCommentVNode, withCtx, createVNode, defineAsyncComponent, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, toRef, shallowRef, isReadonly, computed, isRef, isShallow, isReactive, toRaw, mergeProps, toDisplayString } from 'file:///Users/jameslajom/Documents/git/boxmaker-ui/node_modules/vue/index.mjs';
 import { $fetch } from 'file:///Users/jameslajom/Documents/git/boxmaker-ui/node_modules/ofetch/dist/node.mjs';
 import { createHooks } from 'file:///Users/jameslajom/Documents/git/boxmaker-ui/node_modules/hookable/dist/index.mjs';
 import { getContext } from 'file:///Users/jameslajom/Documents/git/boxmaker-ui/node_modules/unctx/dist/index.mjs';
@@ -518,7 +518,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./_nuxt/index-adc5a3d0.mjs').then((m2) => m2.default || m2)
+    component: () => import('./_nuxt/index-a4b99a2b.mjs').then((m2) => m2.default || m2)
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -622,7 +622,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "e6c45e7e-7e88-4bef-a75d-b9eafb68cc1a"
+    "buildId": "e01fa420-c957-4cdc-bc7b-318c5f3f82db"
   },
   "ui": {
     "primary": "green",
@@ -3676,5 +3676,5 @@ let entry;
 }
 const entry$1 = (ctx) => entry(ctx);
 
-export { _export_sfc as _, useRuntimeConfig as a, navigateTo as b, createError as c, useHead as d, entry$1 as default, useNuxtApp as e, nuxtLinkDefaults as n, useRouter as u };
+export { _export_sfc as _, useRuntimeConfig as a, navigateTo as b, createError as c, useHead as d, entry$1 as default, nuxtLinkDefaults as n, useRouter as u };
 //# sourceMappingURL=server.mjs.map

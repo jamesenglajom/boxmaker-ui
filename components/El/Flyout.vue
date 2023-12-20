@@ -17,9 +17,9 @@
                         </div>
                     </div>
                 </div>
-                <div style="align-self:center">
+                <!-- <div style="align-self:center">
                     <button class="ui button red mini">PROCEED</button>
-                </div>
+                </div> -->
             </div>
             <div class="content">
                 <ComForm :boxId="box.id"></ComForm>

@@ -19,8 +19,10 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.10.0",
+    "@pinia/nuxt": "^0.5.1",
     "floating-vue": "^2.0.0-beta.24",
     "fomantic-ui-css": "^2.9.3",
+    "pinia": "^2.1.7",
     "semantic-ui-vue": "^0.11.0",
     "vue-fomantic-ui": "^0.14.0"
   }

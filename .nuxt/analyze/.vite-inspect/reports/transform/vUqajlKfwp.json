@@ -4,57 +4,57 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n  <div>\n    <div style=\"display:flex;justify-content:space-between\">\n      <div style=\"align-self:center\">\n        <h3>{{ getBoxbyTags(selectedTags).length == boxes().length ? boxes().length : `${getBoxbyTags(selectedTags).length} of ${boxes().length}` }} Models</h3>\n      </div>\n      <div style=\"align-self:center\">\n\n        <div class=\"ui icon buttons\">\n          <button @click=\"view = 'icon'\" :class=\"view == 'icon' ? 'active' : ''\" class=\"ui button basic\"\n            data-tooltip=\"Icon view\" data-inverted=\"\"><i class=\"th icon\"></i></button>\n          <button @click=\"view = 'list'\" :class=\"view == 'list' ? 'active' : ''\" class=\"ui button basic\"\n            data-tooltip=\"List view\" data-inverted=\"\"><i class=\"th list icon\"></i></button>\n        </div>\n      </div>\n    </div>\n    <div class=\"ui divider\"></div>\n    <div class=\"ui segment secondary\">\n\n\n\n\n      <!-- icon view -->\n      <template v-if=\"view == 'icon'\">\n        <div class=\"ui\" style=\"display:flex;flex-wrap:wrap;\">\n          <template v-for=\"(datum, index) in getBoxbyTags(selectedTags)\" :key=\"datum\">\n            <div class=\"image-item-container\" @click=\"boxSelect(datum.id)\" :data-tooltip=\"datum.name\" data-inverted=\"\">\n              <!-- <div class=\"tag\" :class=\"index%2==0?'free':'pro'\">{{index%2==0?'FREE':'PRO'}}</div> -->\n              <div style=\"display:flex;justify-content:center;height:100px;\">\n\n                <div style=\"align-self:center;justify-content:center;text-align:center;\">\n                  <center>\n                    <img style=\"width:60px;color:rgb(0,78,97);\" class=\"ui image\"\n                      :src=\"`/assets/images/box_icons/${datum.img}`\" />\n                  </center>\n                  <!-- <div class=\"label\"\n                    style=\"color:rgb(0,78,97);padding:3px;margin-top:7px;font-size:.85em;text-align:center;\">\n                    {{ datum.name }}</div> -->\n                </div>\n              </div>\n            </div>\n          </template>\n        </div>\n      </template>\n\n      <!-- list view -->\n      <template v-else-if=\"view == 'list'\">\n        <div class=\"ui items\">\n          <template v-for=\"(datum, index) in getBoxbyTags(selectedTags)\" :key=\"datum\">\n            <div class=\"item\" @click=\"boxSelect(datum.id)\">\n              <div class=\"ui tiny image\">\n                    <img style=\"width:60px;color:rgb(0,78,97);\" class=\"ui image\"\n                      :src=\"`/assets/images/box_icons/${datum.img}`\" />\n              </div>\n              <div class=\"content\" style=\"margin-left:20px\">\n                <div class=\"header\">{{ datum.name }}</div>\n                <div class=\"meta\" style=\"display:flex;flex-wrap:wrap;\">\n                  <template v-for=\"tag in datum.tags\">\n                    <div style=\"margin-top:2px;padding:4px 10px;border-radius:25px;background-color:#666666;color:white;\">\n                      {{ tag }}</div>\n                  </template>\n                </div>\n                <div class=\"description\">\n                  <p>{{ datum.description }}</p>\n                </div>\n              </div>\n            </div>\n            <template v-if=\"getBoxbyTags(selectedTags).length - 1 > index\">\n              <div class=\"ui divider\"></div>\n            </template>\n          </template>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script>\nimport { getBoxbyTags, getBoxById, boxes } from '@/composables/boxdata';\nexport default {\n  props: [\"selectedTags\"],\n  methods: {\n    boxSelect(v) {\n      this.$emit(\"selected\", getBoxById(v))\n    }\n  },\n  data() {\n    return {\n      view: \"icon\"\n    }\n  }\n}\n\n</script>\n\n<style>\n.image-item-container:hover {\n  /* background-color: rgb(255, 212, 59); yellow bg hover */\n  background-color: #666666;\n\n}\n\n.image-item-container {\n  /* margin:10px; */\n  width: 100px;\n  height: 100px;\n  border-radius: 7px;\n  background-color: transparent;\n  position: relative;\n  cursor: pointer;\n}\n\n.ui.items>.item:hover {\n  background-color: #cccccc;\n  cursor: pointer;\n}\n\n.ui.items>.item {\n  padding: 15px;\n}\n</style>",
-      "start": 1702955792007,
-      "end": 1702955793533,
+      "start": 1703080663652,
+      "end": 1703080665107,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702955793533,
-      "end": 1702955793533,
+      "start": 1703080665107,
+      "end": 1703080665107,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702955793533,
-      "end": 1702955793533,
+      "start": 1703080665107,
+      "end": 1703080665108,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702955793533,
-      "end": 1702955793533,
+      "start": 1703080665108,
+      "end": 1703080665108,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1702955793533,
-      "end": 1702955793533,
+      "start": 1703080665108,
+      "end": 1703080665108,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1702955793533,
-      "end": 1702955793533,
+      "start": 1703080665108,
+      "end": 1703080665108,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702955793534,
-      "end": 1702955793534,
+      "start": 1703080665108,
+      "end": 1703080665108,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702955793534,
-      "end": 1702955793534,
+      "start": 1703080665108,
+      "end": 1703080665108,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "\nimport { getBoxbyTags, getBoxById, boxes } from '@/composables/boxdata';\nconst _sfc_main = {\n  props: [\"selectedTags\"],\n  methods: {\n    boxSelect(v) {\n      this.$emit(\"selected\", getBoxById(v))\n    }\n  },\n  data() {\n    return {\n      view: \"icon\"\n    }\n  }\n}\n\n\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, normalizeClass as _normalizeClass, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = { style: {\"display\":\"flex\",\"justify-content\":\"space-between\"} }\nconst _hoisted_2 = { style: {\"align-self\":\"center\"} }\nconst _hoisted_3 = { style: {\"align-self\":\"center\"} }\nconst _hoisted_4 = { class: \"ui icon buttons\" }\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"i\", { class: \"th icon\" }, null, -1)\nconst _hoisted_6 = [\n  _hoisted_5\n]\nconst _hoisted_7 = /*#__PURE__*/_createElementVNode(\"i\", { class: \"th list icon\" }, null, -1)\nconst _hoisted_8 = [\n  _hoisted_7\n]\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"ui divider\" }, null, -1)\nconst _hoisted_10 = { class: \"ui segment secondary\" }\nconst _hoisted_11 = {\n  key: 0,\n  class: \"ui\",\n  style: {\"display\":\"flex\",\"flex-wrap\":\"wrap\"}\n}\nconst _hoisted_12 = [\"onClick\", \"data-tooltip\"]\nconst _hoisted_13 = { style: {\"display\":\"flex\",\"justify-content\":\"center\",\"height\":\"100px\"} }\nconst _hoisted_14 = { style: {\"align-self\":\"center\",\"justify-content\":\"center\",\"text-align\":\"center\"} }\nconst _hoisted_15 = [\"src\"]\nconst _hoisted_16 = {\n  key: 1,\n  class: \"ui items\"\n}\nconst _hoisted_17 = [\"onClick\"]\nconst _hoisted_18 = { class: \"ui tiny image\" }\nconst _hoisted_19 = [\"src\"]\nconst _hoisted_20 = {\n  class: \"content\",\n  style: {\"margin-left\":\"20px\"}\n}\nconst _hoisted_21 = { class: \"header\" }\nconst _hoisted_22 = {\n  class: \"meta\",\n  style: {\"display\":\"flex\",\"flex-wrap\":\"wrap\"}\n}\nconst _hoisted_23 = { style: {\"margin-top\":\"2px\",\"padding\":\"4px 10px\",\"border-radius\":\"25px\",\"background-color\":\"#666666\",\"color\":\"white\"} }\nconst _hoisted_24 = { class: \"description\" }\nconst _hoisted_25 = {\n  key: 0,\n  class: \"ui divider\"\n}\n\nfunction _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {\n  const _component_center = _resolveComponent(\"center\")\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createElementVNode(\"h3\", null, _toDisplayString(_ctx.getBoxbyTags($props.selectedTags).length == _ctx.boxes().length ? _ctx.boxes().length : `${_ctx.getBoxbyTags($props.selectedTags).length} of ${_ctx.boxes().length}`) + \" Models\", 1)\n      ]),\n      _createElementVNode(\"div\", _hoisted_3, [\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createElementVNode(\"button\", {\n            onClick: _cache[0] || (_cache[0] = $event => ($data.view = 'icon')),\n            class: _normalizeClass([$data.view == 'icon' ? 'active' : '', \"ui button basic\"]),\n            \"data-tooltip\": \"Icon view\",\n            \"data-inverted\": \"\"\n          }, _hoisted_6, 2),\n          _createElementVNode(\"button\", {\n            onClick: _cache[1] || (_cache[1] = $event => ($data.view = 'list')),\n            class: _normalizeClass([$data.view == 'list' ? 'active' : '', \"ui button basic\"]),\n            \"data-tooltip\": \"List view\",\n            \"data-inverted\": \"\"\n          }, _hoisted_8, 2)\n        ])\n      ])\n    ]),\n    _hoisted_9,\n    _createElementVNode(\"div\", _hoisted_10, [\n      ($data.view == 'icon')\n        ? (_openBlock(), _createElementBlock(\"div\", _hoisted_11, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_ctx.getBoxbyTags($props.selectedTags), (datum, index) => {\n              return (_openBlock(), _createElementBlock(\"div\", {\n                key: datum,\n                class: \"image-item-container\",\n                onClick: $event => ($options.boxSelect(datum.id)),\n                \"data-tooltip\": datum.name,\n                \"data-inverted\": \"\"\n              }, [\n                _createElementVNode(\"div\", _hoisted_13, [\n                  _createElementVNode(\"div\", _hoisted_14, [\n                    _createVNode(_component_center, null, {\n                      default: _withCtx(() => [\n                        _createElementVNode(\"img\", {\n                          style: {\"width\":\"60px\",\"color\":\"rgb(0,78,97)\"},\n                          class: \"ui image\",\n                          src: `/assets/images/box_icons/${datum.img}`\n                        }, null, 8, _hoisted_15)\n                      ]),\n                      _: 2\n                    }, 1024)\n                  ])\n                ])\n              ], 8, _hoisted_12))\n            }), 128))\n          ]))\n        : ($data.view == 'list')\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_16, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_ctx.getBoxbyTags($props.selectedTags), (datum, index) => {\n                return (_openBlock(), _createElementBlock(_Fragment, { key: datum }, [\n                  _createElementVNode(\"div\", {\n                    class: \"item\",\n                    onClick: $event => ($options.boxSelect(datum.id))\n                  }, [\n                    _createElementVNode(\"div\", _hoisted_18, [\n                      _createElementVNode(\"img\", {\n                        style: {\"width\":\"60px\",\"color\":\"rgb(0,78,97)\"},\n                        class: \"ui image\",\n                        src: `/assets/images/box_icons/${datum.img}`\n                      }, null, 8, _hoisted_19)\n                    ]),\n                    _createElementVNode(\"div\", _hoisted_20, [\n                      _createElementVNode(\"div\", _hoisted_21, _toDisplayString(datum.name), 1),\n                      _createElementVNode(\"div\", _hoisted_22, [\n                        (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(datum.tags, (tag) => {\n                          return (_openBlock(), _createElementBlock(\"div\", _hoisted_23, _toDisplayString(tag), 1))\n                        }), 256))\n                      ]),\n                      _createElementVNode(\"div\", _hoisted_24, [\n                        _createElementVNode(\"p\", null, _toDisplayString(datum.description), 1)\n                      ])\n                    ])\n                  ], 8, _hoisted_17),\n                  (_ctx.getBoxbyTags($props.selectedTags).length - 1 > index)\n                    ? (_openBlock(), _createElementBlock(\"div\", _hoisted_25))\n                    : _createCommentVNode(\"\", true)\n                ], 64))\n              }), 128))\n            ]))\n          : _createCommentVNode(\"\", true)\n    ])\n  ]))\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue?vue&type=style&index=0&lang.css\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render]])",
-      "start": 1702955793534,
-      "end": 1702955793540,
+      "start": 1703080665108,
+      "end": 1703080665115,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -62,105 +62,105 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702955793540,
-      "end": 1702955793540,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665115,
+      "end": 1703080665115,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702955793541,
-      "end": 1702955793541,
+      "start": 1703080665116,
+      "end": 1703080665116,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { getBoxbyTags as __unimport_getBoxbyTags, boxes as __unimport_boxes } from '/Users/jameslajom/Documents/git/boxmaker-ui/composables/boxdata.js';\nimport { unref as __unimport_unref_ } from 'vue';\nimport { getBoxbyTags, getBoxById, boxes } from '@/composables/boxdata';\nconst _sfc_main = {\n  props: [\"selectedTags\"],\n  methods: {\n    boxSelect(v) {\n      this.$emit(\"selected\", getBoxById(v))\n    }\n  },\n  data() {\n    return {\n      view: \"icon\"\n    }\n  }\n}\n\n\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, normalizeClass as _normalizeClass, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = { style: {\"display\":\"flex\",\"justify-content\":\"space-between\"} }\nconst _hoisted_2 = { style: {\"align-self\":\"center\"} }\nconst _hoisted_3 = { style: {\"align-self\":\"center\"} }\nconst _hoisted_4 = { class: \"ui icon buttons\" }\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"i\", { class: \"th icon\" }, null, -1)\nconst _hoisted_6 = [\n  _hoisted_5\n]\nconst _hoisted_7 = /*#__PURE__*/_createElementVNode(\"i\", { class: \"th list icon\" }, null, -1)\nconst _hoisted_8 = [\n  _hoisted_7\n]\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"ui divider\" }, null, -1)\nconst _hoisted_10 = { class: \"ui segment secondary\" }\nconst _hoisted_11 = {\n  key: 0,\n  class: \"ui\",\n  style: {\"display\":\"flex\",\"flex-wrap\":\"wrap\"}\n}\nconst _hoisted_12 = [\"onClick\", \"data-tooltip\"]\nconst _hoisted_13 = { style: {\"display\":\"flex\",\"justify-content\":\"center\",\"height\":\"100px\"} }\nconst _hoisted_14 = { style: {\"align-self\":\"center\",\"justify-content\":\"center\",\"text-align\":\"center\"} }\nconst _hoisted_15 = [\"src\"]\nconst _hoisted_16 = {\n  key: 1,\n  class: \"ui items\"\n}\nconst _hoisted_17 = [\"onClick\"]\nconst _hoisted_18 = { class: \"ui tiny image\" }\nconst _hoisted_19 = [\"src\"]\nconst _hoisted_20 = {\n  class: \"content\",\n  style: {\"margin-left\":\"20px\"}\n}\nconst _hoisted_21 = { class: \"header\" }\nconst _hoisted_22 = {\n  class: \"meta\",\n  style: {\"display\":\"flex\",\"flex-wrap\":\"wrap\"}\n}\nconst _hoisted_23 = { style: {\"margin-top\":\"2px\",\"padding\":\"4px 10px\",\"border-radius\":\"25px\",\"background-color\":\"#666666\",\"color\":\"white\"} }\nconst _hoisted_24 = { class: \"description\" }\nconst _hoisted_25 = {\n  key: 0,\n  class: \"ui divider\"\n}\n\nfunction _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {\n  const _component_center = _resolveComponent(\"center\")\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createElementVNode(\"h3\", null, _toDisplayString((\"getBoxbyTags\" in _ctx ? _ctx.getBoxbyTags : __unimport_unref_(__unimport_getBoxbyTags))($props.selectedTags).length == (\"boxes\" in _ctx ? _ctx.boxes : __unimport_unref_(__unimport_boxes))().length ? (\"boxes\" in _ctx ? _ctx.boxes : __unimport_unref_(__unimport_boxes))().length : `${(\"getBoxbyTags\" in _ctx ? _ctx.getBoxbyTags : __unimport_unref_(__unimport_getBoxbyTags))($props.selectedTags).length} of ${(\"boxes\" in _ctx ? _ctx.boxes : __unimport_unref_(__unimport_boxes))().length}`) + \" Models\", 1)\n      ]),\n      _createElementVNode(\"div\", _hoisted_3, [\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createElementVNode(\"button\", {\n            onClick: _cache[0] || (_cache[0] = $event => ($data.view = 'icon')),\n            class: _normalizeClass([$data.view == 'icon' ? 'active' : '', \"ui button basic\"]),\n            \"data-tooltip\": \"Icon view\",\n            \"data-inverted\": \"\"\n          }, _hoisted_6, 2),\n          _createElementVNode(\"button\", {\n            onClick: _cache[1] || (_cache[1] = $event => ($data.view = 'list')),\n            class: _normalizeClass([$data.view == 'list' ? 'active' : '', \"ui button basic\"]),\n            \"data-tooltip\": \"List view\",\n            \"data-inverted\": \"\"\n          }, _hoisted_8, 2)\n        ])\n      ])\n    ]),\n    _hoisted_9,\n    _createElementVNode(\"div\", _hoisted_10, [\n      ($data.view == 'icon')\n        ? (_openBlock(), _createElementBlock(\"div\", _hoisted_11, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList((\"getBoxbyTags\" in _ctx ? _ctx.getBoxbyTags : __unimport_unref_(__unimport_getBoxbyTags))($props.selectedTags), (datum, index) => {\n              return (_openBlock(), _createElementBlock(\"div\", {\n                key: datum,\n                class: \"image-item-container\",\n                onClick: $event => ($options.boxSelect(datum.id)),\n                \"data-tooltip\": datum.name,\n                \"data-inverted\": \"\"\n              }, [\n                _createElementVNode(\"div\", _hoisted_13, [\n                  _createElementVNode(\"div\", _hoisted_14, [\n                    _createVNode(_component_center, null, {\n                      default: _withCtx(() => [\n                        _createElementVNode(\"img\", {\n                          style: {\"width\":\"60px\",\"color\":\"rgb(0,78,97)\"},\n                          class: \"ui image\",\n                          src: `/assets/images/box_icons/${datum.img}`\n                        }, null, 8, _hoisted_15)\n                      ]),\n                      _: 2\n                    }, 1024)\n                  ])\n                ])\n              ], 8, _hoisted_12))\n            }), 128))\n          ]))\n        : ($data.view == 'list')\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_16, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList((\"getBoxbyTags\" in _ctx ? _ctx.getBoxbyTags : __unimport_unref_(__unimport_getBoxbyTags))($props.selectedTags), (datum, index) => {\n                return (_openBlock(), _createElementBlock(_Fragment, { key: datum }, [\n                  _createElementVNode(\"div\", {\n                    class: \"item\",\n                    onClick: $event => ($options.boxSelect(datum.id))\n                  }, [\n                    _createElementVNode(\"div\", _hoisted_18, [\n                      _createElementVNode(\"img\", {\n                        style: {\"width\":\"60px\",\"color\":\"rgb(0,78,97)\"},\n                        class: \"ui image\",\n                        src: `/assets/images/box_icons/${datum.img}`\n                      }, null, 8, _hoisted_19)\n                    ]),\n                    _createElementVNode(\"div\", _hoisted_20, [\n                      _createElementVNode(\"div\", _hoisted_21, _toDisplayString(datum.name), 1),\n                      _createElementVNode(\"div\", _hoisted_22, [\n                        (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(datum.tags, (tag) => {\n                          return (_openBlock(), _createElementBlock(\"div\", _hoisted_23, _toDisplayString(tag), 1))\n                        }), 256))\n                      ]),\n                      _createElementVNode(\"div\", _hoisted_24, [\n                        _createElementVNode(\"p\", null, _toDisplayString(datum.description), 1)\n                      ])\n                    ])\n                  ], 8, _hoisted_17),\n                  ((\"getBoxbyTags\" in _ctx ? _ctx.getBoxbyTags : __unimport_unref_(__unimport_getBoxbyTags))($props.selectedTags).length - 1 > index)\n                    ? (_openBlock(), _createElementBlock(\"div\", _hoisted_25))\n                    : _createCommentVNode(\"\", true)\n                ], 64))\n              }), 128))\n            ]))\n          : _createCommentVNode(\"\", true)\n    ])\n  ]))\n}\n\nimport \"/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tray.vue?vue&type=style&index=0&lang.css\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render]])",
-      "start": 1702955793541,
-      "end": 1702955793547,
+      "start": 1703080665116,
+      "end": 1703080665118,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -173,50 +173,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1702955793547,
-      "end": 1702955793547,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702955793547,
-      "end": 1702955793547,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1702955793547,
-      "end": 1702955793547,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1702955793547,
-      "end": 1702955793547,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702955793547,
-      "end": 1702955793547,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702955793547,
-      "end": 1702955793547,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702955793547,
-      "end": 1702955793548,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702955793548,
-      "end": 1702955793548,
+      "start": 1703080665118,
+      "end": 1703080665118,
       "order": "normal"
     }
   ]

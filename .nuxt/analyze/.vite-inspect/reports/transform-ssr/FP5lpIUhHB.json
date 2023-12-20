@@ -3,99 +3,99 @@
   "transforms": [
     {
       "name": "vite:vue",
-      "result": "\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n",
-      "start": 1702955810476,
-      "end": 1702955810476,
+      "result": "\n.four.wide.column:hover {\n    color: #1F1F21 !important;\n    cursor: pointer;\n}\n\n.four.wide.column.active {\n    color: #B31228 !important;\n    cursor: pointer;\n}\n\n.option-wrapper {\n    overflow-y: auto;\n    overflow-x: none;\n    box-sizing: border-box;\n    min-height: 10px;\n    max-height: 500px;\n    width: calc(100% - 0px);\n    border: .5px solid gray;\n    border-bottom-left-radius: 4px;\n    border-bottom-right-radius: 4px;\n    transition: min-height ease-in-out .1s, max-height ease-in-out .1s, width ease-in-out .1s;\n}\n\n.option-wrapper.hide {\n    min-height: 0px;\n    max-height: 0px;\n    border: none;\n}\n\n\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n",
+      "start": 1703080682479,
+      "end": 1703080682479,
       "sourcemaps": {
         "version": 3,
         "sources": [
           "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue"
         ],
         "names": [],
-        "mappings": "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",
+        "mappings": ";AAgLA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACpB,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnB;;AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACrB,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnB;;AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IACtB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC;IACjB,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC;IACvB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;IACvB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC9B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;AAC7F;;AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAA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",
         "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue",
         "sourceRoot": "",
         "sourcesContent": [
-          "<template>\n    <div style=\"\">\n        <div class=\"ui grid\" style=\"margin-bottom:40px;\">\n            <div class=\"one column\" style=\"width:100%;\">\n                <div style=\"display:flex\">\n                    <div>\n                        <button class=\"ui labeled icon basic button\" data-tooltip=\"Filter tags\" data-inverted=\"\"\n                            @click=\"show_tag_selection = !show_tag_selection\">\n                            <i class=\"filter icon\" sryle=\"background-white\"></i>\n                            <small><b>{{ available_tags.length }}</b> TAGS</small>\n                        </button>\n                    </div>\n                    <template v-if=\"selected_tags.length == 0\">\n                        <button class=\"ui button basic\">ALL</button>\n                    </template>\n                    <template v-else>\n                        <button @click=\"clearTags\" class=\"ui icon button\">\n                            <i class=\"undo icon\"></i>\n                        </button>\n                    </template>\n                </div>\n\n\n                <div class=\"selected-wrapper\" :class=\"show_tag_selection == false ? 'show-height' : 'hide-height'\">\n                    <div class=\"selected-inner\">\n\n                        <template v-if=\"selected_tags.length != 0\">\n                            <template v-for=\"datum in available_tags.filter(i => !selected_tags.includes(i.id) == false)\">\n                                <div\n                                    style=\"margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;\">\n                                    <small><b>{{ datum.name.toUpperCase() }}</b></small>\n                                </div>\n                            </template>\n                        </template>\n                    </div>\n                </div>\n            </div>\n\n            <div :style=\"show_tag_selection ? 'display:default' : 'display:none;'\" class=\"selection-wrapper\">\n                <div class=\"ui grid\">\n                    <template v-for=\"(datum, i1) in Math.ceil(available_tags.length / 3)\">\n                        <div class=\"stackable three column row\" style=\"padding:0px;margin:0px;\">\n                            <template v-for=\"(datum, i2) in 3\">\n                                <template v-if=\"(i1 * 3 + i2) < available_tags.length\">\n                                    <div class=\"column\" style=\"padding:2px;\">\n\n                                        <div :for=\"available_tags[(i1 * 3 + i2)].id\"\n                                            style=\"align-self:center;display:flex;background:#CCCCCC;padding:10px 10px 8px 10px;border-radius:3px;position:relative\">\n\n                                            <div style=\"align-self: center;\">\n                                                <input type=\"checkbox\" class=\"ui checkbox\"\n                                                    @change=\"handleSelect(available_tags[(i1 * 3 + i2)].id)\"\n                                                    :checked=\"selected_tags.filter(i => i == available_tags[(i1 * 3 + i2)].id).length > 0\"\n                                                    :name=\"available_tags[(i1 * 3 + i2)].id\">\n                                            </div>\n                                            <div style=\"align-self: center;margin-left:10px;\">\n                                                <label :for=\"available_tags[(i1 * 3 + i2)].id\">{{ available_tags[(i1 * 3 +\n                                                    i2)].name\n                                                }}\n                                                    <a style=\"margin:0;position:absolute;right:10px;top:7px;\" class=\"ui label\" :data-tooltip=\"`${available_tags[(i1 * 3 + i2)].no_of_boxes} available boxes`\">\n                                                        {{ available_tags[(i1 * 3 + i2)].no_of_boxes }}\n                                                    </a>\n                                                </label>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </template>\n                            </template>\n                        </div>\n                    </template>\n                </div>\n            </div>\n        </div>\n\n\n\n    </div>\n</template>\n\n<script>\nimport { tags } from \"@/composables/boxdata.js\"\nexport default {\n    setup() {\n        const available_tags = tags()\n        return {\n            available_tags\n        }\n    },\n    mounted() {\n        this.local_tags = this.available_tags;\n        // console.log(this.local_tags)\n    },\n    data() {\n        return {\n            selected_tags: [],\n            local_tags: [],\n            show_tag_selection: false\n        }\n    },\n    methods: {\n        clearTags() {\n            this.selected_tags = [];\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        },\n        handleSelect(id) {\n            let selected = \"\";\n            if (this.selected_tags.includes(id)) {\n                selected = this.selected_tags.filter(i => i != id);\n            } else {\n                selected = this.local_tags.filter(i => i.id == id)[0];\n                selected = [...this.selected_tags, selected.id];\n            }\n            this.selected_tags = selected;\n            // console.log(this.selected_tags)\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        }\n    }\n}\n</script>\n\n<style>\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n</style>\n"
+          "<template>\n    <div style=\"padding-top:50px;\">\n        <div class=\"ui grid\" style=\"margin-bottom:40px;\">\n            <div class=\"one column\" style=\"width:100%;\">\n                <div style=\"display:flex\">\n                    <div style=\"width:100%;position:relative\">\n                        <button class=\"ui labeled icon basic button\" data-tooltip=\"Filter tags\" data-inverted=\"\"\n                            @click=\"show_tag_selection = !show_tag_selection\">\n                            <i class=\"filter icon\" sryle=\"background-white\"></i>\n                            <small><b>{{ available_tags.length }}</b> TAGS</small>\n                        </button>\n\n\n                        <!-- <template v-if=\"selected_tags.length == 0\">\n                            <button class=\"ui button basic\">ALL</button>\n                        </template> -->\n                        <!-- <template v-else>\n                            <button @click=\"clearTags\" class=\"ui icon button\">\n                                <i class=\"undo icon\"></i>\n                            </button>\n                        </template> -->\n                        <!-- <div class=\"ui input\">\n                            <input type=\"number\" placeholder=\"enter no. of column\" v-model=\"tray_columns\">\n                        </div> -->\n\n\n\n                        <div id=\"option-container\" style=\"position:absolute;z-index:9000;background:white;width:100%;\">\n                            <!-- set max height here -->\n                            <div class=\"option-wrapper\" :class=\"show_tag_selection ? '' : 'hide'\">\n                                <div class=\"ui grid\" style=\"margin:0px;box-sizing:border-box;\">\n                                    <template v-for=\"datum in available_tags\">\n                                        <div @click=\"handleSelect(datum.id)\" class=\"four wide column\"\n                                            :class=\"selected_tags.includes(datum.id) ? 'active' : ''\" style=\"color:gray\">\n                                            <i :class=\"selected_tags.includes(datum.id) ? 'visible' : 'invisible'\"\n                                                class=\"ui icon thumbtack\"></i>{{ `${datum.name.charAt(0).toUpperCase() +\n                                                    datum.name.slice(1)}` }} <small>({{ datum.no_of_boxes }})</small>\n                                        </div>\n                                    </template>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n\n\n                <div class=\"selected-wrapper\" :class=\"show_tag_selection == false ? 'show-height' : 'hide-height'\">\n                    <div class=\"selected-inner\">\n                        <template v-if=\"selected_tags.length == 0\">\n                            <div\n                                style=\"background:#B31228;color:white;margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;\">\n                                <small>\n                                    <i class=\"ui icon thumbtack\"></i>\n                                    <b>All</b></small>\n                            </div>\n                        </template>\n                        <template v-for=\"datum in available_tags.filter(i => !selected_tags.includes(i.id) == false)\">\n                            <div\n                                style=\"background:#B31228;color:white;margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;\">\n                                <small>\n                                    <i class=\"ui icon thumbtack\"></i>\n\n                                    <b>{{ datum.name.toUpperCase() }}</b></small>\n                            </div>\n                        </template>\n                        <template v-if=\"selected_tags.length != 0\">\n                            <div @click=\"clearTags\"\n                                style=\"cursor:pointer;background:#1F1F21;color:white;margin:1px;padding:3px 10px;border-radius:3px;border:solid .5px gray;width:auto;\">\n                                <small>\n                                    <i class=\"undo icon\"></i>\n                                </small>\n                            </div>\n                        </template>\n                    </div>\n                </div>\n            </div>\n            <!-- <div :style=\"show_tag_selection ? 'display:default' : 'display:none;'\">\n                <div class=\"ui equal width grid\">\n                    <template v-for=\"(datum, i1) in Math.ceil(available_tags.length / tray_columns)\"\n                        v-if=\"show_tag_selection\">\n                        <div class=\"ui equal width row\" style=\"padding:0px;margin:0px;\">\n                            <template v-for=\"(datum, i2) in tray_columns\">\n                                <div class=\"column\">\n\n\n                                    <template v-if=\"(i1 * tray_columns + i2) < available_tags.length\">\n                                        <div class=\"\" style=\"padding:2px;width:100%\">\n\n                                            <div :for=\"available_tags[(i1 * tray_columns + i2)].id\"\n                                                style=\"align-self:center;display:flex;background:#CCCCCC;padding:10px 10px 8px 10px;border-radius:3px;position:relative\">\n\n                                                <div style=\"align-self: center;\">\n                                                    <input type=\"checkbox\" class=\"ui checkbox\"\n                                                        @change=\"handleSelect(available_tags[(i1 * tray_columns + i2)].id)\"\n                                                        :checked=\"selected_tags.filter(i => i == available_tags[(i1 * tray_columns + i2)].id).length > 0\"\n                                                        :name=\"available_tags[(i1 * tray_columns + i2)].id\">\n                                                </div>\n                                                <div style=\"align-self: center;margin-left:10px;\">\n                                                    <label :for=\"available_tags[(i1 * tray_columns + i2)].id\">{{\n                                                        available_tags[(i1 * tray_columns +\n                                                            i2)].name\n                                                    }}\n                                                        <a style=\"margin:0;position:absolute;right:10px;top:7px;\"\n                                                            class=\"ui label\"\n                                                            :data-tooltip=\"`${available_tags[(i1 * tray_columns + i2)].no_of_boxes} available boxes`\">\n                                                            {{ available_tags[(i1 * tray_columns + i2)].no_of_boxes }}\n                                                        </a>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </template>\n                                </div>\n                            </template>\n                        </div>\n                    </template>\n                </div>\n            </div> -->\n        </div>\n\n\n\n    </div>\n</template>\n\n<script>\nimport { tags } from \"@/composables/boxdata.js\"\nexport default {\n    setup() {\n        const available_tags = tags()\n        return {\n            available_tags\n        }\n    },\n    mounted() {\n        this.local_tags = this.available_tags;\n        // console.log(this.local_tags)\n    },\n    watch: {\n        tray_columns(o, n) {\n            if (o != n) {\n                this.reset_column;\n            }\n        }\n    },\n    data() {\n        return {\n            selected_tags: [],\n            local_tags: [],\n            show_tag_selection: false,\n            tray_columns: 3,\n            reset_column: false,\n        }\n    },\n    methods: {\n        clearTags() {\n            this.selected_tags = [];\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        },\n        handleSelect(id) {\n            let selected = \"\";\n            if (this.selected_tags.includes(id)) {\n                selected = this.selected_tags.filter(i => i != id);\n            } else {\n                selected = this.local_tags.filter(i => i.id == id)[0];\n                selected = [...this.selected_tags, selected.id];\n            }\n            this.selected_tags = selected;\n            // console.log(this.selected_tags)\n            this.$emit(\"selectedTagsId\", this.selected_tags)\n        }\n    }\n}\n</script>\n\n<style>\n.four.wide.column:hover {\n    color: #1F1F21 !important;\n    cursor: pointer;\n}\n\n.four.wide.column.active {\n    color: #B31228 !important;\n    cursor: pointer;\n}\n\n.option-wrapper {\n    overflow-y: auto;\n    overflow-x: none;\n    box-sizing: border-box;\n    min-height: 10px;\n    max-height: 500px;\n    width: calc(100% - 0px);\n    border: .5px solid gray;\n    border-bottom-left-radius: 4px;\n    border-bottom-right-radius: 4px;\n    transition: min-height ease-in-out .1s, max-height ease-in-out .1s, width ease-in-out .1s;\n}\n\n.option-wrapper.hide {\n    min-height: 0px;\n    max-height: 0px;\n    border: none;\n}\n\n\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n</style>\n"
         ]
       }
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702955810476,
-      "end": 1702955810476,
+      "start": 1703080682480,
+      "end": 1703080682480,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1702955810476,
-      "end": 1702955810476,
+      "start": 1703080682480,
+      "end": 1703080682480,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702955810477,
-      "end": 1702955810477,
+      "start": 1703080682481,
+      "end": 1703080682481,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1702955810477,
-      "end": 1702955810477,
+      "start": 1703080682481,
+      "end": 1703080682481,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1702955810478,
-      "end": 1702955810478,
+      "start": 1703080682481,
+      "end": 1703080682481,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "result": "#selection-container{display:flex;flex-wrap:wrap;margin-bottom:30px;width:100%}#selected-container{margin-bottom:30px}#selection-container>div{border-radius:25px;cursor:pointer;margin:2px;padding:2px 10px}#selection-container>div:hover{background-color:gray;color:#fff}.selected{background-color:#414141;border:1px inset #a9a9a9;color:#fff}.selected-inner{flex-wrap:wrap;margin-top:2px}.selected-inner,.selected-wrapper{display:flex;width:100%}",
-      "start": 1702955810478,
-      "end": 1702955810508,
+      "result": ".four.wide.column:hover{color:#1f1f21!important;cursor:pointer}.four.wide.column.active{color:#b31228!important;cursor:pointer}.option-wrapper{border:.5px solid gray;border-bottom-left-radius:4px;border-bottom-right-radius:4px;box-sizing:border-box;max-height:500px;min-height:10px;overflow-x:none;overflow-y:auto;transition:min-height .1s ease-in-out,max-height .1s ease-in-out,width .1s ease-in-out;width:100%}.option-wrapper.hide{border:none;max-height:0;min-height:0}#selection-container{display:flex;flex-wrap:wrap;margin-bottom:30px;width:100%}#selected-container{margin-bottom:30px}#selection-container>div{border-radius:25px;cursor:pointer;margin:2px;padding:2px 10px}#selection-container>div:hover{background-color:gray;color:#fff}.selected{background-color:#414141;border:1px inset #a9a9a9;color:#fff}.selected-inner{flex-wrap:wrap;margin-top:2px}.selected-inner,.selected-wrapper{display:flex;width:100%}",
+      "start": 1703080682481,
+      "end": 1703080682512,
       "order": "normal",
       "sourcemaps": {
         "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue",
-        "mappings": "AACA,qBACI,YAAa,CAEb,cAAe,CACf,kBAAmB,CAFnB,UAGJ,CAEA,oBACI,kBACJ,CAEA,yBAGI,kBAAmB,CACnB,cAAe,CAFf,UAAW,CADX,gBAIJ,CAEA,+BACI,qBAAsB,CACtB,UACJ,CAEA,UACI,wBAAiC,CAEjC,wBAA0B,CAD1B,UAGJ,CAEA,gBACI,cAAe,CAEf,cAEJ,CAGA,kCAJI,YAAa,CAFb,UAUJ",
+        "mappings": "AACA,wBACI,uBAAyB,CACzB,cACJ,CAEA,yBACI,uBAAyB,CACzB,cACJ,CAEA,gBAOI,sBAAuB,CACvB,6BAA8B,CAC9B,8BAA+B,CAN/B,qBAAsB,CAEtB,gBAAiB,CADjB,eAAgB,CAFhB,eAAgB,CADhB,eAAgB,CAShB,sFAAyF,CAJzF,UAKJ,CAEA,qBAGI,WAAY,CADZ,YAAe,CADf,YAGJ,CAGA,qBACI,YAAa,CAEb,cAAe,CACf,kBAAmB,CAFnB,UAGJ,CAEA,oBACI,kBACJ,CAEA,yBAGI,kBAAmB,CACnB,cAAe,CAFf,UAAW,CADX,gBAIJ,CAEA,+BACI,qBAAsB,CACtB,UACJ,CAEA,UACI,wBAAiC,CAEjC,wBAA0B,CAD1B,UAGJ,CAEA,gBACI,cAAe,CAEf,cAEJ,CAGA,kCAJI,YAAa,CAFb,UAUJ",
         "names": [],
         "sources": [
           "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue"
         ],
         "sourcesContent": [
-          "\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n"
+          "\n.four.wide.column:hover {\n    color: #1F1F21 !important;\n    cursor: pointer;\n}\n\n.four.wide.column.active {\n    color: #B31228 !important;\n    cursor: pointer;\n}\n\n.option-wrapper {\n    overflow-y: auto;\n    overflow-x: none;\n    box-sizing: border-box;\n    min-height: 10px;\n    max-height: 500px;\n    width: calc(100% - 0px);\n    border: .5px solid gray;\n    border-bottom-left-radius: 4px;\n    border-bottom-right-radius: 4px;\n    transition: min-height ease-in-out .1s, max-height ease-in-out .1s, width ease-in-out .1s;\n}\n\n.option-wrapper.hide {\n    min-height: 0px;\n    max-height: 0px;\n    border: none;\n}\n\n\n#selection-container {\n    display: flex;\n    width: 100%;\n    flex-wrap: wrap;\n    margin-bottom: 30px;\n}\n\n#selected-container {\n    margin-bottom: 30px;\n}\n\n#selection-container>div {\n    padding: 2px 10px;\n    margin: 2px;\n    border-radius: 25px;\n    cursor: pointer;\n}\n\n#selection-container>div:hover {\n    background-color: gray;\n    color: white;\n}\n\n.selected {\n    background-color: rgb(65, 65, 65);\n    color: white;\n    border: 1px inset darkgray;\n\n}\n\n.selected-inner {\n    flex-wrap: wrap;\n    width: 100%;\n    margin-top: 2px;\n    display: flex;\n}\n\n\n.selected-wrapper {\n    width: 100%;\n    display: flex;\n\n}\n"
         ],
         "version": 3
       }
     },
     {
       "name": "vite:esbuild",
-      "start": 1702955810508,
-      "end": 1702955810508,
+      "start": 1703080682512,
+      "end": 1703080682513,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1702955810509,
-      "end": 1702955810509,
+      "start": 1703080682513,
+      "end": 1703080682513,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1702955810509,
-      "end": 1702955810509,
+      "start": 1703080682513,
+      "end": 1703080682513,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "result": "#selection-container{display:flex;flex-wrap:wrap;margin-bottom:30px;width:100%}#selected-container{margin-bottom:30px}#selection-container>div{border-radius:25px;cursor:pointer;margin:2px;padding:2px 10px}#selection-container>div:hover{background-color:gray;color:#fff}.selected{background-color:#414141;border:1px inset #a9a9a9;color:#fff}.selected-inner{flex-wrap:wrap;margin-top:2px}.selected-inner,.selected-wrapper{display:flex;width:100%}",
-      "start": 1702955810509,
-      "end": 1702955810509,
+      "result": ".four.wide.column:hover{color:#1f1f21!important;cursor:pointer}.four.wide.column.active{color:#b31228!important;cursor:pointer}.option-wrapper{border:.5px solid gray;border-bottom-left-radius:4px;border-bottom-right-radius:4px;box-sizing:border-box;max-height:500px;min-height:10px;overflow-x:none;overflow-y:auto;transition:min-height .1s ease-in-out,max-height .1s ease-in-out,width .1s ease-in-out;width:100%}.option-wrapper.hide{border:none;max-height:0;min-height:0}#selection-container{display:flex;flex-wrap:wrap;margin-bottom:30px;width:100%}#selected-container{margin-bottom:30px}#selection-container>div{border-radius:25px;cursor:pointer;margin:2px;padding:2px 10px}#selection-container>div:hover{background-color:gray;color:#fff}.selected{background-color:#414141;border:1px inset #a9a9a9;color:#fff}.selected-inner{flex-wrap:wrap;margin-top:2px}.selected-inner,.selected-wrapper{display:flex;width:100%}",
+      "start": 1703080682513,
+      "end": 1703080682513,
       "order": "normal",
       "sourcemaps": {
         "file": "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue",
-        "mappings": "AAAA,qBAAqB,YAAY,CAAC,cAAc,CAAC,kBAAkB,CAAC,UAAU,CAAC,oBAAoB,kBAAkB,CAAC,yBAAyB,kBAAkB,CAAC,cAAc,CAAC,UAAU,CAAC,gBAAgB,CAAC,+BAA+B,qBAAqB,CAAC,UAAU,CAAC,UAAU,wBAAwB,CAAC,wBAAwB,CAAC,UAAU,CAAC,gBAAgB,cAAc,CAAC,cAAc,CAAC,kCAAkC,YAAY,CAAC,UAAU",
+        "mappings": "AAAA,wBAAwB,uBAAuB,CAAC,cAAc,CAAC,yBAAyB,uBAAuB,CAAC,cAAc,CAAC,gBAAgB,sBAAsB,CAAC,6BAA6B,CAAC,8BAA8B,CAAC,qBAAqB,CAAC,gBAAgB,CAAC,eAAe,CAAC,eAAe,CAAC,eAAe,CAAC,sFAAsF,CAAC,UAAU,CAAC,qBAAqB,WAAW,CAAC,YAAY,CAAC,YAAY,CAAC,qBAAqB,YAAY,CAAC,cAAc,CAAC,kBAAkB,CAAC,UAAU,CAAC,oBAAoB,kBAAkB,CAAC,yBAAyB,kBAAkB,CAAC,cAAc,CAAC,UAAU,CAAC,gBAAgB,CAAC,+BAA+B,qBAAqB,CAAC,UAAU,CAAC,UAAU,wBAAwB,CAAC,wBAAwB,CAAC,UAAU,CAAC,gBAAgB,cAAc,CAAC,cAAc,CAAC,kCAAkC,YAAY,CAAC,UAAU",
         "names": [],
         "sources": [
           "/Users/jameslajom/Documents/git/boxmaker-ui/components/Box/Tags.vue"
@@ -108,69 +108,69 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1702955810509,
-      "end": 1702955810509,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702955810509,
-      "end": 1702955810509,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702955810509,
-      "end": 1702955810509,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702955810510,
-      "end": 1702955810510,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1702955810510,
-      "end": 1702955810510,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702955810510,
-      "end": 1702955810510,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1702955810510,
-      "end": 1702955810510,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1702955810510,
-      "end": 1702955810510,
+      "start": 1703080682514,
+      "end": 1703080682514,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
       "result": "export default ''",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -178,116 +178,116 @@
     },
     {
       "name": "vite:build-html",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1702955810511,
-      "end": 1702955810511,
+      "start": 1703080682515,
+      "end": 1703080682515,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702955810512,
-      "end": 1702955810512,
+      "start": 1703080682516,
+      "end": 1703080682516,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1702955810512,
-      "end": 1702955810512,
+      "start": 1703080682516,
+      "end": 1703080682516,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1702955810512,
-      "end": 1702955810512,
+      "start": 1703080682516,
+      "end": 1703080682516,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1702955810512,
-      "end": 1702955810512,
+      "start": 1703080682516,
+      "end": 1703080682516,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1702955810512,
-      "end": 1702955810512,
+      "start": 1703080682516,
+      "end": 1703080682516,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1702955810512,
-      "end": 1702955810512,
+      "start": 1703080682516,
+      "end": 1703080682516,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1702955810512,
-      "end": 1702955810512,
+      "start": 1703080682516,
+      "end": 1703080682516,
       "order": "normal"
     }
   ]

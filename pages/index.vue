@@ -19,7 +19,7 @@
             <BoxTags @selectedTagsId="handleSelectedTags"></BoxTags>
             <BoxTray :selectedTags="selectedTags" @selected="handleSelectedBox"></BoxTray>
         </div>
-        <div class="ui dimmer fluid" :class="flyout ? 'active' : ''"></div>
+        <div class="ui dimmer fluid very light" :class="flyout ? 'active' : ''"></div>
     </div>
 </template>
 

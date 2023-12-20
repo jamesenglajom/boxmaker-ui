@@ -63,21 +63,23 @@
 .input>.ui.label {
     background: #CCCCCC;
 }
-select.ui.selection.dropdown{
-    padding:0px;
-}
-i.circular.icon{
-    font-size:.75em;
-    color:gray;
+
+select.ui.selection.dropdown {
+    padding: 0px;
 }
 
-.v-popper__popper{
-    max-width:250px;
+i.circular.icon {
+    font-size: .75em;
+    color: gray;
 }
 
-.ui.basic.label{
-    width:50px;
-    text-align:center;
+.v-popper__popper {
+    max-width: 250px;
+}
+
+.ui.basic.label {
+    width: 50px;
+    text-align: center;
 }
 </style>
 
@@ -103,7 +105,7 @@ i.circular.icon{
                         <div class="field" style="color:white;padding-right:2px">
                             <div class="label"><small>WIDTH</small></div>
                             <div class="ui right labeled input">
-                                <input  type="number" placeholder="Page Width" v-model="form['PAGEWIDTH']"
+                                <input type="number" placeholder="Page Width" v-model="form['PAGEWIDTH']"
                                     style="width:calc(100% - 80px)" />
                                 <div class="ui basic label">
                                     {{ 'in' }}
@@ -130,10 +132,11 @@ i.circular.icon{
         <div id="form-container">
             <!-- part1 -->
             <div id="unit-select-container">
-                <div class="ui buttons" >
+                <div class="ui buttons">
                     <template v-for="datum in structure.units_options">
-                        <button class="ui button red" v-tooltip="datum.name" :class="form['UNITS'] == datum.value ? 'active' : ''"
-                            @click="convertTo(datum.value)">{{ datum.abbr }}</button>
+                        <button class="ui button red" v-tooltip="datum.name"
+                            :class="form['UNITS'] == datum.value ? 'active' : ''" @click="convertTo(datum.value)">{{
+                                datum.abbr }}</button>
                     </template>
                 </div>
             </div>
@@ -154,16 +157,17 @@ i.circular.icon{
                                     <div style="width:calc(100%);box-sizing:border-box;">
                                         <div
                                             style="text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden">
-                                            
+
                                             <template v-if="datum.tooltip">
-                                                        <i class="question circle icon link" v-tooltip="datum.tooltip"></i>
-                                                    </template>
+                                                <i class="question circle icon link" v-tooltip="datum.tooltip"></i>
+                                            </template>
                                             <small>
                                                 {{ datum.name.toUpperCase() }}
                                             </small>
                                         </div>
                                         <div class="ui right labeled input" style="width:100%;">
-                                            <input :min="datum.minval" :max="datum.maxval" type="number" v-model="form[datum.symbol]" :placeholder="datum.name"
+                                            <input :min="datum.minval" :max="datum.maxval" type="number"
+                                                v-model="form[datum.symbol]" :placeholder="datum.name"
                                                 style="width:calc(100% - 80px)">
                                             <div class="ui basic label" style="box-sizing:border-box;">
                                                 {{ display_unit(datum) }}
@@ -174,20 +178,24 @@ i.circular.icon{
                             </div>
                         </template>
                     </div>
-                    <!-- SUBMIT BUTTON -->
-                    <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;">
-                        <div class="ui button red">
-                            <button class="" @click="boxLayoutPreview">Submit</button>
-                        </div>
-                    </div>
                 </div>
             </div>
 
 
+            <!-- SUBMIT BUTTON -->
+            <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom: 20px;">
+                <div class="ui button red">
+                    <button class="" @click="submitForm">Submit</button>
+                </div>
+            </div>
+
+
+
             <!-- part3 -->
-            <div style="padding:0px 20px;display:flex;margin-bottom:50px;">
+            <div style="padding:0px 20px;display:flex;margin-bottom:20px;">
                 <!-- others form -->
-                <div style="width:50%;padding-right:10px;">
+                <div style="width:50%;padding-right:10px;"
+                    v-if="structure.options_field ? structure.options_field.length != 0 : null">
                     <div class="ui segment">
                         <div style="margin-bottom:20px;">
                             <h3>OTHER SPECIFICATIONS</h3>
@@ -199,16 +207,17 @@ i.circular.icon{
                                         <div style="width:calc(100%);box-sizing:border-box;">
                                             <div
                                                 style="text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden">
-                                                
+
                                                 <template v-if="datum.tooltip">
-                                                        <i class="question circle icon link" v-tooltip="datum.tooltip"></i>
-                                                    </template>
+                                                    <i class="question circle icon link" v-tooltip="datum.tooltip"></i>
+                                                </template>
                                                 <small>
                                                     {{ datum.name.toUpperCase() }}
                                                 </small>
                                             </div>
                                             <div class="ui right labeled input" style="width:100%;">
-                                                <input  :min="datum.minval" :max="datum.maxval" type="number" v-model="form[datum.symbol]" :placeholder="datum.name"
+                                                <input :min="datum.minval" :max="datum.maxval" type="number"
+                                                    v-model="form[datum.symbol]" :placeholder="datum.name"
                                                     style="width:calc(100% - 80px)">
                                                 <div class="ui basic label" style="box-sizing:border-box;">
                                                     {{ display_unit(datum) }}
@@ -239,7 +248,8 @@ i.circular.icon{
                                                         {{ datum.name.toUpperCase() }}
                                                     </small>
                                                 </div>
-                                                <select class="ui dropdown selection" style="width:calc(100% - 1px) !important;min-width:calc(100% - 99px) !important;"
+                                                <select class="ui dropdown selection"
+                                                    style="width:calc(100% - 1px) !important;min-width:calc(100% - 99px) !important;"
                                                     v-model="form['REGISTRATION']">
                                                     <template v-for=" datum  in  structure.regmarks_options"
                                                         :key="datum.name">
@@ -259,9 +269,11 @@ i.circular.icon{
                                                         {{ datum.name.toUpperCase() }}
                                                     </small>
                                                 </div>
-                                                <div class="ui right labeled input" style="width:100%;" :class="datum.symbol == 'MARK'? form['REGISTRATION'] == 'none'? 'disabled' :'' :''">
-                                                    <input  :min="datum.minval" :max="datum.maxval" type="number" v-model="form[datum.symbol]"
-                                                        :placeholder="datum.name" style="width:calc(100% - 80px)">
+                                                <div class="ui right labeled input" style="width:100%;"
+                                                    :class="datum.symbol == 'MARK' ? form['REGISTRATION'] == 'none' ? 'disabled' : '' : ''">
+                                                    <input :min="datum.minval" :max="datum.maxval" type="number"
+                                                        v-model="form[datum.symbol]" :placeholder="datum.name"
+                                                        style="width:calc(100% - 80px)">
                                                     <div class="ui basic label" style="box-sizing:border-box;">
                                                         {{ display_unit(datum) }}
                                                     </div>
@@ -276,11 +288,19 @@ i.circular.icon{
                 </div>
             </div>
 
+
+
+            <!-- SUBMIT BUTTON -->
+            <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom: 60px;">
+                <div class="ui button red">
+                    <button class="" @click="submitForm">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 <script>
-import { getBoxById,convert } from "@/composables/boxdata"
+import { getBoxById, convert } from "@/composables/boxdata"
 export default {
     name: "CommonForm",
     props: ["boxId"],
@@ -294,7 +314,7 @@ export default {
                     this.sampleDivHeight = this.$refs.sampleDiv.offsetHeight;
                     this.infoDivHeight = this.$refs.infoDiv.offsetHeight;
                     this.form = box_data.form.values;
-                    this.form['model'] = v;
+                    this.form['MODEL'] = v;
                     this.boxLayoutPreview();
                 });
             }
@@ -304,25 +324,42 @@ export default {
         convertTo(unit_id) {
             let new_unit = unit_id, old_unit = this.form["UNITS"];
             this.form["UNITS"] = new_unit;
-                    console.log('index.vue')
-                    console.log(this.form)
-            convert(old_unit,new_unit, this.form);
+            console.log('index.vue')
+            console.log(this.form)
+            convert(old_unit, new_unit, this.form);
         },
-        display_unit(property){
-            let displays = {measure: this.form["UNITS"],percantage: "%", number:"n", angle: "  °  "};
+        display_unit(property) {
+            let displays = { measure: this.form["UNITS"], percantage: "%", number: "n", angle: "  °  " };
             return displays[property.type];
         },
-        boxLayoutPreview(){
+        boxLayoutPreview() {
             let q = '';
-            this.structure.parameters_field.forEach((v)=>{
+            this.structure.parameters_field.forEach((v) => {
                 q = `${q}&${v.symbol}=${this.form[v.symbol]}`
             });
-            this.boxLayout = this.structure.preview_image + q; 
+            this.boxLayout = this.structure.preview_image + q;
+        },
+        async submitForm() {
+            let formData = this.form;
+            formData['MODEL'] = this.boxId;
+            formData['REQUEST'] = 'SIGNCUT';
+            formData['CUSTOMER'] = 'whisqu';
+            formData['KEY'] = "gAAAAABlcdnsuTKh5-MunYhaHHnQuYiqUGGNk3upJGjTifAR3OUwwZAnZz-4PGMm7um_bJobX1uR-N_f_HdQjqQn5hFz61fDKg%3D%3D";
+            console.log(formData);
+            // await $fetch('http://www.signcutpro.com/cgi-bin/templatemaker-dev.php', {
+            //     method: "POST",
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(formData)
+            // })
+
         }
     },
     data() {
         return {
-            boxLayout:'',
+            boxLayout: '',
             structure: {},
             form: {},
             sampleDivHeight: 0,

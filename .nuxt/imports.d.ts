@@ -30,7 +30,9 @@ export { _useShortcuts, useShortcuts } from '../node_modules/@nuxt/ui/dist/runti
 export { useTimer } from '../node_modules/@nuxt/ui/dist/runtime/composables/useTimer';
 export { useToast } from '../node_modules/@nuxt/ui/dist/runtime/composables/useToast';
 export { useUI } from '../node_modules/@nuxt/ui/dist/runtime/composables/useUI';
+export { useBoxMakerStore } from '../stores/boxmaker';
 export { useColorMode } from '../node_modules/@nuxtjs/color-mode/dist/runtime/composables';
+export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { useImage } from '../node_modules/@nuxt/image/dist/runtime/composables';
 export { defineStore, acceptHMRUpdate, usePinia, storeToRefs } from '../node_modules/@pinia/nuxt/dist/runtime/composables';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';

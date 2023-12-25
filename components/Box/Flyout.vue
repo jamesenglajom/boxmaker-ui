@@ -1,62 +1,37 @@
 
 <template>
     <div id="flyout-element">
-        <div ref="flyout" class="ui flyout left" :class="flyout ? 'overlay visible' : ''" tab-index="-1">
+        <div class="ui flyout left" :class="boxmaker.openFlyout ? 'overlay visible' : ''" tab-index="-1">
             <div class="ui header" style="display:flex;justify-content:space-between">
                 <div style="display:flex;align-self:center">
                     <div @click="closeFlyout" style="background-color:lightgrey;cursor:pointer;padding:5px 10px;border-radius:4px;">
                         <i class="arrow left icon" ></i>
                     </div>
                     <div style="align-self:center;width:30px;margin-left:15px;">
-                        <img height="100px" width="100px" :src="`/assets/images/box_icons/${box? box.img: ''}`" class="ui image"/>
+                        <img height="100px" width="100px" :src="`/assets/images/box_icons/${boxmaker.getStoredBox? boxmaker.getStoredBox.img: ''}`" class="ui image"/>
                     </div>
                     <div class="content" style="align-self:center;margin-left:10px">
-                        <!-- Arced Top Box -->
                         <div class="box_name">
-                        {{ box!=undefined ? box.name: '' }}
+                        {{ boxmaker.getStoredBox? boxmaker.getStoredBox.name: ''  }}
                         </div>
                     </div>
                 </div>
-                <!-- <div style="align-self:center">
-                    <button class="ui button red mini">PROCEED</button>
-                </div> -->
             </div>
             <div class="content">
-                <ComForm :boxId="box.id"></ComForm>
+                <FormWrapper></FormWrapper>
             </div>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    props: ["isOpen","box"],
-    data() {
-        return {
-            flyout: false,
-        }
-    },
-    methods: {
-        closeFlyout() {
-            this.flyout = false;
-            this.$emit("isClosed", true)
-        },
-    },
-    watch: {
-        isOpen(value) {
-            if (value) {
-                this.flyout = value;
-            }
-        },
-        flyout(value) {
-            if (value) {
-                document.querySelector('body').style.overflow = "hidden";
-
-            } else {
-                document.querySelector('body').style.overflow = "visible";
-            }
-        },
-    }
+<script setup>
+import { useBoxMakerStore } from '@/stores/boxmaker';
+const boxmaker = useBoxMakerStore();
+// function
+function closeFlyout(){
+    boxmaker.$patch({
+        box_id: null
+    })
 }
 </script>
 <style>

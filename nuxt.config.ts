@@ -5,11 +5,4 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', // 'vue-fomantic-ui'
   '@nuxt/devtools', "@nuxt/image", "floating-vue/nuxt", 
   '@pinia/nuxt',],
-  nitro:{
-    esbuild: {
-      options: {
-        target: 'esnext'
-      }
-    }
-  }
 })

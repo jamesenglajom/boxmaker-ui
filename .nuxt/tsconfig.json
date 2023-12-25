@@ -83,6 +83,9 @@
       "#tailwind-config": [
         "./tailwind.config"
       ],
+      "#tailwind-config/*": [
+        "./tailwind.config/*"
+      ],
       "#image": [
         "../node_modules/@nuxt/image/dist/runtime"
       ],

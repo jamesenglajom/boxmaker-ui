@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "dev": "npx nuxi dev --dotenv .env.local",
+    "generate": "npx nuxi generaten",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
@@ -20,6 +20,7 @@
   "dependencies": {
     "@nuxt/ui": "^2.10.0",
     "@pinia/nuxt": "^0.5.1",
+    "@vueuse/components": "^10.7.0",
     "floating-vue": "^2.0.0-beta.24",
     "fomantic-ui-css": "^2.9.3",
     "pinia": "^2.1.7",

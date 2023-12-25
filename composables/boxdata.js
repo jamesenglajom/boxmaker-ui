@@ -55,7 +55,6 @@ export const tags = () => {
         tags = [...tags, ...tagsLCase]
     });
     tags =  [...new Set(tags)].sort();
-
     return tags.map(i => { return { id: slug(i), name: i.toLowerCase(), no_of_boxes: getBoxbyTags([slug(i)]).length } });
 }
 
@@ -129,8 +128,7 @@ function getFormStructure(box){
     options_field = Object.values(box.parameters.options),
     parameters_field = Object.values(box.parameters.parameters),
     professional_field = Object.values(box.parameters.professional).filter(i=> professional_fields_filter.includes(i.symbol)),
-    standard_field = Object.values(box.parameters.standard).filter(i=> standard_fields_filter.includes(i.symbol))
-    ;
+    standard_field = Object.values(box.parameters.standard).filter(i=> standard_fields_filter.includes(i.symbol));
 
     // STRUCTURES
     // general outputs

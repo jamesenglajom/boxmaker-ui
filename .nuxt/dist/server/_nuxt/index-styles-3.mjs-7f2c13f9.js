@@ -1,5 +1,0 @@
-const Tags_vue_vue_type_style_index_0_lang = ".four.wide.column:hover{color:#1f1f21!important;cursor:pointer}.four.wide.column.active{color:#b31228!important;cursor:pointer}.option-wrapper{border:.5px solid gray;border-bottom-left-radius:4px;border-bottom-right-radius:4px;box-sizing:border-box;max-height:500px;min-height:10px;overflow-x:none;overflow-y:auto;transition:min-height .1s ease-in-out,max-height .1s ease-in-out,width .1s ease-in-out;width:100%}.option-wrapper.hide{border:none;max-height:0;min-height:0}#selection-container{display:flex;flex-wrap:wrap;margin-bottom:30px;width:100%}#selected-container{margin-bottom:30px}#selection-container>div{border-radius:25px;cursor:pointer;margin:2px;padding:2px 10px}#selection-container>div:hover{background-color:gray;color:#fff}.selected{background-color:#414141;border:1px inset #a9a9a9;color:#fff}.selected-inner{flex-wrap:wrap;margin-top:2px}.selected-inner,.selected-wrapper{display:flex;width:100%}";
-export {
-  Tags_vue_vue_type_style_index_0_lang as default
-};
-//# sourceMappingURL=index-styles-3.mjs-7f2c13f9.js.map

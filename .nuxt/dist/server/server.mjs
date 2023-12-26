@@ -1,1 +1,0 @@
-export { default } from "file:///Users/jameslajom/Documents/git/boxmaker-ui/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

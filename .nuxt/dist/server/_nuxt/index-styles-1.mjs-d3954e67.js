@@ -1,5 +1,0 @@
-const index_vue_vue_type_style_index_0_lang = "#image-preview-container{display:flex;height:500px;width:100%}#sample-info{background:#f7f7f7;border:.5px solid #ccc;display:flex;position:relative;width:40%}#sample-info>div{align-self:center}#box-fold-preview{background:#f7f7f7;border:.5px solid #ccc;border-left:none;position:relative;width:60%}#box-fold-preview>div{align-self:center}#box-info-display{background:#1f1f21;bottom:0;color:#fff;left:0;padding:8px 16px;position:absolute;width:100%}#page-select-container{background:#666;border-bottom:.5px solid #ccc;padding:5px;width:100%}#page-select-container>label{color:#fff}#unit-select-container{margin-top:30px;padding:2px 15px;text-align:center}.input>.ui.label{background:#ccc}select.ui.selection.dropdown{padding:0}i.circular.icon{color:gray;font-size:.75em}.v-popper__popper{max-width:250px}.ui.basic.label{text-align:center;width:50px}";
-export {
-  index_vue_vue_type_style_index_0_lang as default
-};
-//# sourceMappingURL=index-styles-1.mjs-d3954e67.js.map

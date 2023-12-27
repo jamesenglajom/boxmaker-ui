@@ -25,12 +25,10 @@
                                         </small>
                                     </div>
                                     <template v-if="box(prop.category)[c_index(i1, i2)].type != 'select'">
-                                        <div class="ui right labeled input" style="width:100%;" 
-                                        :class="box(prop.category)[c_index(i1, i2)].symbol == 'MARK'?
-                                        form['REGISTRATION'] == 'none'?'disabled':''
-                                        :
-                                        ''"
-                                        >
+                                        <div class="ui right labeled input" style="width:100%;" :class="box(prop.category)[c_index(i1, i2)].symbol == 'MARK' ?
+                                            form['REGISTRATION'] == 'none' ? 'disabled' : ''
+                                            :
+                                            ''">
                                             <input @input="onChange" :min="box(prop.category)[c_index(i1, i2)].minval"
                                                 :max="box(prop.category)[c_index(i1, i2)].maxval" type="number"
                                                 v-model="form[box(prop.category)[c_index(i1, i2)].symbol]"
@@ -69,25 +67,32 @@ import { useBoxMakerStore } from '@/stores/boxmaker';
 const boxmaker = useBoxMakerStore();
 const { getBoxForm: box, getBoxFormValue: formVal } = storeToRefs(boxmaker);
 // props
-const prop = defineProps(['category', 'unit']);
+const prop = defineProps(['category', 'unit', 'convert']);
 // emits
 const emit = defineEmits(['formValues']);
 // data
 const row_field_limit = ref(3);
 const form = ref([]);
+const unit = ref([])
+const convert_flag = ref(false);
+
 // watch
 watch(() => boxmaker.box_id, (v) => {
-    if(v){
+    if (v) {
         form.value = boxmaker.getBoxFormValue(prop.category);
     }
 });
 
 
-watch(()=> prop.unit, (v,o)=>{
-    o = o ?? 'mm';
-    Object.assign(form.value,convert(o,v,form.value))
-    emit('formValues',form)
-
+watch(() => prop.unit, (v, o) => {
+    if (convert_flag.value) {
+        Object.assign(form.value, convert(o, v, form.value))
+        emit('formValues', form)
+        convert_flag.value = false;
+    }
+});
+watch(() => prop.convert, (v, o) => {
+    convert_flag.value = true;
 });
 // functions
 function convert(from, to, data) {
@@ -98,7 +103,7 @@ function convert(from, to, data) {
         inch: { name: "inch", mm: 25.4, cm: 2.54, inch: 1 }
     }
     let temp = data,
-        prop = computed(()=>boxmaker.getBoxForm());
+        prop = computed(() => boxmaker.getBoxForm());
     Object.keys(data).forEach((v) => {
         if (['PAGEWIDTH', 'PAGEHEIGHT'].includes(v) == false) {
             let tmp = prop.value.filter(i => i.symbol == v);
@@ -114,15 +119,15 @@ function display_unit(property) {
     return displays[property.type];
 };
 function c_index(i1, i2) {
-    return i1 * this.row_field_limit + i2;
+    return i1 * row_field_limit.value + i2;
 };
 function onChange() {
-    emit('formValues',form)
+    emit('formValues', form)
 }
 function generateGridClass(length, index) {
     let gclass = 'equal width row'
-    if (length % row_field_limit != 0) {
-        if (Math.ceil(length / this.row_field_limit) -1 ==  index) {
+    if (length % row_field_limit.value != 0) {
+        if (Math.ceil(length / row_field_limit.value) - 1 == index) {
             gclass = 'ui three column centered grid'
         }
     }
@@ -212,4 +217,5 @@ i.circular.icon {
 .ui.basic.label {
     width: 50px;
     text-align: center;
-}</style>
+}
+</style>

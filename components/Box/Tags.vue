@@ -69,6 +69,7 @@ const {isLoaded} = storeToRefs(boxmaker);
 // data
 const show_tag_selection = ref(false);
 const selected_tags = computed(()=> boxmaker.tags)
+const all_tags = computed(()=> boxmaker.getTags)
 const closeElement = () => {
     show_tag_selection.value = false
 }
@@ -80,11 +81,11 @@ function clearTags() {
 };
 function handleSelect(id) {
     let selected = [];
-    if (this.selected_tags.includes(id)) {
-        selected = this.selected_tags.filter(i => i != id);
+    if (selected_tags.value.includes(id)) {
+        selected = selected_tags.value.filter(i => i != id);
     } else {
-        selected = boxmaker.getTags.filter(i => i.id == id)[0];
-        selected = [...this.selected_tags, selected.id];
+        selected = all_tags.value.filter(i => i.id == id)[0];
+        selected = [...selected_tags.value, selected.id];
     }
     boxmaker.$patch({
         tags: selected

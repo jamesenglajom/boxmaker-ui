@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+// export const gallery = Object.values(import.meta.glob('/assets/images/box_icons/*', { eager: true, as: 'url' }))
 export const useBoxMakerStore = defineStore("boxmaker", {
   state: () => ({
     fetching: false,
@@ -8,7 +8,7 @@ export const useBoxMakerStore = defineStore("boxmaker", {
     // selected
     box_id: null,
     tags: [],
-    formChange:false,
+    formChange: false,
   }),
   getters: {
     openFlyout(state) {
@@ -53,13 +53,13 @@ export const useBoxMakerStore = defineStore("boxmaker", {
         boxes = Object.values(state.api);
         if (state.tags.length != 0) {
           let t = boxes.filter((i) =>
-            i.tags.some(s => state.tags.includes(slug(s)))
+            i.tags.some((s) => state.tags.includes(slug(s)))
           );
           boxes = t;
         }
       }
       return boxes.map((i) => {
-        return { ...i, img: imgName(i.name) };
+        return { ...i, img: imgName(i.id) };
       });
     },
     getTags(state) {
@@ -82,15 +82,15 @@ export const useBoxMakerStore = defineStore("boxmaker", {
         ? Object.values(state.api)
             .filter((i) => i.id == state.box_id)
             .map((i) => {
-              return { ...i, img: imgName(i.name) };
+              return { ...i, img: imgName(i.id) };
             })[0]
         : null;
     },
-    getBoxName(state){
-      return state.box_id ? this.getStoredBox.name: "";
+    getBoxName(state) {
+      return state.box_id ? this.getStoredBox.name : "";
     },
-    getBoxDescription(state){
-      return state.box_id ? this.getStoredBox.description: "";
+    getBoxDescription(state) {
+      return state.box_id ? this.getStoredBox.description : "";
     },
     getBoxForm: (state) => {
       return (category) => {
@@ -119,11 +119,17 @@ export const useBoxMakerStore = defineStore("boxmaker", {
                   i.symbol
                 )
               );
-            }else if(v=="professional"){
+            } else if (v == "professional") {
               datum = datum.filter((i) =>
-                ["REGISTRATION", "MARK", "BLEED", "OVERCUT","DASH","GAP","FILMIN"].includes(
-                  i.symbol
-                )
+                [
+                  "REGISTRATION",
+                  "MARK",
+                  "BLEED",
+                  "OVERCUT",
+                  "DASH",
+                  "GAP",
+                  "FILMIN",
+                ].includes(i.symbol)
               );
             }
             form_field = [...form_field, ...datum];
@@ -136,39 +142,46 @@ export const useBoxMakerStore = defineStore("boxmaker", {
         return result;
       };
     },
-    getBoxFormValue(){
-        // if(state.api !== null && state.box_id !== null){
-        return (category) => {
-          return this
-          .getBoxForm(category)
-            .reduce(
-              (obj, item) => Object.assign(obj, { [item.symbol]: item.value }),
-              {}
-            )
-        }
+    getBoxFormValue() {
+      // if(state.api !== null && state.box_id !== null){
+      return (category) => {
+        return this.getBoxForm(category).reduce(
+          (obj, item) => Object.assign(obj, { [item.symbol]: item.value }),
+          {}
+        );
+      };
     },
-    getCustomer(state){
-      return state.api ? this.getStoredBox.CUSTOMER:''
+    getCustomer(state) {
+      return state.api ? this.getStoredBox.CUSTOMER : "";
     },
     getBoxImg(state) {
       return state.api ? (state.box_id ? this.getStoredBox.img : null) : null;
     },
-    getBoxSampleImage(state){
-      return state.box_id ? `https://templatemaker-dev.signcut.com/?CUSTOMER=${this.getCustomer}&REQUEST=EXPLANATION&MODEL=${state.box_id}`:''
+    getBoxSampleImage(state) {
+      return state.box_id
+        ? `https://templatemaker-dev.signcut.com/?CUSTOMER=${this.getCustomer}&REQUEST=EXPLANATION&MODEL=${state.box_id}`
+        : "";
     },
-    getBoxDieLinePreviewImage(state){
+    getBoxDieLinePreviewImage(state) {
       return (form) => {
-        const url =  new URLSearchParams(form);
-        return state.box_id ? `https://templatemaker-dev.signcut.com?REQUEST=DIELINESPREVIEW&MODEL=${state.box_id}&CUSTOMER=${this.getCustomer}&${url}`: '';
-      }
+        const url = new URLSearchParams(form);
+        return state.box_id
+          ? `https://templatemaker-dev.signcut.com?REQUEST=DIELINESPREVIEW&MODEL=${state.box_id}&CUSTOMER=${this.getCustomer}&${url}`
+          : "";
+      };
     },
-    getBoxPagePresetField(state){
-      return state.box_id ? this.getBoxForm('standard').filter(i=> i.symbol == "PAGEPRESET")[0]: null
+    getBoxPagePresetField(state) {
+      return state.box_id
+        ? this.getBoxForm("standard").filter((i) => i.symbol == "PAGEPRESET")[0]
+        : null;
     },
-    getBoxPageWidthHeightField(state){
-      return state.box_id ? this.getBoxForm('standard').filter(i=> ["PAGEWIDTH","PAGEHEIGHT"].includes(i.symbol)): null
+    getBoxPageWidthHeightField(state) {
+      return state.box_id
+        ? this.getBoxForm("standard").filter((i) =>
+            ["PAGEWIDTH", "PAGEHEIGHT"].includes(i.symbol)
+          )
+        : null;
     },
-    
   },
   actions: {
     async fetchApi() {
@@ -196,11 +209,14 @@ function slug(str) {
     .toLowerCase();
 }
 
-function imgName(str) {
-  return (
-    str
-      .replace(/[^a-zA-Z ]/g, "")
-      .replace(/\s/g, "-")
-      .toLowerCase() + ".svg"
-  );
+function imgName(id) {
+  const img = new URL(`/assets/images/box_icons/${id}.svg`, import.meta.url)
+    .href;
+  return img;
+  // return (
+  //   str
+  //     .replace(/[^a-zA-Z ]/g, "")
+  //     .replace(/\s/g, "-")
+  //     .toLowerCase() + ".svg"
+  // );
 }

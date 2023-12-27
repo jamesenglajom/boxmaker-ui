@@ -142,7 +142,7 @@ i.circular.icon {
 
             <!-- dimensions -->
             <div style="padding:20px;">
-                <FormGroup :category="'dimension'" :unit="form['UNITS']" @formValues="handleFieldValueChange"></FormGroup>
+                <FormGroup :category="'dimension'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange"></FormGroup>
             </div>
 
 
@@ -157,12 +157,12 @@ i.circular.icon {
             <div style="padding:0px 20px;margin-bottom:20px;">
                 <!-- others form -->
                 <!-- <div style="width:50%;padding-right:10px;"> -->
-                <FormGroup :category="'other specifications'" :unit="form['UNITS']" @formValues="handleFieldValueChange">
+                <FormGroup :category="'other specifications'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
                 </FormGroup>
                 <!-- </div> -->
                 <!-- prof form -->
                 <!-- <div style="width:50%;padding-left:10px;"> -->
-                <FormGroup :category="'professional'" :unit="form['UNITS']" @formValues="handleFieldValueChange">
+                <FormGroup :category="'professional'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
                 </FormGroup>
                 <!-- </div> -->
             </div>
@@ -188,7 +188,7 @@ export default {
 <script setup>
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, computed, watch } from 'vue'
-import { useBoxMakerStore } from "@/stores/boxmaker"
+import { useBoxMakerStore} from "@/stores/boxmaker"
 // store
 const boxmaker = useBoxMakerStore();
 const { getStoredBox: box,
@@ -210,7 +210,7 @@ const units = ref([
 const form = ref({});
 const preview = ref('');
 const disable_submit = ref(false);
-
+const convert_flag = ref('true');
 
 // watch
 watch(
@@ -222,36 +222,9 @@ watch(
     }
 );
 
-
-// functions
-function check(){
-    // console.log(form.value)
-}
 function unitSelect(o,n){
-    const old = o;
     form.value['UNITS'] = n;
-    Object.assign(form.value,convert(old,n,form.value))
-}
-function convert(from, to, data) {
-    // specify to-convert properties
-    let units = {
-        mm: { name: "mm", mm: 1, cm: .1, inch: 0.0393700787 },
-        cm: { name: "cm", mm: 10, cm: 1, inch: 0.3937007874 },
-        inch: { name: "inch", mm: 25.4, cm: 2.54, inch: 1 }
-    }
-    let temp = data,
-        prop = computed(()=>boxmaker.getBoxForm());
-    Object.keys(data).forEach((v) => {
-        if (['PAGEWIDTH', 'PAGEHEIGHT'].includes(v) == false) {
-            let tmp = prop.value.filter(i => i.symbol == v);
-            if (tmp.length != 0 && tmp[0].type == 'measure') {
-
-                temp[v] = parseFloat(temp[v] * units[from][to]).toFixed(2);
-
-            }
-        }
-    });
-    return temp;
+    convert_flag.value = !convert_flag.value;
 }
 function handleFieldValueChange(v) {
     form.value = Object.assign(form.value, v.value)
@@ -266,7 +239,6 @@ async function submitForm() {
     formData['KEY'] = "gAAAAABlcdnsuTKh5-MunYhaHHnQuYiqUGGNk3upJGjTifAR3OUwwZAnZz-4PGMm7um_bJobX1uR-N_f_HdQjqQn5hFz61fDKg";
     let url = boxmaker.getStoredBox.action,
         search = new URLSearchParams(formData) + "%3D%3D";
-        console.log(formData)
     await navigateTo(url + '?' + search, {
         open: {
             target: '_blank',

@@ -1,13 +1,8 @@
 <template>
     <div class="ui container">
         <BoxFlyout></BoxFlyout>
+        <BoxTagFilter></BoxTagFilter>
         <div class="ui segment">
-            <!-- <div style="text-align:right">
-                <div class="ui invisible checkbox">
-                    <input type="checkbox" id="cb121" checked="checked">
-                    <label for="cb121" class="image visible"><i class="ui large moon icon"></i></label>
-                </div>
-            </div> -->
             <BoxTags></BoxTags>
             <BoxTray></BoxTray>
         </div>

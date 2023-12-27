@@ -146,7 +146,6 @@ export default {
                     if (increase) {
                         this.option_tray_width = (DW_DElW + 4) < 220 - 60 ? 220 : (element_stretch);
                         this.input_el_width = (DW_DElW + 4) < 220 - 60 ? 220 : (element_stretch);
-                        // console.log(`input_el = ${this.input_el_width}, option_tray = ${this.option_tray_width}, element_stretch = ${element_stretch}`)
                     } else {
                         if (this.selected_items.length == 0) {
                             this.FwrapOn = false;

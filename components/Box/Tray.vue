@@ -33,7 +33,7 @@
                   <div style="align-self:center;justify-content:center;text-align:center;">
                     <center>
                       <img style="width:60px;color:rgb(0,78,97);" class="ui image"
-                        :src="`/assets/images/box_icons/${datum.img}`" />
+                        :src="datum.img" />
                     </center>
                     <!-- <div class="label"
                     style="color:rgb(0,78,97);padding:3px;margin-top:7px;font-size:.85em;text-align:center;">
@@ -61,7 +61,7 @@
               <div class="item h-ccc" @click="boxSelect(datum.id)">
                 <div class="ui tiny image">
                   <img style="width:60px;color:rgb(0,78,97);" class="ui image"
-                    :src="`/assets/images/box_icons/${datum.img}`" />
+                    :src="datum.img" />
                 </div>
                 <div class="content" style="margin-left:20px">
                   <div class="header">{{ datum.name }}</div>
@@ -127,7 +127,7 @@ import { useBoxMakerStore } from '@/stores/boxmaker';
 const boxmaker = useBoxMakerStore();
 const { isLoaded } = storeToRefs(boxmaker);
 const view = ref('icon')
-// emits
+const images = ref([]);
 // function
 function boxSelect(id) {
   // mutate on click

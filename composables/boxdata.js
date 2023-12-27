@@ -104,10 +104,6 @@ export const convert = (from,to,data) => {
             }
         }
     });
-
-    // console.log(prop)
-    // console.log(temp)
-
     return temp;
 }
 

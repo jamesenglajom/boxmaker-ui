@@ -59,15 +59,14 @@
     color: white;
 }
 
-.img.selected,
-.box-item.selected {
-    background-color: #B31228 !important;
+.selected {
+    background-color: #B31228;
     color: white;
 }
 
 
 #box-result-container.minimized {
-    padding-bottom: 20px;
+    padding-bottom:20px;
 }
 
 .box-item.expanded {
@@ -105,11 +104,10 @@
 }
 
 .box-item.minimized>.img {
-    background: #252529;
+    background:#252529;
     border-radius: 4px;
-    padding: 10px 5px;
+    padding:10px 5px;
 }
-
 
 .box-item.expanded>.details {
     width: calc(100% - 70px) !important;
@@ -126,7 +124,7 @@
 }
 
 .ui.button.circular:hover {
-    background: #282828;
+    background: #666666;
     color: whitesmoke;
 
 }
@@ -156,36 +154,28 @@
     <div id="tag-filter-flyout" :class="mode">
         <div class="ui flyout left" :class="true ? 'overlay visible' : ''" tab-index="-1">
             <div class="ui header" style="display:flex;justify-content:space-between">
-                <div style="display:flex;align-self:center;width:100%;">
+                <div style="display:flex;align-self:center">
                     <div>
                         <template v-if="mode == 'expanded'">
-                            <button @click="toggleFlyout('minimized')" class="ui button circular icon close-flyout-button">
+                            <button @click="mode = 'minimized'" class="ui button circular icon close-flyout-button">
                                 <i class="arrow left icon"></i>
                             </button>
                         </template>
                         <template v-else-if="mode == 'minimized'">
-                            <button @click="toggleFlyout('expanded')" class="ui button circular icon close-flyout-button">
+                            <button @click="mode = 'expanded'" class="ui button circular icon close-flyout-button">
                                 <i class="arrow right icon"></i>
                             </button>
                         </template>
                     </div>
-                    <div class="content"
-                        style="width:100%;display:flex;justify-content:space-between;align-self:center;margin-left:10px; color:#fff">
-                        <div style="align-self:center">
-                            {{ mode == 'expanded' ? 'Filter: ' : '' }}
-                        </div>
-                        <div style="align-self:center">
-                            <button @click="clearFilter" class="ui button circular icon close-flyout-button">
-                                <i class="redo alternate icon"></i>
-                            </button>
-                        </div>
+                    <div class="content" style="align-self:center;margin-left:10px; color:#fff">
+                        {{ mode == 'expanded' ? 'Filter' : '' }}
                     </div>
                 </div>
             </div>
             <div class="content">
                 <div v-if="mode == 'expanded'" style="padding:10px 30px; padding-bottom:0px;">
                     <div class="ui input" style="width:100%">
-                        <input v-model="search" type="text" placeholder="Search...">
+                        <input  type="text" placeholder="Search...">
                     </div>
                 </div>
                 <div v-if="mode == 'minimized'"
@@ -217,12 +207,8 @@
                     <div id="box-result-label" :class="mode">Results ({{ boxes.length }}):</div>
                     <div id="box-result-container" :class="mode">
                         <template v-for="datum in boxes">
-                            <div @click="selectBox(datum.id)" v-tooltip.right="mode == 'minimized' ? datum.name : null"
-                                :class="`box-item ${mode} ${box_id ? box_id == datum.id ? mode == 'expanded' ? 'selected' : '' : '' : ''}`">
-
-
-                                <div class="img"
-                                    :class="box_id ? box_id == datum.id ? mode == 'minimized' ? ' selected' : '' : '' : ''">
+                            <div @click="selectBox(datum.id)" v-tooltip.right="mode == 'minimized' ? datum.name : null" class="box-item" :class="mode">
+                                <div class="img">
                                     <img :src="datum.img" alt="">
                                 </div>
                                 <div class="details">
@@ -247,25 +233,9 @@ import { useBoxMakerStore } from "@/stores/boxmaker";
 import { storeToRefs } from "pinia";
 
 const bm = useBoxMakerStore();
-const { box_id, isLoading, getTags: tags, getBoxes: boxes, tags: selected_tags, flyoutv2: flyout } = storeToRefs(bm);
+const { getTags: tags, getBoxes: boxes, tags: selected_tags } = storeToRefs(bm);
 
-// data
 const mode = ref('minimized')
-const search = ref("");
-
-// watch
-watch(() => search.value, (v) => {
-    bm.$patch({
-        search: search.value
-    })
-});
-// function
-const clearFilter = () => {
-    search.value = ""
-    bm.$patch({
-        tags: []
-    })
-}
 const handleTagSelect = (tag) => {
     let selected = [];
     if (selected_tags.value.filter(i => i == tag).length > 0) {
@@ -277,15 +247,14 @@ const handleTagSelect = (tag) => {
         tags: selected,
     })
 }
+watch(() => mode, (v)=>{
+    bm.$patch({
+        
+    });
+});
 const selectBox = (id) => {
     bm.$patch({
         box_id: id
-    });
-}
-const toggleFlyout = (mod) => {
-    mode.value = mod;
-    bm.$patch({
-        flyoutv2: mod == 'expanded' ? true : false
     });
 }
 </script>

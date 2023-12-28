@@ -92,84 +92,101 @@ i.circular.icon {
 
 <template>
     <div id="CommonFormComponent">
-        <div id="image-preview-container">
-            <div id="sample-info" ref="sampleDiv">
-                <img style="max-height:500px;width:100%;" :src="sample_image" alt=""
-                    >
-                <div id="box-info-display" ref="infoDiv">
-                    {{ description }}
+
+        <template v-if="box_loading">
+            <div class="ui inverted segment" style="height:100vh">
+                <div class="ui active large inverted loader text">
+                    Loading ...
                 </div>
             </div>
-            <div id="box-fold-preview">
-                <div id="page-select-container" v-if="page_preset">
-                    <label for=""><small>{{ page_preset.name }}</small></label>
-                    <select @change="check" class="ui dropdown selection" style="width:100%;" v-model="form['PAGEPRESET']">
-                        <template v-for=" datum  in Object.entries(page_preset.options)" :key="datum[1]">
-                            <option :value="datum[0]">{{ datum[1] }}</option>
-                        </template>
-                    </select>
-                    <div style="display:flex">
-                        <template v-for="datum in page_wh">
-                            <div class="field" style="color:white;padding-right:2px">
-                                <div class="label"><small>{{ datum.name }}</small></div>
-                                <div class="ui right labeled input">
-                                    <input @input="check" type="number" :placeholder="datum.name" v-model="form[datum.symbol]"
-                                        style="width:calc(100% - 80px)" />
-                                    <div class="ui basic label">
-                                        {{ 'in' }}
+        </template>
+        <div :style="box_loading?'display:none;':''">
+            <div style="padding:20px 40px;">
+                <span class="ui large text" style="color:white;">{{ box.name }}</span>
+            </div>
+            <div id="image-preview-container">
+                <div id="sample-info" ref="sampleDiv">
+                    <img style="max-height:500px;width:100%;" :src="sample_image" alt="">
+                    <div id="box-info-display" ref="infoDiv">
+                        {{ description }}
+                    </div>
+                </div>
+                <div id="box-fold-preview">
+                    <div id="page-select-container" v-if="page_preset">
+                        <label for=""><small>{{ page_preset.name }}</small></label>
+                        <select @change="check" class="ui dropdown selection" style="width:100%;"
+                            v-model="form['PAGEPRESET']">
+                            <template v-for=" datum  in Object.entries(page_preset.options)" :key="datum[1]">
+                                <option :value="datum[0]">{{ datum[1] }}</option>
+                            </template>
+                        </select>
+                        <div style="display:flex">
+                            <template v-for="datum in page_wh">
+                                <div class="field" style="color:white;padding-right:2px">
+                                    <div class="label"><small>{{ datum.name }}</small></div>
+                                    <div class="ui right labeled input">
+                                        <input @input="check" type="number" :placeholder="datum.name"
+                                            v-model="form[datum.symbol]" style="width:calc(100% - 80px)" />
+                                        <div class="ui basic label">
+                                            {{ 'in' }}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div>
+                        <img style="max-height:calc(500px - 130px);width:100%;" :src="preview" alt="">
+                    </div>
+                </div>
+            </div>
+            <div id="form-container">
+                <!-- units -->
+                <div id="unit-select-container">
+                    <div class="ui buttons">
+                        <template v-for="datum in units">
+                            <button class="ui button red" v-tooltip="datum.name"
+                                @click="unitSelect(form['UNITS'], datum.value)"
+                                :class="form['UNITS'] == datum.value ? 'active' : ''">{{
+                                    datum.abbr }}</button>
                         </template>
                     </div>
                 </div>
-                <div>
-                    <img style="max-height:calc(500px - 130px);width:100%;" :src="preview" alt="">
+
+                <!-- dimensions -->
+                <div style="padding:20px;">
+                    <FormGroup :category="'dimension'" :convert="convert_flag" :unit="form['UNITS']"
+                        @formValues="handleFieldValueChange"></FormGroup>
                 </div>
-            </div>
-        </div>
-        <div id="form-container">
-            <!-- units -->
-            <div id="unit-select-container">
-                <div class="ui buttons">
-                    <template v-for="datum in units">
-                        <button class="ui button red" v-tooltip="datum.name" @click="unitSelect(form['UNITS'],datum.value)"
-                            :class="form['UNITS'] == datum.value ? 'active' : ''">{{
-                                datum.abbr }}</button>
-                    </template>
+
+
+                <!-- SUBMIT BUTTON -->
+                <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom: 20px;">
+                    <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
+                        <button @click="submitForm">Submit</button>
+                    </div>
                 </div>
-            </div>
-
-            <!-- dimensions -->
-            <div style="padding:20px;">
-                <FormGroup :category="'dimension'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange"></FormGroup>
-            </div>
 
 
-            <!-- SUBMIT BUTTON -->
-            <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom: 20px;">
-                <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
-                    <button @click="submitForm">Submit</button>
+                <div style="padding:0px 20px;margin-bottom:20px;">
+                    <!-- others form -->
+                    <!-- <div style="width:50%;padding-right:10px;"> -->
+                    <FormGroup :category="'other specifications'" :convert="convert_flag" :unit="form['UNITS']"
+                        @formValues="handleFieldValueChange">
+                    </FormGroup>
+                    <!-- </div> -->
+                    <!-- prof form -->
+                    <!-- <div style="width:50%;padding-left:10px;"> -->
+                    <FormGroup :category="'professional'" :convert="convert_flag" :unit="form['UNITS']"
+                        @formValues="handleFieldValueChange">
+                    </FormGroup>
+                    <!-- </div> -->
                 </div>
-            </div>
-
-
-            <div style="padding:0px 20px;margin-bottom:20px;">
-                <!-- others form -->
-                <!-- <div style="width:50%;padding-right:10px;"> -->
-                <FormGroup :category="'other specifications'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
-                </FormGroup>
-                <!-- </div> -->
-                <!-- prof form -->
-                <!-- <div style="width:50%;padding-left:10px;"> -->
-                <FormGroup :category="'professional'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
-                </FormGroup>
-                <!-- </div> -->
-            </div>
-            <!-- SUBMIT BUTTON -->
-            <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom: 60px;">
-                <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
-                    <button @click="submitForm">Submit</button>
+                <!-- SUBMIT BUTTON -->
+                <div style="width:100%;box-sizing: border-box;padding:5px;padding-bottom:30px;text-align:center;margin-bottom: 60px;">
+                    <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
+                        <button @click="submitForm">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -188,7 +205,7 @@ export default {
 <script setup>
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, computed, watch } from 'vue'
-import { useBoxMakerStore} from "@/stores/boxmaker"
+import { useBoxMakerStore } from "@/stores/boxmaker"
 // store
 const boxmaker = useBoxMakerStore();
 const { getStoredBox: box,
@@ -210,11 +227,24 @@ const units = ref([
 const form = ref({});
 const preview = ref('');
 const disable_submit = ref(false);
-const convert_flag = ref('true');
-
+const convert_flag = ref(true);
+const box_loading = ref(false)
+const loading_delay = ref(1000);
+// mounted
+onMounted(async () => {
+    if (box_id.value) {
+        form.value = boxmaker.getBoxFormValue();
+        preview.value = boxmaker.getBoxDieLinePreviewImage(form.value);
+    }
+})
 // watch
 watch(
     () => boxmaker.box_id, (v) => {
+        box_loading.value = true;
+        setTimeout(() => {
+            box_loading.value = false;
+        }
+            , loading_delay.value);
         if (v) {
             form.value = boxmaker.getBoxFormValue();
             preview.value = boxmaker.getBoxDieLinePreviewImage(form.value);
@@ -222,7 +252,7 @@ watch(
     }
 );
 
-function unitSelect(o,n){
+function unitSelect(o, n) {
     form.value['UNITS'] = n;
     convert_flag.value = !convert_flag.value;
 }

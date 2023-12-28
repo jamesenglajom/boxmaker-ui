@@ -5,7 +5,8 @@ export const useBoxMakerStore = defineStore("boxmaker", {
     fetching: false,
     status: "idle",
     api: null,
-    // selected
+    search:"",
+    flyoutv2:false,
     box_id: null,
     tags: [],
     formChange: false,
@@ -13,6 +14,9 @@ export const useBoxMakerStore = defineStore("boxmaker", {
   getters: {
     openFlyout(state) {
       return state.api ? (state.box_id ? true : false) : false;
+    },
+    getFlyoutV2(state){
+      return state.flyoutv2; 
     },
     getFetchStatus(state) {
       let status = "idle";
@@ -58,9 +62,15 @@ export const useBoxMakerStore = defineStore("boxmaker", {
           boxes = t;
         }
       }
-      return boxes.map((i) => {
+      boxes = boxes.map((i) => {
         return { ...i, img: imgName(i.id) };
       });
+
+      if(state.search != ""){
+        boxes = boxes.filter(i=> i.name.toLowerCase().includes(state.search));
+      }
+      state.box_id = boxes.length > 0 ? boxes[0].id : null;
+      return boxes;
     },
     getTags(state) {
       return state.api

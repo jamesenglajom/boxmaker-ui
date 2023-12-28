@@ -14,7 +14,7 @@
                             <div class="column">
                                 <template v-if="(c_index(i1, i2)) < fields.length">
                                     <div
-                                        style="text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden;padding-bottom:¢¢¢¢7px;">
+                                        style="text-overflow: ellipsis;width:calc(100% - 1px);white-space:nowrap;overflow:hidden;padding-bottom:7px;">
                                         <template v-if="fields[c_index(i1, i2)].tooltip">
                                             <i class="question circle icon link"
                                                 v-tooltip="fields[c_index(i1, i2)].tooltip"></i>
@@ -62,7 +62,7 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import { useBoxMakerStore } from '@/stores/boxmaker';
 const boxmaker = useBoxMakerStore();
 const { getBoxForm: box, getBoxFormValue: formVal } = storeToRefs(boxmaker);
@@ -71,22 +71,20 @@ const prop = defineProps(['category', 'unit', 'convert']);
 // emits
 const emit = defineEmits(['formValues']);
 // data
-const row_field_limit = ref(2);
+const row_field_limit = ref(3);
 const form = ref([]);
 const unit = ref([])
 const convert_flag = ref(false);
+
+
 const fields = computed(()=> boxmaker.getBoxForm(prop.category));
 
-onMounted(()=>{
-    form.value = boxmaker.getBoxFormValue(prop.category);
-});
 // watch
 watch(() => boxmaker.box_id, (v) => {
     if (v) {
         form.value = boxmaker.getBoxFormValue(prop.category);
     }
 });
-
 watch(() => prop.unit, (v, o) => {
     if (convert_flag.value) {
         Object.assign(form.value, convert(o, v, form.value))
@@ -131,7 +129,7 @@ function generateGridClass(length, index) {
     let gclass = 'equal width row'
     if (length % row_field_limit.value != 0) {
         if (Math.ceil(length / row_field_limit.value) - 1 == index) {
-            gclass = 'ui two column centered grid'
+            gclass = 'ui three column centered grid'
         }
     }
     return gclass;

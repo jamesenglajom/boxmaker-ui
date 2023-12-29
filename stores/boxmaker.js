@@ -69,7 +69,13 @@ export const useBoxMakerStore = defineStore("boxmaker", {
       if(state.search != ""){
         boxes = boxes.filter(i=> i.name.toLowerCase().includes(state.search));
       }
-      state.box_id = boxes.length > 0 ? boxes[0].id : null;
+
+      
+      const currentUrl = window.location.href;
+      if(!currentUrl.includes('v1')){
+        state.box_id = boxes.length > 0 ? boxes[0].id : null;
+      }
+
       return boxes;
     },
     getTags(state) {

@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="content">
-                <FormWrapper></FormWrapper>
+                <v1FormWrapper></v1FormWrapper>
             </div>
         </div>
     </div>

@@ -1,10 +1,10 @@
 <template>
     <div class="ui container">
-        <BoxFlyout></BoxFlyout>
+        <v1BoxFlyout></v1BoxFlyout>
         <!-- <BoxTagFilter></BoxTagFilter> -->
         <div class="ui segment">
-            <BoxTags></BoxTags>
-            <BoxTray></BoxTray>
+            <v1BoxTags></v1BoxTags>
+            <v1BoxTray></v1BoxTray>
         </div>
         <div class="ui dimmer fluid very light" :class="boxmaker.openFlyout ? 'active' : ''"></div>
     </div>

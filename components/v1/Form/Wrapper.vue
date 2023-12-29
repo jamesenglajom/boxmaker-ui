@@ -142,7 +142,7 @@ i.circular.icon {
 
             <!-- dimensions -->
             <div style="padding:20px;">
-                <FormGroup :category="'dimension'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange"></FormGroup>
+                <v1FormGroup :category="'dimension'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange"></v1FormGroup>
             </div>
 
 
@@ -157,13 +157,13 @@ i.circular.icon {
             <div style="padding:0px 20px;margin-bottom:20px;">
                 <!-- others form -->
                 <!-- <div style="width:50%;padding-right:10px;"> -->
-                <FormGroup :category="'other specifications'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
-                </FormGroup>
+                <v1FormGroup :category="'other specifications'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
+                </v1FormGroup>
                 <!-- </div> -->
                 <!-- prof form -->
                 <!-- <div style="width:50%;padding-left:10px;"> -->
-                <FormGroup :category="'professional'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
-                </FormGroup>
+                <v1FormGroup :category="'professional'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
+                </v1FormGroup>
                 <!-- </div> -->
             </div>
             <!-- SUBMIT BUTTON -->

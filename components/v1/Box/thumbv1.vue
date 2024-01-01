@@ -31,7 +31,7 @@ const prop = defineProps(["box"])
     width: 200px;
     margin: 10px;
     padding: 30px;
-    border-radius: 12px;
+    border-radius: 60px;
     /* background:rgb(220, 220, 220); */
     height:200px;
     display:flex;

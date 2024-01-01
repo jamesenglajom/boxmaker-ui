@@ -1,8 +1,26 @@
 <style>
+div#page-w-h :nth-child(1){
+padding-right:2px !important;
+}
+div#page-w-h :nth-child(2){
+ padding-left:2px !important;
+}
+select.ui.dropdown.selection{
+    padding: 0px;
+}
 .ui.accordion>.active.content {
-    height: calc(100vh - 750px);
+    /* height: calc(100vh - 300px); */
     position: relative;
-    overflow-y: auto;
+    padding:20px !important;
+    background:whitesmoke;
+}
+
+.ui.accordion>.title {
+    cursor: pointer;
+}
+
+.ui.accordion>.title.active {
+    cursor: default;
 }
 
 #flyout-content-wrapper {
@@ -94,74 +112,69 @@
         <div style="display:flex">
             <div id="representation-wrapper">
                 <div id="box-fold-preview">
-                    <!-- <V1BoxRuler></V1BoxRuler> -->
                     <V1BoxPreviewCanvas :preview="preview"></V1BoxPreviewCanvas>
-
                 </div>
             </div>
             <div id="form-wrapper">
-                <div id="sample-info">
-                    <img style="max-height:500px;width:100%;" :src="sample_image" alt="">
-                    <div id="box-info-display" ref="infoDiv">
-                        {{ description }}
-                    </div>
-                </div>
-                <div id="page-select" v-if="page_preset">
-                    <label for="">{{ page_preset.name }}</label>
-                    <select @change="check" class="ui dropdown selection" style="width:100%;" v-model="form['PAGEPRESET']">
-                        <template v-for=" datum  in Object.entries(page_preset.options)" :key="datum[1]">
-                            <option :value="datum[0]">{{ datum[1] }}</option>
-                        </template>
-                    </select>
-                    <div style="display:flex">
-                        <template v-for="datum in page_wh">
-                            <div class="field">
-                                <div class="label">{{ datum.name }}</div>
-                                <div class="ui right labeled input">
-                                    <input @input="check" type="number" :placeholder="datum.name"
-                                        v-model="form[datum.symbol]" style="width:calc(100% - 80px)" />
-                                    <div class="ui basic label">
-                                        {{ 'in' }}
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-                <div class="ui basic buttons" style="width:100%;margin-top:4px;border-radius:none !important;">
-                    <div class="ui button">One</div>
-                    <div class="ui button">Two</div>
-                    <div class="ui button">Three</div>
-                </div>
                 <div class="ui styled accordion" style="margin-top:7px;">
                     <template v-for="datum in accordion_items">
-                        <div class="title" @click="accrodion_tab = datum" :class="datum == accrodion_tab ? 'active' : ''">
+                        <div class="title active">
                             <i class="dropdown icon"></i>
                             {{ datum.toUpperCase() }}
                         </div>
-                        <div class="content" :class="datum == accrodion_tab ? 'active' : ''">
-                            <V1FormGroup :category="datum"></V1FormGroup>
+                        <div class="content active">
+                            <template v-if="datum == 'sample image'">
+                                <div id="sample-info">
+                                    <img style="max-height:500px;width:100%;" :src="sample_image" alt="">
+                                    <div id="box-info-display" ref="infoDiv">
+                                        {{ description }}
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-else-if="datum == 'standard'">
+                                <div id="page-select" v-if="page_preset" style="margin-top:7px;">
+                                    <label for="">{{ page_preset.name }}</label>
+                                    <select @change="check" class="ui dropdown selection" style="width:100%;"
+                                        v-model="form['PAGEPRESET']">
+                                        <template v-for=" datum  in Object.entries(page_preset.options)" :key="datum[1]">
+                                            <option :value="datum[0]">{{ datum[1] }}</option>
+                                        </template>
+                                    </select>
+                                    <div id="page-w-h" style="display:flex;margin-top:7px;">
+                                        <template v-for="datum in page_wh">
+                                            <div class="field">
+                                                <div class="label">{{ datum.name }}</div>
+                                                <div class="ui right labeled input" :class="form['PAGEPRESET'] == 'Custom'?'':'disabled'">
+                                                    <input @input="check" type="number" :placeholder="datum.name"
+                                                        v-model="form[datum.symbol]" style="width:calc(100% - 80px)" />
+                                                    <div class="ui basic label">
+                                                        {{ form['UNITS'] }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="ui buttons" style="width:100%;margin-top:7px;border-radius:none !important;">
+                                    <template v-for="datum in units">
+                                        <button class="ui button basic" v-tooltip="datum.name"
+                                            @click="unitSelect(form['UNITS'], datum.value)"
+                                            :class="form['UNITS'] == datum.value ? 'active' : ''">{{
+                                                datum.abbr }}</button>
+                                    </template>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <V1FormGroup :category="datum" :convert="convert_flag" :unit="form['UNITS']"
+                        @formValues="handleFieldValueChange"></V1FormGroup>
+                            </template>
                         </div>
                     </template>
                 </div>
-
-                <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-top:25px;">
-                    <!-- <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
-                        <button @click="submitForm">
-                            <div
-                                style="display:flex;justify-content:center;width:normal;padding:2px 10px;border-radius:15px;">
-                                <div>{{ "BUY 3" }}</div>
-                                <div style="margin-left:2px;">
-                                </div>
-                            </div>
-                        </button>
-
-                    </div> -->
-
-                    <div class="ui button red">
+                <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin:10px 0px;" >
+                    <div class="ui button red" @click="submitForm">
                         <div style="display:flex;">
                             <div style="align-self:center;">
-
                                 <img :src="goldCoin" alt="" style="width:18px;">
                             </div>
                             <div style="align-self:center;margin-left:4px;">
@@ -170,7 +183,6 @@
                             <div style="align-self:center;margin-left:10px;">
                                 PURCHASE
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -210,7 +222,7 @@ const preview = ref('');
 const disable_submit = ref(false);
 const convert_flag = ref('true');
 const accrodion_tab = ref("dimension");
-const accordion_items = ref(["dimension", "other specifications", "professional"]);
+const accordion_items = ref(["sample image", "standard", "dimension", "other specifications", "professional"]);
 // watch
 watch(
     () => bm.box_id, (v) => {

@@ -1,18 +1,18 @@
 <template>
-    <div v-if="fields.length != 0" style="flex:1;padding:5px 40px;">
+    <div v-if="fields.length != 0" style="flex:1;">
         <!-- <div>{{ form }}</div> -->
         <!-- <div :class="prop.category.toLowerCase() == 'dimension' ? 'ui equal width centered grid' : ''"> -->
-        <div class="ui equal width grid">
+        <div class="ui equal width grid" style="padding:0px;margin:0px;">
             <template v-for="(d1, i1) in Math.ceil(fields.length / row_field_limit)">
-                <div :class="generateGridClass(fields.length, i1)">
+                <div :class="generateGridClass(fields.length, i1)" style="padding:3px 0px;">
                     <template v-for="(d2, i2) in row_field_limit">
                         <!-- <template v-if="fields.length > c_index(i1, i2)"> -->
-                            <!-- <div :class="prop.category.toLowerCase() == 'dimension' ? 'column' : ''"> -->
-                            <div class="column" style="box-sizing:border-box;display:flex;padding:0px;margin:0px;">
-                                <template v-if="(c_index(i1, i2)) < fields.length">
-                                    <!-- <div style="display:flex; justify-content:space-between"> -->
-                                        <div
-                                            style="text-align:right;padding:0px 10px;white-space:wrap;overflow:hidden; align-self:center;width:60%;">
+                        <!-- <div :class="prop.category.toLowerCase() == 'dimension' ? 'column' : ''"> -->
+                        <div class="column" style="box-sizing:border-box;padding:0px;margin:0px;">
+                            <template v-if="(c_index(i1, i2)) < fields.length">
+                                <div style="display:flex;width:100%;justify-content: space-between;">
+                                    <template v-if="fields[c_index(i1, i2)].type != 'select'">
+                                        <div style="text-align:right;align-self:center;width:50%;">
                                             <template v-if="fields[c_index(i1, i2)].tooltip">
                                                 <i class="question circle icon link"
                                                     v-tooltip="fields[c_index(i1, i2)].tooltip"></i>
@@ -20,35 +20,45 @@
                                             {{ `${fields[c_index(i1,
                                                 i2)].name}` }}
                                         </div>
-                                        <template v-if="fields[c_index(i1, i2)].type != 'select'">
-                                            <div class="ui right labeled input" :class="fields[c_index(i1, i2)].symbol == 'MARK' ?
-                                                form['REGISTRATION'] == 'none' ? 'disabled' : ''
-                                                :
-                                                ''" style="width:100%">
-                                                <input  @input="onChange" :min="fields[c_index(i1, i2)].minval"
-                                                    :max="fields[c_index(i1, i2)].maxval" type="number"
-                                                    v-model="form[fields[c_index(i1, i2)].symbol]"
-                                                    :placeholder="fields[c_index(i1, i2)].name"
-                                                    style="width:calc(100% - 80px)">
-                                                <div class="ui basic label" style="box-sizing:border-box;">
-                                                    {{ display_unit(fields[c_index(i1, i2)]) }}
-                                                </div>
+                                        <div class="ui right labeled input" :class="fields[c_index(i1, i2)].symbol == 'MARK' ?
+                                            form['REGISTRATION'] == 'none' ? 'disabled' : ''
+                                            :
+                                            ''" style="width:40%">
+                                            <input @input="onChange" :min="fields[c_index(i1, i2)].minval"
+                                                :max="fields[c_index(i1, i2)].maxval" type="number"
+                                                v-model="form[fields[c_index(i1, i2)].symbol]"
+                                                :placeholder="fields[c_index(i1, i2)].name" style="width:calc(100% - 80px)">
+                                            <div class="ui basic label" style="box-sizing:border-box;">
+                                                {{ display_unit(fields[c_index(i1, i2)]) }}
                                             </div>
-                                        </template>
-                                        <template v-else>
-                                            <select class="ui dropdown selection" @change="onChange" 
-                                                v-model="form[fields[c_index(i1, i2)].symbol]">
-                                                <template
-                                                    v-for=" datum  in  Object.entries(fields[c_index(i1, i2)].options)"
-                                                    :key="datum[1]">
-                                                    <option :value="datum[0]">{{ datum[1] }}</option>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div style="display:block;width:100%;">
+                                            <div style="width:100%;">
+                                                <template v-if="fields[c_index(i1, i2)].tooltip">
+                                                    <i class="question circle icon link"
+                                                        v-tooltip="fields[c_index(i1, i2)].tooltip"></i>
                                                 </template>
-                                            </select>
-                                        </template>
-                                    <!-- </div> -->
-                                </template>
-                            </div>
-                        </template>
+                                                {{ `${fields[c_index(i1,
+                                                    i2)].name}` }}
+                                            </div>
+                                            <div style="width:100%;">
+                                                <select id="reg-mark" class="ui dropdown selection" @change="onChange"
+                                                    v-model="form[fields[c_index(i1, i2)].symbol]">
+                                                    <template
+                                                        v-for=" datum  in  Object.entries(fields[c_index(i1, i2)].options)"
+                                                        :key="datum[1]">
+                                                        <option :value="datum[0]">{{ datum[1] }}</option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
                     <!-- </template> -->
                 </div>
             </template>
@@ -69,7 +79,6 @@ const emit = defineEmits(['formValues']);
 // data
 const row_field_limit = ref(1);
 const form = ref([]);
-const unit = ref([])
 const convert_flag = ref(false);
 
 
@@ -198,13 +207,11 @@ function generateGridClass(length, index) {
     background: #CCCCCC;
 }
 
-select.ui.selection.dropdown {
-    padding: 0px;
+#reg-mark.ui.selection.dropdown {
+    width: calc(100% - 1px) !important;
     min-width:calc(100% - 1px) !important;
     max-width:calc(100% - 1px) !important;
-    width:calc(100% - 1px) !important;
 }
-
 i.circular.icon {
     font-size: .75em;
     color: gray;

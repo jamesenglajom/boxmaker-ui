@@ -1,54 +1,38 @@
 <template>
-  <div>
-    <div style="display:flex;justify-content:space-between">
-      <div style="align-self:center">
-        <h3>{{ isLoaded ? boxmaker.getBoxes.length == boxmaker.getAllBoxCount ? boxmaker.getAllBoxCount + ' models' :
-          `${boxmaker.getBoxes.length} of ${boxmaker.getAllBoxCount} models` : 'Loading...' }} </h3>
-      </div>
-      <div style="align-self:center">
+  <div style="background:white; padding:30px;">
+    <div class="" style="background:white;">
+      <V1BoxTagsv2></V1BoxTagsv2>
+      <div style="display:flex;justify-content:space-between">
+        <div style="align-self:center">
+          <span>{{ isLoaded ? boxmaker.getBoxes.length == boxmaker.getAllBoxCount ? boxmaker.getAllBoxCount + ' models' :
+            `${boxmaker.getBoxes.length} of ${boxmaker.getAllBoxCount} models` : 'Loading...' }} </span>
+        </div>
+        <div style="align-self:center">
 
-        <div class="ui icon buttons" :class="isLoaded ? '' : 'disabled'">
-          <button @click="view = 'icon'" :class="view == 'icon' ? 'active' : ''" class="ui button basic"
-            data-tooltip="Icon view" data-inverted=""><i class="th icon"></i></button>
-          <button @click="view = 'list'" :class="view == 'list' ? 'active' : ''" class="ui button basic"
-            data-tooltip="List view" data-inverted=""><i class="th list icon"></i></button>
+          <div class="ui icon buttons" :class="isLoaded ? '' : 'disabled'">
+            <button @click="view = 'icon'" :class="view == 'icon' ? 'active' : ''" class="ui button basic"
+              data-tooltip="Icon view" data-inverted=""><i class="th icon"></i></button>
+            <button @click="view = 'list'" :class="view == 'list' ? 'active' : ''" class="ui button basic"
+              data-tooltip="List view" data-inverted=""><i class="th list icon"></i></button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ui divider"></div>
-    <div class="ui segment secondary">
-
-
-
+      <div class="ui divider"></div>
 
       <!-- icon view -->
       <template v-if="view == 'icon'">
         <template v-if="isLoaded">
-          <div class="ui" style="display:flex;flex-wrap:wrap;">
+          <div class="ui" style="display:flex;flex-wrap:wrap;justify-content: center;text-align: center;border-radius:7px;padding:20px 0px;">
             <template v-for="(datum, index) in boxmaker.getBoxes" :key="datum">
-              <div class="image-item-container" @click="boxSelect(datum.id)" :data-tooltip="datum.name" data-inverted="">
-                <!-- <div class="tag" :class="index%2==0?'free':'pro'">{{index%2==0?'FREE':'PRO'}}</div> -->
-                <div style="display:flex;justify-content:center;height:100px;">
-
-                  <div style="align-self:center;justify-content:center;text-align:center;">
-                    <center>
-                      <img style="width:60px;color:rgb(0,78,97);" class="ui image"
-                        :src="datum.img" />
-                    </center>
-                    <!-- <div class="label"
-                    style="color:rgb(0,78,97);padding:3px;margin-top:7px;font-size:.85em;text-align:center;">
-                    {{ datum.name }}</div> -->
-                  </div>
-                </div>
-              </div>
+              <V1BoxThumbv1 @click="boxSelect(datum.id)" :box="datum"></V1BoxThumbv1>
             </template>
           </div>
         </template>
         <template v-else>
           <div class="ui" style="height:450px;">
-              <div class="ui active dimmer">
-                <div class="ui indeterminate text loader">Preparing Files</div>
-              </div>
+            <div class="ui active dimmer">
+              <div class="ui indeterminate text loader">Preparing Files</div>
+            </div>
           </div>
         </template>
       </template>
@@ -60,8 +44,7 @@
             <template v-for="(datum, index) in boxmaker.getBoxes" :key="datum">
               <div class="item h-ccc" @click="boxSelect(datum.id)">
                 <div class="ui tiny image">
-                  <img style="width:60px;color:rgb(0,78,97);" class="ui image"
-                    :src="datum.img" />
+                  <img style="width:60px;color:rgb(0,78,97);" class="ui image" :src="datum.img" />
                 </div>
                 <div class="content" style="margin-left:20px">
                   <div class="header">{{ datum.name }}</div>
@@ -73,7 +56,7 @@
                     </template>
                   </div>
                   <div class="description">
-                    <p  style="line-height:2em;">{{ datum.description }}</p>
+                    <p style="line-height:2em;">{{ datum.description }}</p>
                   </div>
                 </div>
               </div>

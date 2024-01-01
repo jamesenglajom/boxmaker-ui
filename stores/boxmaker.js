@@ -71,10 +71,10 @@ export const useBoxMakerStore = defineStore("boxmaker", {
       }
 
       
-      const currentUrl = window.location.href;
-      if(!currentUrl.includes('v1')){
-        state.box_id = boxes.length > 0 ? boxes[0].id : null;
-      }
+      // const currentUrl = window.location.href;
+      // if(!currentUrl.includes('v1')){
+      //   state.box_id = boxes.length > 0 ? boxes[0].id : null;
+      // }
 
       return boxes;
     },

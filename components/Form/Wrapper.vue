@@ -92,7 +92,6 @@ i.circular.icon {
 
 <template>
     <div id="CommonFormComponent">
-
         <template v-if="box_loading">
             <div class="ui inverted segment" style="height:100vh">
                 <div class="ui active large inverted loader text">

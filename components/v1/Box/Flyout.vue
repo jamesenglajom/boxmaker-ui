@@ -2,7 +2,7 @@
 <template>
     <div id="flyout-element">
         <div class="ui flyout left" :class="boxmaker.openFlyout ? 'overlay visible' : ''" tab-index="-1">
-            <div class="ui header" style="display:flex;justify-content:space-between">
+            <!-- <div class="ui header" style="display:flex;justify-content:space-between">
                 <div style="display:flex;align-self:center">
                     <div @click="closeFlyout"
                         style="background-color:lightgrey;cursor:pointer;padding:5px 10px;border-radius:4px;">
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="content">
                 <v1FormWrapper></v1FormWrapper>
             </div>
@@ -39,33 +39,18 @@ function closeFlyout() {
 </script>
 <style>
 .ui.flyout.overlay {
-    background: whitesmoke;
-    width: 90% !important;
+    background: white;
+    width: 95% !important;
     z-index: 999;
     overflow: hidden;
-    max-width: 720px;
+    max-width: 100%;
+    height:100vh;
+    padding:0px !important;
 }
 
 .ui.flyout.visible>.ui.header {
     background: white;
     border: none !important;
-
 }
 
-.ui.flyout.visible>.content {
-    -webkit-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);
-    -moz-box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);
-    box-shadow: inset 2px 2px 15px -8px rgba(10, 10, 10, 1);
-    background: whitesmoke;
-    overflow-y: scroll;
-    max-height: calc(100vh - 65px);
-    display: relative;
-    padding: 0px;
-}
-
-.ui.pusher.dimmer.active {
-    height: 100vh !important;
-    top: auto !important;
-    z-index: 1;
-}
 </style>

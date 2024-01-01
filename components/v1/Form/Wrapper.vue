@@ -1,16 +1,44 @@
-
 <style>
-/* partition divs */
-#image-preview-container {
+.ui.accordion>.active.content {
+    height: calc(100vh - 750px);
+    position: relative;
+    overflow-y: auto;
+}
+
+#flyout-content-wrapper {
     width: 100%;
-    height: 500px;
-    display: flex
+    box-sizing: border-box;
+    padding: 0px !important;
+
+}
+
+.content {
+    padding: 0px !important;
+}
+
+#representation-wrapper {
+    width: calc(100% - 60px);
+    min-width: 400px;
+    background: #cccccc;
+    height: calc(100vh - 60px);
+}
+
+#form-wrapper {
+    min-width: 400px;
+    width: 400px;
+    position: relative;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    background: white;
+    padding: 0px 4px;
 }
 
 #sample-info {
+    width: 100%;
+    height: calc(31vh + 4px);
+    padding-bottom: 50px;
     background: #F7F7F7;
     border: solid .5px #CCCCCC;
-    width: 40%;
     position: relative;
     display: flex;
     cursor: help;
@@ -18,6 +46,8 @@
 
 #sample-info>div {
     align-self: center;
+    opacity: 0;
+    transition: opacity ease-in-out 0.25s;
 }
 
 #sample-info:hover>div {
@@ -25,84 +55,59 @@
 }
 
 #box-fold-preview {
-    background: #F7F7F7;
-    border: solid .5px #CCCCCC;
-    border-left: none;
-    width: 60%;
-    position: relative;
+    width: 100%;
+    position: relatve;
 }
 
-#box-fold-preview>div {
+#flyout-header {
+    width: 100%;
+    height: 60px;
+    background: white;
+    display: flex;
+    padding: 10px;
+}
+
+#flyout-header>div {
     align-self: center;
 }
 
-#box-info-display {
-    background: #1F1F21;
-    color: white;
-    position: absolute;
-    padding: 8px 16px;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    opacity: 0%;
-    transition: opacity ease-in-out .45s;
+.back-button {
+    background: transparent !important;
+    cursor: pointer;
 }
 
-#page-select-container {
-    width: 100%;
-    border-bottom: solid .5px #CCCCCC;
-    background: #666666;
-    /* background: gray; */
-    padding: 5px;
-}
-
-#page-select-container>label {
-    color: white;
-}
-
-
-#unit-select-container {
-    margin-top: 30px;
-    padding: 2px 15px;
-    text-align: center;
-}
-
-.input>.ui.label {
-    background: #CCCCCC;
-}
-
-select.ui.selection.dropdown {
-    padding: 0px;
-}
-
-i.circular.icon {
-    font-size: .75em;
-    color: gray;
-}
-
-.v-popper__popper {
-    max-width: 250px;
-}
-
-.ui.basic.label {
-    width: 50px;
-    text-align: center;
+.back-button:hover {
+    background: whitesmoke !important;
 }
 </style>
 
 <template>
-    <div id="CommonFormComponent">
-        <div id="image-preview-container">
-            <div id="sample-info" ref="sampleDiv">
-                <img style="max-height:500px;width:100%;" :src="sample_image" alt=""
-                    >
-                <div id="box-info-display" ref="infoDiv">
-                    {{ description }}
+    <div id="flyout-content-wrapper">
+        <div id="flyout-header">
+            <div class="ui button circular icon back-button" @click="closeFlyout">
+                <i class="ui arrow left icon"></i>
+            </div>
+            <div style="margin-left:10px;">
+                <span class="ui text large">{{ box_id ? bm.getStoredBox.name : '' }}</span>
+            </div>
+        </div>
+        <div style="display:flex">
+            <div id="representation-wrapper">
+                <div id="box-fold-preview">
+                    <!-- <V1BoxRuler></V1BoxRuler> -->
+                    <V1BoxPreviewCanvas :preview="preview"></V1BoxPreviewCanvas>
+
                 </div>
             </div>
-            <div id="box-fold-preview">
-                <div id="page-select-container" v-if="page_preset">
-                    <label for=""><small>{{ page_preset.name }}</small></label>
+            <div id="form-wrapper">
+                <div id="sample-info">
+                    <img style="max-height:500px;width:100%;" :src="sample_image" alt="">
+                    <div id="box-info-display" ref="infoDiv">
+                        {{ description }}
+                    </div>
+                </div>
+                <div id="page-select" v-if="page_preset">
+                    <label for="">{{ page_preset.name }}</label>
                     <select @change="check" class="ui dropdown selection" style="width:100%;" v-model="form['PAGEPRESET']">
                         <template v-for=" datum  in Object.entries(page_preset.options)" :key="datum[1]">
                             <option :value="datum[0]">{{ datum[1] }}</option>
@@ -110,11 +115,11 @@ i.circular.icon {
                     </select>
                     <div style="display:flex">
                         <template v-for="datum in page_wh">
-                            <div class="field" style="color:white;padding-right:2px">
-                                <div class="label"><small>{{ datum.name }}</small></div>
+                            <div class="field">
+                                <div class="label">{{ datum.name }}</div>
                                 <div class="ui right labeled input">
-                                    <input @input="check" type="number" :placeholder="datum.name" v-model="form[datum.symbol]"
-                                        style="width:calc(100% - 80px)" />
+                                    <input @input="check" type="number" :placeholder="datum.name"
+                                        v-model="form[datum.symbol]" style="width:calc(100% - 80px)" />
                                     <div class="ui basic label">
                                         {{ 'in' }}
                                     </div>
@@ -123,74 +128,67 @@ i.circular.icon {
                         </template>
                     </div>
                 </div>
-                <div>
-                    <img style="max-height:calc(500px - 130px);width:100%;" :src="preview" alt="">
+                <div class="ui basic buttons" style="width:100%;margin-top:4px;border-radius:none !important;">
+                    <div class="ui button">One</div>
+                    <div class="ui button">Two</div>
+                    <div class="ui button">Three</div>
                 </div>
-            </div>
-        </div>
-        <div id="form-container">
-            <!-- units -->
-            <div id="unit-select-container">
-                <div class="ui buttons">
-                    <template v-for="datum in units">
-                        <button class="ui button red" v-tooltip="datum.name" @click="unitSelect(form['UNITS'],datum.value)"
-                            :class="form['UNITS'] == datum.value ? 'active' : ''">{{
-                                datum.abbr }}</button>
+                <div class="ui styled accordion" style="margin-top:7px;">
+                    <template v-for="datum in accordion_items">
+                        <div class="title" @click="accrodion_tab = datum" :class="datum == accrodion_tab ? 'active' : ''">
+                            <i class="dropdown icon"></i>
+                            {{ datum.toUpperCase() }}
+                        </div>
+                        <div class="content" :class="datum == accrodion_tab ? 'active' : ''">
+                            <V1FormGroup :category="datum"></V1FormGroup>
+                        </div>
                     </template>
                 </div>
-            </div>
 
-            <!-- dimensions -->
-            <div style="padding:20px;">
-                <v1FormGroup :category="'dimension'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange"></v1FormGroup>
-            </div>
+                <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-top:25px;">
+                    <!-- <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
+                        <button @click="submitForm">
+                            <div
+                                style="display:flex;justify-content:center;width:normal;padding:2px 10px;border-radius:15px;">
+                                <div>{{ "BUY 3" }}</div>
+                                <div style="margin-left:2px;">
+                                </div>
+                            </div>
+                        </button>
 
+                    </div> -->
 
-            <!-- SUBMIT BUTTON -->
-            <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom: 20px;">
-                <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
-                    <button @click="submitForm">Submit</button>
-                </div>
-            </div>
+                    <div class="ui button red">
+                        <div style="display:flex;">
+                            <div style="align-self:center;">
 
+                                <img :src="goldCoin" alt="" style="width:18px;">
+                            </div>
+                            <div style="align-self:center;margin-left:4px;">
+                                3
+                            </div>
+                            <div style="align-self:center;margin-left:10px;">
+                                PURCHASE
+                            </div>
 
-            <div style="padding:0px 20px;margin-bottom:20px;">
-                <!-- others form -->
-                <!-- <div style="width:50%;padding-right:10px;"> -->
-                <v1FormGroup :category="'other specifications'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
-                </v1FormGroup>
-                <!-- </div> -->
-                <!-- prof form -->
-                <!-- <div style="width:50%;padding-left:10px;"> -->
-                <v1FormGroup :category="'professional'" :convert="convert_flag" :unit="form['UNITS']" @formValues="handleFieldValueChange">
-                </v1FormGroup>
-                <!-- </div> -->
-            </div>
-            <!-- SUBMIT BUTTON -->
-            <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom: 60px;">
-                <div class="ui button red" :class="disable_submit ? 'disabled' : ''">
-                    <button @click="submitForm">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: 'ComFormComponent',
-    inheritAttrs: false,
-    customOptions: {}
-}
-</script>
 
 
 <script setup>
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, computed, watch } from 'vue'
-import { useBoxMakerStore} from "@/stores/boxmaker"
+import { useBoxMakerStore } from "@/stores/boxmaker"
+import goldCoin from "@/assets/images/others/gold-coin.svg"
+
 // store
-const boxmaker = useBoxMakerStore();
+const bm = useBoxMakerStore();
 const { getStoredBox: box,
     getBoxFormValue: formVal,
     box_id,
@@ -199,7 +197,7 @@ const { getStoredBox: box,
     getBoxDieLinePreviewImage: preview_image,
     getBoxPagePresetField: page_preset,
     getBoxPageWidthHeightField: page_wh
-} = storeToRefs(boxmaker);
+} = storeToRefs(bm);
 
 // data
 const units = ref([
@@ -211,33 +209,35 @@ const form = ref({});
 const preview = ref('');
 const disable_submit = ref(false);
 const convert_flag = ref('true');
-
+const accrodion_tab = ref("dimension");
+const accordion_items = ref(["dimension", "other specifications", "professional"]);
 // watch
 watch(
-    () => boxmaker.box_id, (v) => {
+    () => bm.box_id, (v) => {
         if (v) {
-            form.value = boxmaker.getBoxFormValue();
-            preview.value = boxmaker.getBoxDieLinePreviewImage(form.value);
+            form.value = bm.getBoxFormValue();
+            preview.value = bm.getBoxDieLinePreviewImage(form.value);
+            console.log(preview.value);
         }
     }
 );
 
-function unitSelect(o,n){
+function unitSelect(o, n) {
     form.value['UNITS'] = n;
     convert_flag.value = !convert_flag.value;
 }
 function handleFieldValueChange(v) {
     form.value = Object.assign(form.value, v.value)
-    preview.value = boxmaker.getBoxDieLinePreviewImage(form.value);
+    preview.value = bm.getBoxDieLinePreviewImage(form.value);
 }
 async function submitForm() {
     disable_submit.value = true;
     let formData = form.value;
-    formData['MODEL'] = boxmaker.getStoredBox.MODEL;
+    formData['MODEL'] = bm.getStoredBox.MODEL;
     formData['REQUEST'] = 'SIGNCUT';
-    formData['CUSTOMER'] = boxmaker.getStoredBox.CUSTOMER;
+    formData['CUSTOMER'] = bm.getStoredBox.CUSTOMER;
     formData['KEY'] = "gAAAAABlcdnsuTKh5-MunYhaHHnQuYiqUGGNk3upJGjTifAR3OUwwZAnZz-4PGMm7um_bJobX1uR-N_f_HdQjqQn5hFz61fDKg";
-    let url = boxmaker.getStoredBox.action,
+    let url = bm.getStoredBox.action,
         search = new URLSearchParams(formData) + "%3D%3D";
     await navigateTo(url + '?' + search, {
         open: {
@@ -247,4 +247,10 @@ async function submitForm() {
         disable_submit.value = false;
     });
 };
+
+const closeFlyout = () => {
+    bm.$patch({
+        box_id: null
+    });
+}
 </script>

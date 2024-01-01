@@ -15,13 +15,16 @@ const {isLoading} = storeToRefs(bm);
 <style>
 @import url("fomantic-ui-css/semantic.min.css");
 
-@media only screen and (min-width: 760px) {
+/* @media only screen and (min-width: 760px) {
   body {
     background-color: rgb(231, 231, 231);
     width: 760px;
   }
-}
+} */
 
+#app-body{
+  padding:0px;
+}
 .ui.red {
   background-color: #b31228 !important;
 }

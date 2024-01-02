@@ -1,7 +1,7 @@
 <template>
   <div style="background:white; padding:30px;">
     <div class="" style="background:white;">
-      <V1BoxTagsv2></V1BoxTagsv2>
+      <V3BoxTagsv2></V3BoxTagsv2>
       <div style="display:flex;justify-content:space-between">
         <div style="align-self:center">
           <span>{{ isLoaded ? boxmaker.getBoxes.length == boxmaker.getAllBoxCount ? boxmaker.getAllBoxCount + ' models' :
@@ -24,7 +24,7 @@
         <template v-if="isLoaded">
           <div class="ui" style="display:flex;flex-wrap:wrap;justify-content: center;text-align: center;border-radius:7px;padding:20px 0px;">
             <template v-for="(datum, index) in boxmaker.getBoxes" :key="datum">
-              <V1BoxThumbv1 @click="boxSelect(datum.id)" :box="datum"></V1BoxThumbv1>
+              <V3BoxThumbv1 @click="boxSelect(datum.id)" :box="datum"></V3BoxThumbv1>
             </template>
           </div>
         </template>
@@ -66,37 +66,6 @@
             </template>
           </div>
         </template>
-        <template v-else>
-          <div class="ui items" style="background:white">
-            <template v-for="(datum, index) in 7" :key="datum">
-              <div class="item">
-                <div class="ui tiny image">
-                  <div class="ui placeholder">
-                    <div class="image"></div>
-                  </div>
-                </div>
-                <div class="content" style="margin-left:20px">
-                  <div class=" ui placeholder">
-                    <div class="short line"></div>
-                  </div>
-                  <div class="ui placeholder">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                  </div>
-                  <div class="description">
-                    <div class="ui placeholder">
-                      <div class="line"></div>
-                      <div class="line"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <template v-if="boxmaker.getBoxes.length - 1 > index">
-                <div class="ui divider"></div>
-              </template>
-            </template>
-          </div>
-        </template>
       </template>
     </div>
   </div>
@@ -122,13 +91,10 @@ function boxSelect(id) {
 
 <style>
 .image-item-container:hover {
-  /* background-color: rgb(255, 212, 59); yellow bg hover */
   background-color: #666666;
-
 }
 
 .image-item-container {
-  /* margin:10px; */
   width: 100px;
   height: 100px;
   border-radius: 7px;

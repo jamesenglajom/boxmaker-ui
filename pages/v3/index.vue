@@ -1,20 +1,15 @@
 <template>
     <div>
-        <v1BoxFlyout></v1BoxFlyout>
-        <!-- <BoxTagFilter></BoxTagFilter> -->
-        <!-- <div class="ui segment"> -->
-            <v1BoxTray></v1BoxTray>
-        <!-- </div> -->
+        <V3BoxFlyout></V3BoxFlyout>
+        <V3BoxTray></V3BoxTray>
         <div class="ui dimmer fluid very light" :class="boxmaker.openFlyout ? 'active' : ''"></div>
     </div>
 </template>
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useBoxMakerStore } from "@/stores/boxmaker"
-
 // store installation
 const boxmaker = useBoxMakerStore();
-
 // fetch on component mount
 onMounted(() => {
     boxmaker.fetchApi().then(res => {

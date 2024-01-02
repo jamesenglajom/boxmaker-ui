@@ -112,7 +112,7 @@ select.ui.dropdown.selection{
         <div style="display:flex">
             <div id="representation-wrapper">
                 <div id="box-fold-preview">
-                    <V1BoxPreviewCanvas :preview="preview"></V1BoxPreviewCanvas>
+                    <V3BoxPreviewCanvas :preview="preview"></V3BoxPreviewCanvas>
                 </div>
             </div>
             <div id="form-wrapper">
@@ -165,8 +165,8 @@ select.ui.dropdown.selection{
                                 </div>
                             </template>
                             <template v-else>
-                                <V1FormGroup :category="datum" :convert="convert_flag" :unit="form['UNITS']"
-                        @formValues="handleFieldValueChange"></V1FormGroup>
+                                <V3FormGroup :category="datum" :convert="convert_flag" :unit="form['UNITS']"
+                        @formValues="handleFieldValueChange"></V3FormGroup>
                             </template>
                         </div>
                     </template>
@@ -229,7 +229,6 @@ watch(
         if (v) {
             form.value = bm.getBoxFormValue();
             preview.value = bm.getBoxDieLinePreviewImage(form.value);
-            console.log(preview.value);
         }
     }
 );

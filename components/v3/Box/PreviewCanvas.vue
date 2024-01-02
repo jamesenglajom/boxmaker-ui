@@ -6,13 +6,7 @@
     </div>
 </template>
 <script setup>
-import {watch} from "vue";
-
 const prop = defineProps(["preview"])
-
-watch(()=> prop.preview,()=>{
-console.log(prop.preview)
-});
 </script>
 <style>
 #preview-canvas-wrap{
@@ -20,10 +14,13 @@ console.log(prop.preview)
     top:50px;
     left:50px;
     width:calc(100% - 100px);
-    height:100vh;
+    height:calc(100vh - 200px);
+    display:flex;
+    justify-content:center;
 }
 #preview-canvas-wrap > div{
-    background:whitesmoke;
+    align-self:center;
+    background:transparent;
     height:calc(100vh - 160px);
 }
 #preview-canvas-wrap > div > img{

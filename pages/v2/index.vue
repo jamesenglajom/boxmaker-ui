@@ -25,7 +25,7 @@ import { useBoxMakerStore } from "@/stores/boxmaker"
 
 // store installation
 const boxmaker = useBoxMakerStore();
-const { flyoutv2, isLoaded,getStoredBox:box } = storeToRefs(boxmaker);
+const { flyoutv2, isLoaded} = storeToRefs(boxmaker);
 // fetch on component mount
 onMounted(() => {
     boxmaker.fetchApi().then(res => {

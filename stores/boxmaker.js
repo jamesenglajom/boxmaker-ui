@@ -1,22 +1,28 @@
 import { defineStore } from "pinia";
+
 // export const gallery = Object.values(import.meta.glob('/assets/images/box_icons/*', { eager: true, as: 'url' }))
 export const useBoxMakerStore = defineStore("boxmaker", {
   state: () => ({
     fetching: false,
     status: "idle",
     api: null,
-    search:"",
-    flyoutv2:false,
+    search: "",
+    flyoutv2: false,
     box_id: null,
     tags: [],
     formChange: false,
+    cw_width: null,
+    cw_height: null,
+    die_line_image: null,
+    memory: false,
+    discard:false
   }),
   getters: {
     openFlyout(state) {
       return state.api ? (state.box_id ? true : false) : false;
     },
-    getFlyoutV2(state){
-      return state.flyoutv2; 
+    getFlyoutV2(state) {
+      return state.flyoutv2;
     },
     getFetchStatus(state) {
       let status = "idle";
@@ -66,11 +72,12 @@ export const useBoxMakerStore = defineStore("boxmaker", {
         return { ...i, img: imgName(i.id) };
       });
 
-      if(state.search != ""){
-        boxes = boxes.filter(i=> i.name.toLowerCase().includes(state.search));
+      if (state.search != "") {
+        boxes = boxes.filter((i) =>
+          i.name.toLowerCase().includes(state.search)
+        );
       }
 
-      
       // const currentUrl = window.location.href;
       // if(!currentUrl.includes('v1')){
       //   state.box_id = boxes.length > 0 ? boxes[0].id : null;
@@ -93,29 +100,35 @@ export const useBoxMakerStore = defineStore("boxmaker", {
           }))
         : [];
     },
-    getStoredBox(state) {
-      return state.api !== null && state.box_id !== null
-        ? Object.values(state.api)
-            .filter((i) => i.id == state.box_id)
-            .map((i) => {
-              return { ...i, img: imgName(i.id) };
-            })[0]
-        : null;
+    getStoredBox: (state) => {
+      return (id) =>{
+      let temp_id =  id ?? state.box_id;
+      let box = state.api !== null && temp_id !== null
+      ? Object.values(state.api)
+          .filter((i) => i.id == temp_id)
+          .map((i) => {
+            return { ...i, img: imgName(i.id) };
+          })[0]
+      : null;
+      return box;
+      // return {id, box_id:state.box_id};
+      };
     },
     getBoxName(state) {
-      return state.box_id ? this.getStoredBox.name : "";
+      return state.box_id ? this.getStoredBox().name : "";
     },
     getBoxDescription(state) {
-      return state.box_id ? this.getStoredBox.description : "";
+      return state.box_id ? this.getStoredBox().description : "";
     },
     getBoxForm: (state) => {
-      return (category) => {
+      return (category,id) => {
         let result = [];
-        if (state.box_id != null && state.api != null) {
+        id = id ?? state.box_id;
+        if (id != null && state.api != null) {
           const b = Object.values(state.api).filter(
-            (i) => i.id === state.box_id
+            (i) => i.id === id
           )[0];
-          let category = {
+          let categories = {
             standard: "STANDARD",
             options: "OTHER SPECIFICATIONS",
             parameters: "DIMENSION",
@@ -124,10 +137,10 @@ export const useBoxMakerStore = defineStore("boxmaker", {
           let fields = b.parameters;
           let form_field = [];
 
-          Object.keys(category).forEach((v) => {
+          Object.keys(categories).forEach((v) => {
             let datum = Object.values(fields[v]).map((i) => ({
               ...i,
-              category: category[v],
+              category: categories[v],
             }));
             if (v == "standard") {
               datum = datum.filter((i) =>
@@ -153,7 +166,7 @@ export const useBoxMakerStore = defineStore("boxmaker", {
           result = form_field;
         }
         if (category !== undefined) {
-          result = result.filter((i) => i.category.toLowerCase() === category);
+          result = result.filter((i) => i.category.toLowerCase() === category.toLowerCase());
         }
         return result;
       };
@@ -168,23 +181,15 @@ export const useBoxMakerStore = defineStore("boxmaker", {
       };
     },
     getCustomer(state) {
-      return state.api ? this.getStoredBox.CUSTOMER : "";
+      return state.box_id ? this.getStoredBox().CUSTOMER : "";
     },
     getBoxImg(state) {
-      return state.api ? (state.box_id ? this.getStoredBox.img : null) : null;
+      return state.api ? (state.box_id ? this.getStoredBox().img : null) : null;
     },
     getBoxSampleImage(state) {
       return state.box_id
         ? `https://templatemaker-dev.signcut.com/?CUSTOMER=${this.getCustomer}&REQUEST=EXPLANATION&MODEL=${state.box_id}`
         : "";
-    },
-    getBoxDieLinePreviewImage(state) {
-      return (form) => {
-        const url = new URLSearchParams(form);
-        return state.box_id
-          ? `https://templatemaker-dev.signcut.com?REQUEST=DIELINESPREVIEW&MODEL=${state.box_id}&CUSTOMER=${this.getCustomer}&${url}`
-          : "";
-      };
     },
     getBoxPagePresetField(state) {
       return state.box_id
@@ -211,9 +216,31 @@ export const useBoxMakerStore = defineStore("boxmaker", {
         this.$patch({
           fetching: false,
         });
+        
         return error;
       }
     },
+    setBoxDieLinePreviewImage(form) {
+        const url = new URLSearchParams(form);
+        this.$patch({
+          die_line_image:  `https://templatemaker-dev.signcut.com?REQUEST=DIELINESPREVIEW&MODEL=${this.box_id}&CUSTOMER=${this.getCustomer}&${url}`,
+        })
+    },
+    createMemoryBox(cookie){
+      // img, name, date, dimension details
+      let box = [], details = this.getStoredBox(cookie.data.MODEL), val = "",label="";
+      box["name"] = details.name;
+      box["img"] = details.img;
+      box["date"] = new Date(cookie.date).toDateString();
+      this.getBoxForm('DIMENSION', cookie.data.MODEL).forEach((v)=>{
+        val = val + " x " +cookie.data[v.symbol] + cookie.data.UNITS;
+        label = label + " x " +v.symbol;
+      });
+      box["dimension_value"] = val;
+      box["dimension_label"] = label;
+      return box;
+      // return this.getBoxForm('DIMENSION', cookie.data.MODEL);
+    }
   },
 });
 
@@ -229,10 +256,4 @@ function imgName(id) {
   const img = new URL(`/assets/images/box_icons/${id}.svg`, import.meta.url)
     .href;
   return img;
-  // return (
-  //   str
-  //     .replace(/[^a-zA-Z ]/g, "")
-  //     .replace(/\s/g, "-")
-  //     .toLowerCase() + ".svg"
-  // );
 }

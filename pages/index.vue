@@ -23,7 +23,7 @@ const { openFlyout } = storeToRefs(bm);
 const sc_cookie = useCookie("SC_BOXMAKER_user123");
 const toggle_remember = ref(false);
 onMounted(() => {
-    toggle_remember.value = sc_cookie.value ? true: false;
+    toggle_remember.value = sc_cookie ? true: false;
     // fetch on component mount
     bm.fetchApi().then(res => {
         bm.$patch({

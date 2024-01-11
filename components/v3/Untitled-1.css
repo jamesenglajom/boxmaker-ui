@@ -1,0 +1,17 @@
+
+
+
+.ruler-x li::after {
+  content: counter(d)"";
+  line-height: 1;
+  padding-inline-start: var(--ruler-num-pi);
+}
+.ruler-y li::after {
+  content: counter(d)"";
+  display: block;
+  padding-inline-end: var(--ruler-num-pi);
+  transform: rotate(-90deg) translateY(-13px);
+  transform-origin: 100% 0%;
+  text-align: end;
+  width: 100%;
+}

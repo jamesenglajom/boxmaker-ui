@@ -1,5 +1,5 @@
 <template>
-    <div style="display: flex;width:100%;margin:20px 0px;position:relative">
+    <div style="display: flex;width:100%;position:relative;">
         <div class="ui action input" style="width:100%;">
             <input type="text" placeholder="Search..." v-model="search">
             <div class="ui button icon" style="position:relative" @click="show_tag_selection = !show_tag_selection">
@@ -70,6 +70,14 @@ const handleTagSelect = (id) => {
 </script>
 
 <style>
+.ui.action.input{
+  border-radius:0px !important;
+}
+.ui.action.input > div,input{
+  border-radius:0px !important;
+  padding:4px !important;
+}
+
 .four.wide.column:hover {
     color: #1F1F21 !important;
     cursor: pointer;

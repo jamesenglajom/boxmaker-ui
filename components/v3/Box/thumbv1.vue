@@ -9,14 +9,14 @@
                     <img style="width:60px;color:rgb(0,78,97);" class="ui image" :src="box.img" />
                 </center>
 
-                <div class="price">
+                <!-- <div class="price">
                     <div style="display:flex;justify-content:center;width:normal;bpadding:2px 10px;border-radius:15px;">
                         <div style="margin-right:2px;">
                             <img :src="goldCoin" alt="" style="width:20px;">
                         </div>
                         <div>{{ `${getRandomInt()}` }}</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -51,7 +51,8 @@ const getRandomInt = () => {
     .image-only-wrap {
         display: flex;
         justify-content: center;
-        padding: 10px 20px 30px 20px;
+        // padding: 10px 20px 30px 20px;
+        padding:20px;
         border-radius: 15px;
         border: 2px inset transparent;
         position: relative;

@@ -61,14 +61,15 @@
         <div style="width:100%;box-sizing: border-box;padding:5px;text-align:center;margin-bottom:30px;">
             <div class="ui button red" @click="submitForm">
                 <div style="display:flex;">
-                    <div style="align-self:center;">
+                    <!-- <div style="align-self:center;">
                         <img :src="goldCoin" alt="" style="width:18px;">
                     </div>
                     <div style="align-self:center;margin-left:4px;">
                         3
-                    </div>
-                    <div style="align-self:center;margin-left:10px;">
-                        PURCHASE
+                    </div> -->
+                    <div style="align-self:center;padding: 4px 10px;">
+                        <!-- PURCHASE -->
+                        Submit
                     </div>
                 </div>
             </div>
@@ -85,6 +86,8 @@ import goldCoin from "@/assets/images/others/gold-coin.svg";
 const bm = useBoxMakerStore();
 
 const sc_cookie = useCookie("SC_BOXMAKER_user123");
+
+const config = useRuntimeConfig();
 const {
     getBoxDescription: description,
     getBoxSampleImage: sample_image,
@@ -92,13 +95,13 @@ const {
     getBoxPageWidthHeightField: page_wh
 } = storeToRefs(bm);
 
-const accordion_items = ref(["sample image", "standard", "dimension", "other specifications", "professional"]);
 
 // data
 const form = ref([]);
 var default_values = [];
 const disable_submit = ref(false);
 const emit = defineEmits(["discard"]);
+const accordion_items = ref(["sample image", "standard", "dimension", "other specifications", "professional"]);
 
 const units = ref([
     { value: 'mm', name: 'Millimeter', abbr: 'mm' },
@@ -162,11 +165,11 @@ async function submitForm() {
     disable_submit.value = true;
     let formData = form.value;
     formData['MODEL'] = bm.getStoredBox().MODEL;
-    formData['REQUEST'] = 'SIGNCUT';
+    formData['REQUEST'] = config.public.scRequest;
     formData['CUSTOMER'] = bm.getStoredBox().CUSTOMER;
-    formData['KEY'] = "gAAAAABlcdnsuTKh5-MunYhaHHnQuYiqUGGNk3upJGjTifAR3OUwwZAnZz-4PGMm7um_bJobX1uR-N_f_HdQjqQn5hFz61fDKg";
+    formData['KEY'] = config.public.scKey;
     let url = bm.getStoredBox().action,
-        search = new URLSearchParams(formData) + "%3D%3D";
+        search = new URLSearchParams(formData) + config.public.scKeyPostfix;
     await navigateTo(url + '?' + search, {
         open: {
             target: '_blank',

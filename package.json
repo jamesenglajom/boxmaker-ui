@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "npx nuxi dev --dotenv .env.local",
-    "generate": "npx nuxi generaten",
+    "build": "nuxt build  --dotenv .env.prod",
+    "dev": "npx nuxi dev --dotenv .env.dev",
+    "generate": "npx nuxi generate --dotenv .env.prod",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

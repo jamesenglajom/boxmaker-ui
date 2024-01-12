@@ -4,7 +4,7 @@
         <V3BoxTray></V3BoxTray>
         <!-- flyout dimmer -->
         <div class="ui dimmer fluid very light" :class="openFlyout ? 'active' : ''"></div>
-        <V3Toast @response="rememberResponse" :cookie="sc_cookie"></V3Toast>
+        <V3Toast :cookie="sc_cookie"></V3Toast>
         <!-- remember template notif dimmer -->
         <div class="ui blurring">
             <div class="ui inverted dimmer" :class="bm.isLoaded ? toggle_remember? 'active':'':''"></div>
@@ -23,21 +23,22 @@ const { openFlyout } = storeToRefs(bm);
 const sc_cookie = useCookie("SC_BOXMAKER_user123");
 const toggle_remember = ref(false);
 onMounted(() => {
-    toggle_remember.value = sc_cookie ? true: false;
     // fetch on component mount
     bm.fetchApi().then(res => {
         bm.$patch({
             fetching: false,
+            memory: sc_cookie.value ? true: false,
+            box_id: sc_cookie.value ? sc_cookie.value.data.MODAL : null,
         });
     });
 })
 
-function rememberResponse(v){
-    if(v == "forget"){
-        sc_cookie.value = null;
-    }
-    toggle_remember.value = false;
-} 
+// function rememberResponse(v){
+//     if(v == "forget"){
+//         sc_cookie.value = null;
+//     }
+//     toggle_remember.value = false;
+// } 
 </script>
 
 <style>
